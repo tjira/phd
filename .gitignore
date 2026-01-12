@@ -1,12 +1,1 @@
-*.acn
-*.acr
-*.alg
-*.aux
-*.bbl
-*.bcf
-*.blg
-*.ist
-*.log
-*.pdf
-*.xml
-*.toc
+/build/

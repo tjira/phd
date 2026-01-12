@@ -43,6 +43,9 @@ jobs:
 
       - name: Download Artifacts
         uses: actions/download-artifact@v4
+        with:
+          name: main.pdf
+          path: main.pdf
 
       - name: Get Current Timestamp
         run: echo "TIMESTAMP=$(date -Is)" >> $GITHUB_ENV
