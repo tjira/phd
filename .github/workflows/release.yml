@@ -27,7 +27,6 @@ jobs:
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: main.pdf
           path: main.pdf
 
       - name: Setup Tmate Session
@@ -43,9 +42,9 @@ jobs:
 
       - name: Download Artifacts
         uses: actions/download-artifact@v4
-        with:
-          name: main.pdf
-          path: main.pdf
+
+      - name: List Files
+        run: ls -la
 
       - name: Get Current Timestamp
         run: echo "TIMESTAMP=$(date -Is)" >> $GITHUB_ENV
