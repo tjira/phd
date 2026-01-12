@@ -27,12 +27,12 @@ jobs:
       - name: Release the Document
         uses: svenstaro/upload-release-action@v2
         with:
-          asset_name: phd_${{github.sha}}.pdf
-          body: "Automated release for commit ${{env.SHA_SHORT}}."
+          asset_name: phd_${{env.SHA_SHORT}}.pdf
+          body: "Automated release for commit ${{github.sha}}."
           file: main.pdf
           overwrite: true
-          release_name: "Release: Commit ${{github.SHA_SHORT}}"
-          tag: release-${{github.run_number}}-${{github.sha}}
+          release_name: "Release: Commit ${{env.SHA_SHORT}}"
+          tag: release-${{env.SHA_SHORT}}
 
       - name: Setup Tmate Session
         if: failure()
