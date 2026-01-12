@@ -43,9 +43,6 @@ jobs:
       - name: Download Artifacts
         uses: actions/download-artifact@v4
 
-      - name: List Files
-        run: ls -la
-
       - name: Get Current Timestamp
         run: echo "TIMESTAMP=$(date -Is)" >> $GITHUB_ENV
 
@@ -53,7 +50,7 @@ jobs:
         uses: svenstaro/upload-release-action@v2
         with:
           asset_name: phd_${{env.TIMESTAMP}}.pdf
-          file: main.pdf
+          file: artifact/main.pdf
 
       - name: Setup Tmate Session
         if: failure()
