@@ -21,14 +21,17 @@ jobs:
           root_file: main.tex
           latexmk_use_lualatex: true
 
+      - name: Obtain the Short SHA
+        run: echo "SHA_SHORT=${GITHUB_SHA::7}" >> $GITHUB_OUTPUT
+
       - name: Release the Document
         uses: svenstaro/upload-release-action@v2
         with:
           asset_name: phd_${{github.sha}}.pdf
-          body: "Automated release for commit ${{github.sha}}."
+          body: "Automated release for commit ${{env.SHA_SHORT}}."
           file: main.pdf
           overwrite: true
-          release_name: "Release: Commit ${{github.sha}}"
+          release_name: "Release: Commit ${{github.SHA_SHORT}}"
           tag: release-${{github.run_number}}-${{github.sha}}
 
       - name: Setup Tmate Session
