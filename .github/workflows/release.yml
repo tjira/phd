@@ -22,7 +22,7 @@ jobs:
           latexmk_use_lualatex: true
 
       - name: Obtain the Short SHA
-        run: echo "SHA_SHORT=${GITHUB_SHA::7}" >> $GITHUB_OUTPUT
+        run: echo "SHA_SHORT=${GITHUB_SHA::7}" >> $GITHUB_ENV
 
       - name: Release the Document
         uses: svenstaro/upload-release-action@v2
