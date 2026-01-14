@@ -1,43 +1,4 @@
-\chapter{Mixed Quantum-Classical Dynamics}\label{sec:mixed_quantum_classical_dynamics}
-\section{Quantum Amplitude Propagation in Mixed Schemes}\label{sec:quantum_amplitude_propagation_in_mixed_themes}
-Under the \acrfull{boa}, the total molecular wavefunction, $\ket{\Psi(t)}$, is separable into electronic and nuclear parts because the nuclear masses greatly exceed those of the electrons. However, when two or more electronic states approach degeneracy, the \acrshort{boa} separation fails and nonadiabatic effects become significant. \acrfull{tsh} is a general framework that treats nuclei and electrons separately: nuclei are propagated classically on an adiabatic \acrfull{pes}, while electrons are treated quantum mechanically.
-
-In \acrshort{tsh}, the nuclei follow Newton's equations of motion on a single adiabatic \acrshort{pes} at any instant:
-\begin{equation}
-\symbf{M}\ddot{\symbf{R}}(t)=-\nabla_{\symbf{R}}E_I,
-\end{equation}
-where $\symbf{M}$ is the diagonal matrix with masses for each coordinate, $\symbf{R}(t)$ is nuclear geometry at time $t$, and $E_I$ is the electronic energy of the state $I$ at the nuclear configuration $\symbf{R}(t)$. Meanwhile, the electrons evolve according to the \acrshort{tdse}, with the electronic wavefunction $\ket{\Phi(t)}$ expanded in the instantaneous adiabatic eigenvectors of the electronic Hamiltonian $H_{\symrm{el}}$ as
-\begin{equation}
-\ket{\Phi(t)}=\sum_I c_I(t)\ket{\phi_I},
-\end{equation}
-where $\phi_I$ satisfies the \acrfull{tise}
-\begin{equation}
-H_{\symrm{el}}\ket{\phi_I}=E_I\ket{\phi_I},
-\end{equation}
-and the complex coefficients $c_I$ encode the instantaneous probability amplitudes for occupying each adiabatic state. For notational brevity, we will often suppress explicit dependence on the variables where no ambiguity arises.
-
-Substituting this ansatz into the full electronic \acrshort{tdse},
-\begin{equation}
-i\frac{\partial}{\partial t}\ket{\Phi(t)}=H_{\symrm{el}}\ket{\Phi(t)},
-\end{equation}
-and projecting onto a particular adiabatic state $\ket{\phi_I}$, we obtain a set of coupled equations for the coefficients $c_I$:
-\begin{equation}\label{eq:tsh_eom}
-i\frac{\symrm{d}c_I}{\symrm{d}t}=\sum_J\left(H_{IJ}^{\symrm{el}}-i\Braket{\phi_I\vert\frac{\partial\phi_J}{\partial t}}\right)c_J,
-\end{equation}
-where $\sigma_{IJ}=\Braket{\phi_I\vert\frac{\partial\phi_J}{\partial t}}$ is the \acrfull{tdc}. In the purely adiabatic basis, $H_{\symrm{el}}$ is diagonal, so electronic population transfer between states is mediated entirely by $\sigma_{IJ}$:
-\begin{equation}\label{eq:sh_tdse_coefs}
-i\dot c_I=E_I c_I-i\sum_J\sigma_{IJ}c_J.
-\end{equation}
-With $\symbf{c}(t)=\left(c_1(t),c_2(t),\dots,c_N(t)\right)^{\symrm{T}}$ the Eq~\eqref{eq:sh_tdse_coefs} is a Schr\"odinger equation in a finite-dimensional Hilbert space $\mathbb{C}^N$ and can be rewritten as
-\begin{equation}
-i\symbf{\dot{c}}(t)=H_{\symrm{eff}}\symbf{c}(t),\qquad H_{IJ}^{\symrm{eff}}=E_I\delta_{IJ}-i\sigma_{IJ}
-\end{equation}
-For electronic dynamics in Eq~\eqref{eq:sh_tdse_coefs} to be unitary, the effective Hamiltonian $H_{\symrm{eff}}$ must be self-adjoint, which in turn requires $\sigma_{IJ}$ to be antisymmetric, $\sigma^\dagger=-\sigma$, in accordance with Sec~\ref{sec:self_adjoint_operators_and_observables}. To evaluate $\sigma_{IJ}$ in practice, note that each adiabatic eigenfunction depends parametrically on the instantaneous nuclear coordinates $\symbf{R}(t)$. By the chain rule,
-\begin{equation}
-\sigma_{IJ}=\Braket{\phi_I\vert\frac{\partial\phi_J}{\partial t}}=\dot{\symbf{R}}\cdot\Braket{\phi_I\vert\frac{\partial\phi_J}{\partial\symbf{R}}}=\symbf{v}\cdot\symbf{d}_{IJ},
-\end{equation}
-where $\symbf{v}=\dot{\symbf{R}}$ is the nuclear velocity and $\symbf{d}_{IJ}$ is the \acrfull{nacv}. Although many quantum‐chemistry packages provide \acrshort{nacv} and thus allow computation of the \acrshort{tdc} via $\sigma_{IJ}=\symbf{v}\cdot\symbf{d}_{IJ}$, \acrshort{nacv} can become ill-defined or numerically unstable near conical intersections (e.g., in multi-reference methods). In cases where a reliable \acrshort{nacv} is not available, one may instead employ a direct \acrshort{tdc} approximation using wavefunction overlaps.
-\section{The Time Derivative Coupling}\label{sec:time_derivative_coupling}
+\section{Time Derivative Coupling}\label{sec:time_derivative_coupling}
 \acrshort{tdc} is a pivotal quantity in \acrshort{tsh} simulations because it enters the electronic equations of motion given in Eq.~\eqref{eq:tsh_eom}. In \textit{ab initio} molecular dynamics, the \acrshort{tdc} is commonly evaluated using the full \acrshort{nacv} as $\sigma_{IJ}=\symbf{v}\cdot\symbf{d}_{IJ}$, where $\symbf{v}$ is the nuclear velocity. When the dynamics evolves on analytic \acrshort{pes} or the \acrshort{nacv} is for any reason not available, it is often preferable to calculate the \acrshort{tdc} directly. The most straightforward strategy applies a finite-difference formula to the adiabatic wavefunctions
 \begin{equation}\label{eq:tdc_fd1}
 \sigma_{IJ}(t)=\frac{1}{\Delta t}\left(\Braket{\phi_I(t)\vert\phi_J(t+\Delta t)}-\Braket{\phi_I(t)\vert\phi_J(t)}\right)=\frac{1}{\Delta t}\left(\Braket{\phi_I(t)\vert\phi_J(t+\Delta t)}-\delta_{IJ}\right),
@@ -116,35 +77,3 @@ which is not a widely used expression for the \acrshort{tdc} so we have taken th
 which is called the $\kappa$\acrshort{tdc}.\supercite{10.1021/acs.jctc.1c01080,10.1021/acs.jctc.3c00813,10.12688/openreseurope.13624.2} Both expressions in Eq~\eqref{eq:lambda_tdc} and Eq~\eqref{eq:kappa_tdc} have been shown to perform similarly in practice,\supercite{10.1021/acs.jctc.5c01176} with the $\kappa$\acrshort{tdc} being slightly more popular due to its simplicity. Both expressions diverge as $Z_{IJ}\to 0$, which is physically correct behavior for the \acrshort{tdc} near conical intersections. However, care must be taken when implementing these expressions to ensure numerical stability, especially the $\lambda$\acrshort{tdc} in Eq~\eqref{eq:lambda_tdc}, which involves division by the nuclear velocity $\dot R$.
 
 These approximations have gained popularity in recent years due to their simplicity, but it has been shown that they can lead to significant errors in certain scenarios, especially when the assumptions underlying their derivation are not met. Therefore, while they can be useful tools in the computational chemist's toolkit, they should be applied with caution and validated against more accurate methods whenever possible.\supercite{10.1021/acs.jctc.5c01176}
-\section{Ehrenfest Dynamics}\label{sec:ehrenfest_dynamics}
-\section{Fewest Switches Surface Hopping}\label{sec:fewest_switches}
-The \acrfull{fssh} method, developed by Tully in 1990,\supercite{10.1063/1.459170} is one of the most widely used \acrshort{tsh} algorithms. In \acrshort{fssh}, an ensemble of classical trajectories is propagated on adiabatic \acrshort{pes} according to Eq~\eqref{eq:tsh_eom}, with stochastic hops between electronic states determined by the instantaneous electronic populations. The key idea is to minimize the number of hops while ensuring that the ensemble-averaged populations match the quantum mechanical populations.
-
-Befor we can obtain the hopping probabilities, it is convenient to express the Eq~\eqref{eq:tsh_eom} in terms of the density matrix elements $\rho_{IJ}=c_I c_J^\ast$ as
-\begin{equation}\label{eq:fssh_density_matrix_eom}
-i\dot\rho_{IJ}=\sum_K\left[\left(H_{IK}^{\symrm{el}}-i\sigma_{IK}\right)\rho_{KJ}-\left(H_{KJ}^{\symrm{el}}-i\sigma_{KJ}\right)\rho_{IK}\right],
-\end{equation}
-where the diagonal elements $\rho_{II}=\lvert c_I\rvert^2$ represent the populations of the adiabatic states, and the off-diagonal elements $\rho_{IJ}$ ($I\neq J$) represent the coherences between states. It is also useful to note that th electronic Hamiltonian (potential) is Hermitian and the \acrshort{tdc} is anti-Hermitian. From Eq~\eqref{eq:fssh_density_matrix_eom}, we can derive the time evolution of the populations $\rho_{II}$ using the properties of complex numbers as
-\begin{equation}\label{eq:fssh_population_eom}
-\dot\rho_{II}=\sum_K b_{KI},
-\end{equation}
-where
-\begin{equation}\label{eq:fssh_b_matrix}
-b_{KI}=2\Im\left(H_{IK}^{\symrm{el}}\rho_{IK}^\ast\right)+2\Re\left(\sigma_{IK}\rho_{IK}^\ast\right).
-\end{equation}
-If we consider an adiabatic basis where the electronic Hamiltonian is diagonal, the first term in Eq~\eqref{eq:fssh_b_matrix} vanishes, and the population transfer between states is mediated entirely by the \acrshort{tdc} term. We should also note that $b_{II}=0$ due to the properties of \acrshort{tdc} being anti-Hermitian and the density matrix being Hermitian.
-
-Our goal is to derive hopping algorithm that minimizes the number of switches between states while ensuring that the ensemble-averaged populations match the quantum mechanical populations. Let's consider a two-state system for simplicity. In this case, the total number of trajectories at a time $t$ on state 1 be expressed as $N_1(t)=N\rho_{11}(t)$, where $N$ is the total number of trajectories in the ensemble. Without the loss of generality, we can assume that the population of state 1 is increasing, i.e., $\rho_{11}(t+\Delta t)>\rho_{11}(t)$. This means that the amount of trajectories that need to hop from state 2 to state 1 during the time interval $\Delta t$ must be larger than the number of trajectories hopping from state 1 to state 2. Since we want to minimize the number of hops, we can assume that no trajectories hop from state 1 to state 2 during this time interval. Therefore, the number of trajectories hopping from state 2 to state 1 must be equal to $N\left(\rho_{11}(t+\Delta t)-\rho_{11}(t)\right)$. The probability of a trajectory on state 2 hopping to state 1 during the time interval $\Delta t$ can then be expressed as the ratio of the number of trajectories hopping to the total number of trajectories on state 2 as
-\begin{equation}\label{eq:fssh_hopping_probability_two_state}
-    P_{2\to 1}=\frac{N\left(\rho_{11}(t+\Delta t)-\rho_{11}(t)\right)}{N\rho_{22}}=\frac{\dot\rho_{11}\Delta t}{\rho_{22}}=\frac{b_{12}\Delta t}{\rho_{22}},
-\end{equation}
-where we used $\dot\rho_{11}=b_{12}$ from Eq~\eqref{eq:fssh_population_eom}. The ho probability from state 1 to state 2 can be derived similarly assuming that the population of state 1 is decreasing during the time interval $\Delta t$.
-
-Should we want to generalize the hopping probabilities to more than two states, we can follow a similar reasoning. Let's assume that the population of state $I$ is increasing during the time interval $\Delta t$. The number of trajectories hopping from all other states to state $I$ must then be equal to $N\left(\rho_{II}(t+\Delta t)-\rho_{II}(t)\right)$. To minimize the number of hops, we can assume that no trajectories hop from state $I$ to any other state during this time interval. Therefore, the probability of a trajectory on state $J$ hopping to state $I$ during the time interval $\Delta t$ can be expressed as
-\begin{equation}\label{eq:fssh_hopping_probability_multistate}
-P_{J\to I}=\frac{b_{IJ}\Delta t}{\rho_{JJ}},
-\end{equation}
-where in the nominator we have the population flux only from state $J$ to state $I$, ignoring contributions from other states.
-\section{Landau--Zener Surface Hopping}\label{sec:landau_zener}
-\section{Mapping Approach to Surface Hopping}\label{sec:mapping_approach}
-\section{Beyond Surface Hopping}\label{sec:beyond_surface_hopping}

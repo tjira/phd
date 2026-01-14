@@ -1,0 +1,38 @@
+\section{Hilbert Spaces and Quantum States}\label{sec:hilbert_spaces_and_quantum_states}
+Hilbert spaces are fundamental concepts in quantum mechanics, providing the mathematical framework for describing quantum states and their evolution. In this section, we will explore the definition of Hilbert spaces, their properties, and how they relate to quantum states. We will start with the definition.
+\begin{definition}[Hilbert Space]
+A Hilbert space $\mathcal{H}$ is a complete inner product space, which means it is a vector space equipped with an inner product that allows for the definition of length and angle, and it is complete with respect to the norm induced by the inner product.
+\end{definition}
+In the context of quantum mechanics we will always take $\mathcal{H}$ to be a complex vector space, and we adopt the physics convention for the inner product, where $\langle\cdot,\cdot\rangle$ is conjugate-linear in its first argument and linear in its second, consistent with Def~\ref{def:inner_product}. The norm induced by the inner product is
+\begin{equation}
+\lvert\psi\rvert = \sqrt{\langle\psi,\psi\rangle}.
+\end{equation}
+Some examples of Hilbert spaces include the finite-dimensional vector spaces $\mathbb{R}^n$ or $\mathbb{C}^n$ or, as is often the case in quantum mechanics, the space of all square-integrable functions $L^2(\mathbb{R}^n)$. Formally\footnote{We will skip here the talk about the Lebesgue measure, since we do not want to complicate our lives with edge cases.}
+\begin{equation}
+L^2(\mathbb{R}^n)=\left\lbrace\psi :\mathbb{R}^n\to\mathbb{C}\middle\vert\int_{\mathbb{R}^n}\psi^*(\symbf{r})\psi(\symbf{r})\mathrm{d}\symbf{r}<\infty\right\rbrace
+\end{equation}
+where $\psi^*(\symbf{r})$ is the complex conjugate of $\psi(\symbf{r})$. In Dirac notation, elements of $\mathcal{H}$ are written as kets $\ket{\psi}$. The inner product of $\psi,\phi\in\mathcal{H}$ is then denoted by
+\begin{equation}
+\braket{\psi\vert\phi}:=\langle\psi,\phi\rangle.
+\end{equation}
+To each ket $\ket{\psi}$ there corresponds a bra $\bra{\psi}$, which is a linear functional
+\begin{equation}
+\bra{\psi} : \mathcal{H}\to\mathbb{C},\qquad\bra{\psi}\left(\ket{\phi}\right):=\braket{\psi|\phi}.
+\end{equation}
+This correspondence is guaranteed by the Riesz representation theorem.
+
+In quantum mechanics, physical (pure) states are represented by rays in a Hilbert space, i.e. one-dimensional subspaces of $\mathcal{H}$. Vectors that differ only by a nonzero complex scalar multiplication represent the same physical state:
+\begin{equation}
+\ket{\psi}\sim\ket{\phi}\Longleftrightarrow\exists\,c\in\mathbb{C}\setminus\lbrace 0\rbrace:\ket{\phi}=c\ket{\psi}.
+\end{equation}
+It is customary to choose a normalized representative $\ket{\psi}$ with
+\begin{equation}
+\braket{\psi\vert\psi}=1,
+\end{equation}
+in which case $\ket{\psi}$ is called a (normalized) state vector. The overall phase $e^{i\theta}\ket{\psi}$ has no observable physical effect.
+
+In most physical applications one assumes that $\mathcal{H}$ is separable, i.e. it possesses a countable orthonormal basis $\lbrace\ket{n}\rbrace_{n\in\mathbb{N}_0}$. Any vector $\ket{\psi}\in\mathcal{H}$ can then be then expanded as
+\begin{equation}
+\ket{\psi}=\sum_{n}c_n\ket{n},\qquad c_n=\braket{n\vert\psi},
+\end{equation}
+where the series converges in the norm of $\mathcal{H}$.

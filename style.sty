@@ -1,0 +1,23 @@
+\RequirePackage[onehalfspacing]{setspace} % setting the line spacing
+\RequirePackage[top=25mm,bottom=30mm,inner=20mm,outer=15mm,bindingoffset=10mm]{geometry} % page composition
+\RequirePackage[hidelinks]{hyperref} % hyperlinks and metadata
+\RequirePackage[backend=biber,style=chem-acs]{biblatex} % bibliography package
+\RequirePackage{braket} % braket notation
+\RequirePackage[acronym,nogroupskip,nomain,toc]{glossaries} % glossary package
+\RequirePackage[automark]{scrlayer-scrpage} % page styles
+\RequirePackage{unicode-math} % unicode math support
+\RequirePackage{microtype} % better typesetting
+\RequirePackage{tikz} % graphics
+
+\addbibresource{library.bib}\makeglossaries % set the library file and make glossaries
+
+\clearpairofpagestyles % clear the default page styles
+\ihead{\pagemark} % add page number to the inner header
+\ohead{\headmark} % add chapter name to the outer header
+
+\setmainfont{Libertinus Serif} % set the main font
+\setmathfont{Libertinus Math} % set the math font
+\setsansfont{Libertinus Sans} % set the sans-serif font
+
+\newtheorem{definition}{Definition}\numberwithin{definition}{section} % definition environment
+\newtheorem{theorem}{Theorem}\numberwithin{theorem}{section} % theorem environment

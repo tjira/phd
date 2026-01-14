@@ -1,11 +1,3 @@
-\chapter{Time Evolution in Quantum Mechanics}\label{sec:time_evolution}
-Quantum dynamics describes the evolution of quantum states $\ket{\Psi(t)}\in\mathcal{H}$ over time and is fundamental in quantum chemistry for understanding molecular behavior at the atomic level. It is governed by the principles of quantum mechanics, particularly the \acrfull{tdse}
-\begin{equation}\label{eq:tdse}
-i\frac{\symrm{d}}{\symrm{d}t}\ket{\Psi\left(t\right)}=H\ket{\Psi\left(t\right)},
-\end{equation}
-which dictates how wavefunctions change with time. Due to the complex nature of these equations, practical solutions are often limited to small or model systems.
-
-This section describes, how we can practically obtain the solution to the \acrshort{tdse}. We work in the complex separable Hilbert space $\mathcal{H}$ introduced in Sec~\ref{sec:hilbert_spaces_and_quantum_states}, with self-adjoint Hamiltonian $H$ (Sec~\ref{sec:self_adjoint_operators_and_observables}), so that the time-evolution operators described in this chapter are consistent with functional calculus treatment in Sec~\ref{sec:spectral_theory_in_hilbert_spaces}.
 \section{Numerical Schemes for TDSE}\label{sec:numerical_schemes_for_time_dependent_schrodinger_equation}
 This section focuses on numerical solutions to \acrshort{tdse}. In the described methods, we work in a position representation $\Psi\left(\symbf{R},t\right):=\braket{\symbf{R}\vert\Psi\left(t\right)}$. More importantly, we expand the wavefunction $\ket{\Psi\left(t\right)}$ in a set of diabatic basis functions $\lbrace\tilde\phi_I\rbrace_{I=1}^N$ defined in Sec~\ref{sec:adiabatic_vs_diabatic_representation}, so that $\Psi\left(\symbf{R},t\right)$ is an N-component vector in a electronic diabatic subspace.
 \subsection{Split-Operator Method}\label{sec:split_operator_method}
@@ -123,7 +115,3 @@ $\frac{\ket{\Psi(\tau)}}{\lvert\Psi(\tau)\rvert}$ converges to the ground state 
 $\tau\to\infty$. In numerical applications one therefore propagates in small imaginary-time
 steps and renormalizes the wavefunction after each step to prevent decay to the zero
 vector and to extract the ground state.
-\section{Holy Trinity of Variational Principles}\label{sec:variational_principles}
-\subsection{Dirac--Frenkel Principle}\label{sec:dirac_frenkel_principle}
-\subsection{McLachlan's Variational Principle}\label{sec:mclachlan_variational_principle}
-\subsection{Time-Dependent Variational Principle}\label{sec:time_dependent_variational_principle}

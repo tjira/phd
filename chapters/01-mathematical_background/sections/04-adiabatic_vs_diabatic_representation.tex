@@ -1,0 +1,79 @@
+\section{Adiabatic vs Diabatic Representation}\label{sec:adiabatic_vs_diabatic_representation}
+In molecular quantum mechanics we often describe a system of electrons and nuclei in terms of two sets of coordinates: electronic coordinates $\symbf{r}$ and nuclear coordinates $\symbf{R}$. The total molecular wavefunction depends on both, $\ket{\Psi(\symbf{R},\symbf{r},t)}$, and evolves under the full molecular Hamiltonian. In practice, it is convenient to expand $\ket{\Psi}$ in a suitable electronic basis that depends on the nuclear positions. Two particularly important choices are the adiabatic and diabatic representations.
+\subsection{Born--Oppenheimer Separation}\label{sec:born_oppenheimer_separation}
+The starting point is the separation of the Hamiltonian into nuclear and electronic parts. For a molecular system one typically writes
+\begin{equation}\label{eq:boa_hamiltonian}
+H=T_{\symrm{n}}(\symbf{R})+H_{\symrm{el}}(\symbf{r};\symbf{R}),
+\end{equation}
+where $T_{\symrm{n}}$ is the nuclear kinetic energy operator and $H_{\symrm{el}}$ contains the electronic kinetic energy and all Coulomb interactions, with the nuclei treated as fixed at positions $\symbf{R}$.
+
+For each fixed nuclear configuration $\symbf{R}$ we can solve the electronic Schr\"odinger equation
+\begin{equation}
+H_{\symrm{el}}(\symbf{r};\symbf{R})\ket{\phi_I(\symbf{R})}=E_I(\symbf{R})\ket{\phi_I(\symbf{R})},
+\end{equation}
+where $\{\ket{\phi_I(\symbf{R})}\}$ are electronic eigenstates and $E_I(\symbf{R})$ is the associated \acrfull{pes} for electronic state $I$.
+
+The total molecular wavefunction can then be expanded as
+\begin{equation}\label{eq:boa_expansion}
+\ket{\Psi(\symbf{R},\symbf{r},t)}=\sum_I\ket{\chi_I(\symbf{R},t)}\otimes\ket{\phi_I(\symbf{R})},
+\end{equation}
+where the nuclear wavefunctions $\ket{\chi_I(\symbf{R},t)}$ act as expansion coefficients in the electronic basis.
+
+Different choices of the electronic basis $\{\ket{\phi_I(\symbf{R})}\}$ lead to different representations of the nuclear dynamics. The two most common choices are the adiabatic and diabatic representations.
+\subsection{Adiabatic Representation}\label{sec:adiabatic_representation}
+In the adiabatic representation the electronic basis is chosen as the eigenstates of the electronic Hamiltonian. By construction,
+\begin{equation}
+H_{\symrm{el}}(\symbf{r};\symbf{R})\ket{\phi_I(\symbf{R})}=E_I(\symbf{R})\ket{\phi_I(\symbf{R})},
+\end{equation}
+so the electronic Hamiltonian is diagonal in this basis.
+
+Inserting the expansion in Eq.~\eqref{eq:boa_expansion} into the time-dependent Schr\"odinger equation and projecting onto $\bra{\phi_I(\symbf{R})}$ yields coupled equations for the nuclear wavefunctions $\ket{\chi_I(\symbf{R},t)}$. These contain the potential energy surfaces $E_I(\symbf{R})$ and additional terms that arise from the nuclear kinetic energy acting on the $\symbf{R}$-dependent electronic states:
+\begin{equation}
+i\frac{\partial}{\partial{t}}\ket{\chi_I(\symbf{R},t)}=\left[T_{\symrm{n}}(\symbf{R})+E_I(\symbf{R})\right]\ket{\chi_I(\symbf{R},t)}+\sum_JC_{IJ}(\symbf{R})\,\ket{\chi_J(\symbf{R},t)},
+\end{equation}
+where operator $C_{IJ}(\symbf{R})$ contains all the derivative coupling terms arising from the application of $T_{\symrm{n}}(\symbf{R})$ on the full wavefunction $\ket{\Psi(\symbf{R},\symbf{r},t)}$.
+
+Physically, the adiabatic representation has two key features. The electronic Hamiltonian is diagonal which means that each $E_I(\symbf{R})$ defines a potential energy surface on which the nuclei move. And second, nonadiabatic effects appear as derivative couplings in the nuclear kinetic energy, encoded in $C_{IJ}(\symbf{R})$.
+
+The adiabatic picture is particularly intuitive far from avoided crossings or conical intersections, where the nuclei move approximately on a single surface $E_I(\symbf{R})$. Near regions where surfaces approach or intersect, the derivative couplings become large and the adiabatic representation can become numerically inconvenient.
+\subsection{Diabatic Representation}\label{sec:diabatic_representation}
+In the diabatic representation one chooses a different set of electronic basis functions $\{\ket{\tilde\phi_\alpha(\symbf{R})}\}$, related to the adiabatic states by an $\symbf{R}$-dependent unitary transformation
+\begin{equation}\label{eq:unitary_transform}
+\ket{\phi_I(\symbf{R})}=\sum_\alpha U_{\alpha I}(\symbf{R})\ket{\tilde\phi_\alpha(\symbf{R})},
+\end{equation}
+where $U(\symbf{R})$ is unitary for each $\symbf{R}$.
+
+The defining property of an ideal diabatic basis is that the derivative couplings vanish:
+\begin{equation}
+\tilde{\symbf{d}}_{\alpha\beta}(\symbf{R})=\braket{\tilde\phi_\alpha(\symbf{R})\vert\nabla_{\symbf{R}}\tilde\phi_\beta(\symbf{R})}\approx\symbf{0},
+\end{equation}
+for all $\alpha,\beta$ (or at least for those states of interest). In such a basis, the nuclear kinetic energy operator acts trivially on the electronic functions and there are no derivative (nonadiabatic) couplings.
+
+However, removing the derivative couplings in this way introduces off-diagonal elements into the potential energy matrix. The nuclear Schr\"odinger equation in the diabatic representation then has the form
+\begin{equation}
+i\frac{\partial}{\partial{t}}\ket{\tilde\chi_\alpha(\symbf{R},t)}=\tilde{T}_{\symrm{n}}\ket{\tilde\chi_\alpha(\symbf{R},t)}+\sum_\beta\tilde{V}_{\alpha\beta}(\symbf{R})\ket{\tilde\chi_\beta(\symbf{R},t)},
+\end{equation}
+where the couplings between electronic states now appear as off-diagonal potential terms rather than derivative couplings. The $\tilde{V}$ term is equivalent to the electronic Hamiltonian in Eq~\eqref{eq:boa_hamiltonian} in diabatic basis, we call it here potential, mainly for historical reasons.
+
+Physically, the diabatic representation has the following features. First, the nuclear kinetic energy is diagonal and free of derivative couplings (or they are at least minimized). Second, the electronic couplings appear as smooth off-diagonal potentials in $\tilde{V}(\symbf{R})$.
+
+This is often advantageous for constructing low-dimensional model Hamiltonians and for simulating nonadiabatic dynamics, since the diabatic potentials can be chosen to vary smoothly through avoided crossings and conical intersections.
+
+In general, a globally exact diabatic basis free of derivative couplings may not exist due to topological obstructions (e.g. around conical intersections). In practice, one works with quasi-diabatic representations where the derivative couplings are small but not exactly zero.
+\subsection{Adiabatic Transform}\label{sec:adiabatic_transform}
+The nuclear wavefunctions in the two representations are related by the same unitary transformation $U(\symbf{R})$ that relates the electronic bases. Writing the total wavefunction as
+\begin{equation}
+\ket{\Psi(\symbf{R},\symbf{r},t)}=\sum_I\ket{\chi_I(\symbf{R},t)}\otimes\ket{\phi_I(\symbf{R})}=\sum_\alpha \ket{\tilde\chi_\alpha(\symbf{R},t)}\otimes\ket{\tilde\phi_\alpha(\symbf{R})},
+\end{equation}
+and inserting Eq~\eqref{eq:unitary_transform} into this equation and comparing the diabatic and adiabatic representation gives
+\begin{equation}
+\ket{\chi_I(\symbf{R},t)}=\sum_\alpha U_{\alpha I}^\ast(\symbf{R})\ket{\tilde\chi_\alpha(\symbf{R},t)}.
+\end{equation}
+The adiabatic potential matrix is diagonal,
+\begin{equation}
+V_{IJ}(\symbf{R})=E_I(\symbf{R})\delta_{IJ}
+\end{equation}
+and is obtained using the unitary similarity transformation according to the change of basis formula in Eq~\eqref{eq:change_of_basis} as
+\begin{equation}
+V(\symbf{R})=U^\dagger(\symbf{R})\tilde{V}(\symbf{R})U(\symbf{R}).
+\end{equation}

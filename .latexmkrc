@@ -7,7 +7,12 @@ add_cus_dep("acn", "acr", 0, "makeglossaries");
 
 @default_files = ("main.tex");
 
-make_path("$aux_dir/$_") for grep { -d } @{["chapters"]};
+make_path("$aux_dir/$_") for grep { -d } @{[
+    "chapters", "frontmatter",
+    "chapters/01-mathematical_background",
+    "chapters/02-time_evolution_in_quantum_mechanics",
+    "chapters/03-mixed_quantum_classical_dynamics",
+]};
 
 sub makeglossaries {
     system("makeglossaries -d $aux_dir " . basename($_[0]));

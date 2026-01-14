@@ -1,10 +1,18 @@
-\input{header}
+\ifdefined\metadata\DocumentMetadata{
+    lang = en,
+    pdfversion = 1.7,
+    pdfstandard = A-3b
+}\fi
+\documentclass[headsepline=true,open=right,parskip=half,twoside=true,12pt]{scrbook}\raggedbottom
+\title{Modeling of Ultrafast Processes in Radiation Chemistry}\author{Tomáš \textsc{Jíra}}
+\usepackage{style}
+\input{frontmatter/acronyms}
 \begin{document}
-\include{titlepage}
+\include{frontmatter/titlepage}
 \tableofcontents
-\include{chapters/mathematical_background}
-\include{chapters/time_evolution_in_quantum_mechanics}
-\include{chapters/mixed_quantum_classical_dynamics}
+\include{chapters/01-mathematical_background/main}
+\include{chapters/02-time_evolution_in_quantum_mechanics/main}
+\include{chapters/03-mixed_quantum_classical_dynamics/main}
 \printglossary[type=\acronymtype]
 \printbibliography
 \end{document}

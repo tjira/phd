@@ -1,0 +1,125 @@
+\section{Vector Spaces and Linear Operators}\label{sec:vector_spaces_and_linear_operators}
+Many concepts in quantum mechanics rest on the algebra of vector spaces and the action of linear operators. We review what is needed here. More complete accounts can be found in standard linear algebra and functional analysis texts. Throughout, the scalar field is a general field $F$, but in quantum mechanics we take $F=\mathbb{C}$ unless stated otherwise.
+\subsection{Vector Spaces and Basic Properties}\label{sec:vector_spaces_basic_properties}
+The object of interest is a vector space: a set with addition and scalar multiplication satisfying compatibility rules. The following definition states these axioms explicitly.
+\begin{definition}[Vector Space]
+A vector space $(V,+,\cdot)$ over a field $F$ is a non-empty set that is closed under vector addition and scalar multiplication. Every vector space must satisfy the following axioms for all $\symbf{u},\symbf{v},\symbf{w}\in V$ and all scalars $a,b\in F$:
+\begin{enumerate}\def\labelenumi{\arabic{enumi}.}
+\item Associativity of vector addition: $(\symbf{u}+\symbf{v})+\symbf{w}=\symbf{u}+(\symbf{v}+\symbf{w})$
+\item Commutativity of vector addition: $\symbf{u}+\symbf{v}=\symbf{v}+\symbf{u}$
+\item Identity element of vector addition: $\exists\,\symbf{0}\in V$ such that $\symbf{u}+\symbf{0}=\symbf{u}$
+\item Inverse element of vector addition: $\exists\,(-\symbf{u})\in V$ such that $\symbf{u}+(-\symbf{u})=\symbf{0}$
+\item Compatibility of scalar multiplication with field multiplication: $a(b\symbf{u})=(ab)\symbf{u}$
+\item Identity element of scalar multiplication: $1\symbf{u}=\symbf{u}$, where $1$ is the multiplicative identity in $F$
+\item Distributivity of scalar multiplication with respect to vector addition: $a(\symbf{u}+\symbf{v})=a\symbf{u}+a\symbf{v}$
+\item Distributivity of scalar multiplication with respect to field addition: $(a+b)\symbf{u}=a\symbf{u}+b\symbf{u}$
+\end{enumerate}
+\end{definition}
+These axioms are necessary for a set to be considered a vector space. Examples of vector spaces include the Euclidean space $\mathbb{R}^n$, the set of all functions with continuous $m$-th derivatives $C^m(\mathbb{R}^n)$ or $C^\infty(\mathbb{R}^n)$, which is the set of all infinitely differentiable functions. In quantum mechanics we usually work in Hilbert spaces, which will be described in more detail in the next section.
+
+Before we can use vector spaces effectively, we must identify and characterize smaller structures that inherit their properties. These are known as subspaces.
+\begin{definition}[Subspace]
+A subset $W\subset V$ is a subspace if it is non-empty and closed under addition and scalar multiplication. For all $\symbf{u},\symbf{v}\in W$ and $a\in F$, one has $\symbf{u}+\symbf{v}\in W$ and $a\symbf{u}\in W$. Equivalently, $W$ is a subspace iff $\symbf{0}\in W$, $\symbf{u}+\symbf{v}\in W$ and $a\symbf{u}\in W$.
+\end{definition}
+Every subspace necessarily contains the zero vector and is closed under both addition and scalar multiplication so it is itself a vector space. Subspaces are important because they capture smaller, self-contained portions of a larger space where similar operations remain valid.
+
+We now proceed to the concept of linear combinations, which provides a mechanism for generating new vectors from existing ones, and the related concept of the span, which describes the set of all such combinations.
+\begin{definition}[Linear Combination]
+Given a vector space $V$ over a field $F$, a linear combination of vectors $\symbf{v}_1,\symbf{v}_2,\ldots,\symbf{v}_n\in V$ is a vector
+\begin{equation}
+\symbf{u}=a_1\symbf{v}_1+a_2\symbf{v}_2+\ldots+a_n\symbf{v}_n,
+\end{equation}
+where $a_1,a_2,\ldots,a_n\in F$. The set of all linear combinations of ${\symbf{v}_1,\symbf{v}_2,\ldots,\symbf{v}_n}$ is called the span of these vectors
+\begin{equation}
+\text{span}\lbrace\symbf{v}_1,\symbf{v}_2,\ldots,\symbf{v}_n\rbrace=\left\lbrace\sum_{i=1}^n a_i\symbf{v}_i\middle\vert a_i\in F\right\rbrace.
+\end{equation}
+The span of a set of vectors is the smallest subspace of $V$ that contains all the vectors in the set.
+\end{definition}
+The span formalizes the idea of building new vectors from known ones. In finite-dimensional spaces, the span of a finite set can fill the entire space (as in the case of a basis) or a lower-dimensional subspace.
+
+To understand how vectors relate to one another within a span, we must determine whether some vectors can be expressed as combinations of others. This leads us to the notion of linear independence.
+\begin{definition}[Linear Independence]
+A set of vectors $\lbrace\symbf{v}_1,\symbf{v}_2,\ldots,\symbf{v}_n\rbrace$ in a vector space $V$ over a field $F$ is said to be linearly independent if the only solution to the equation
+\begin{equation}
+a_1\symbf{v}_1+a_2\symbf{v}_2+\ldots+a_n\symbf{v}_n=\symbf{0}
+\end{equation}
+is $a_1=a_2=\ldots=a_n=0$, where $a_1,a_2,\ldots,a_n\in F$. If there exists a non-trivial solution (i.e., not all $a_i$ are zero), then the set is said to be linearly dependent.
+\end{definition}
+Linear independence ensures that no vector in the set can be constructed from others. This property is essential when defining a minimal generating set for the entire space. For linear operators (defined later), eigenvectors associated with distinct eigenvalues are linearly independent. No orthogonality is assumed here.
+
+Finally, the concepts of basis and dimension summarize the structure of a vector space in a concise form. A basis provides coordinates for states and a matrix representation for operators.
+\begin{definition}[Basis]
+A basis of a vector space $V$ over a field $F$ is a set of vectors $\lbrace\symbf{v}_1,\symbf{v}_2,\ldots,\symbf{v}_n\rbrace$ in $V$ that is linearly independent and spans $V$. The dimension of $V$, denoted as $\text{dim}(V)$, is the number of vectors in any basis of $V$.
+\end{definition}
+Every vector in a vector space can be written uniquely as a linear combination of basis vectors. The dimension quantifies the minimal number of coordinates required to specify any element of the space, which is a fundamental concept underlying state representation in quantum mechanics.
+\subsection{Normed, Inner Product and Complete Vector Space}\label{sec:normed_inner_product_complete_vector_space}
+To introduce geometric concepts into vector spaces, we first define the normed vector space.
+\begin{definition}[Normed Vector Space]
+A normed vector space $(V,\lvert\cdot\rvert)$ is a vector space $V$ over a field $F$ (here, $F$ is $\mathbb{R}$ or $\mathbb{C}$) equipped with a norm, which is a function $\lvert\cdot\rvert:V\to\left[0,\infty\right)\subset\mathbb{R}$ that satisfies the following properties for all $\symbf{u},\symbf{v}\in V$ and all scalars $a\in F$:
+\begin{enumerate}\def\labelenumi{\arabic{enumi}.}
+\item Non-negativity: $\lvert\symbf{u}\rvert\geq 0$, with equality iff $\symbf{u}=\symbf{0}$
+\item Absolute scalability: $\lvert a\symbf{u}\rvert=\lvert a\rvert\lvert\symbf{u}\rvert$
+\item Triangle inequality: $\lvert\symbf{u}+\symbf{v}\rvert\leq\lvert\symbf{u}\rvert+\lvert\symbf{v}\rvert$
+\end{enumerate}
+\end{definition}
+A norm provides a measure of the length or magnitude of vectors in the space, allowing us to discuss concepts such as convergence and continuity. The norm induces a metric (or distance function) on the vector space defined briefly as
+\begin{equation}
+d(\symbf{u},\symbf{v})=\lvert\symbf{u}-\symbf{v}\rvert,
+\end{equation}
+which satisfies all the properties of a metric, thereby enabling the study of geometric properties within the vector space. More specialized normed vector space emerges after we define an inner product.
+
+The inner product generalizes the familiar Euclidean dot product to abstract vector spaces.
+\begin{definition}[Inner Product]\label{def:inner_product}
+An inner product on a vector space $V$ over a field $F$ is a function $\langle\cdot,\cdot\rangle:V\times V\to F$ that satisfies the following properties for all $\symbf{u},\symbf{v},\symbf{w}\in V$ and all scalars $a\in F$:
+\begin{enumerate}\def\labelenumi{\arabic{enumi}.}
+\item Conjugate symmetry: $\langle\symbf{u},\symbf{v}\rangle=\overline{\langle\symbf{v},\symbf{u}\rangle}$
+\item Linearity in the second argument: $\langle \symbf{u},a\symbf{v}+\symbf{w}\rangle=a\langle\symbf{u},\symbf{v}\rangle+\langle\symbf{u},\symbf{w}\rangle$
+\item Positive-definiteness: $\langle\symbf{u},\symbf{u}\rangle\geq 0$, with equality if and only if $\symbf{u}=\symbf{0}$
+\end{enumerate}
+\end{definition}
+The linearity in second argument and conjugate symmetry together imply conjugate-linearity in the first argument. We note here that we use the definition that is commonly used un quantum mechanics. Mathematicians often require linearity in the first argument and conjugate-linearity in the second argument. For real vector spaces, the conjugate symmetry reduces to ordinary symmetry. The inner product induces a norm (or length) of a vector $\symbf{u}$ defined by
+\begin{equation}
+\lvert\symbf{u}\rvert=\sqrt{\langle\symbf{u},\symbf{u}\rangle}.
+\end{equation}
+We can also generalize the concept of perpendicularity to abstract vector spaces using the inner product. Two vectors $\symbf{u}$ and $\symbf{v}$ are said to be orthogonal if their inner product is zero, i.e., $\langle\symbf{u},\symbf{v}\rangle=0$. If their lengths are both one, they are called orthonormal.
+
+The inner product gives rise to two key inequalities that determine much of the geometric structure of the space. The Cauchy-Schwarz inequality states that for any vectors $\symbf{u},\symbf{v}\in V$,
+\begin{equation}
+\lvert\langle\symbf{u},\symbf{v}\rangle\rvert\leq\lvert\symbf{u}\rvert\lvert\symbf{v}\rvert.
+\end{equation}
+This inequality ensures that the angle between two vectors is well-defined and implies the triangle inequality for the induced norm. A vector space equipped with an inner product is called an inner product space. Together, these results ensure that the norm induced by an inner product satisfies all metric axioms, endowing the space with a well-defined notion of distance. Thus, every inner product space is a normed vector space, although the converse is not generally true.
+
+Before we get to linear operators, we add one final definition that will become important when we discuss infinite-dimensional spaces.
+\begin{definition}[Complete Vector Space]
+Let $(V,\lvert\cdot\rvert)$ be a normed vector space. A sequence $\lbrace\symbf{v}_n\rbrace$ in $V$ is called a Cauchy sequence if for every $\epsilon>0$, there exists an integer $N$ such that $\lvert\symbf{v}_m-\symbf{v}_n\rvert<\epsilon$ for all $m,n>N$. The space $V$ is said to be complete if every Cauchy sequence in $V$ converges to a limit that is also in $V$. A complete normed vector space is called a Banach space.
+\end{definition}
+\subsection{Linear Operators}\label{sec:linear_operators}
+Linear operators lie at the core of quantum mechanics, representing physical observables and the evolution of quantum states. We now define linear operators and explore their properties.
+\begin{definition}[Linear Operator]
+A linear operator on a vector space $V$ over a field $F$ is a map $A:V\to V$ with $A(\symbf{u}+\symbf{v})=A\symbf{u}+A\symbf{v}$ and $A(a\symbf{u})=aA\symbf{u}$ for all $\symbf{u},\symbf{v}\in V$, $a\in F$.
+\end{definition}
+Using a basis of a vector space, we can represent linear operators as matrices. If $\lbrace\symbf{e}_i\rbrace_{i=1}^n$ is a basis of an $n$-dimensional vector space $V$, an operator $A$ can be represented by a matrix $[A]_{ij}=a_{ij}$ with the coefficients defined by
+\begin{equation}
+A\symbf{e}_j=\sum_{i=1}^n a_{ij}\symbf{e}_i.
+\end{equation}
+The action of $A$ on any vector $\symbf{v}=\sum_{j=1}^n v_j\symbf{e}_j$ can then be computed as
+\begin{equation}
+A\symbf{v}=\sum_{i=1}^n\left(\sum_{j=1}^n a_{ij}v_j\right)\symbf{e}_i.
+\end{equation}
+If the vector space $V$ is equipped with an inner product and the basis $\lbrace\symbf{e}_i\rbrace_{i=1}^n$ is orthonormal, the matrix elements can also be expressed as
+\begin{equation}
+a_{ij}=\langle\symbf{e}_i,A\symbf{e}_j\rangle.
+\end{equation}
+This equation is consistent with Def~\ref{def:inner_product}, where we adopt the physics convention for the inner product. Note that the matrix representation of an operator depends on the choice of basis. If $U$ is a change of basis matrix from a new basis $\lbrace\symbf{f}_i\rbrace_{i=1}^n$ to the old basis $\lbrace\symbf{e}_i\rbrace_{i=1}^n$ (i.e., $\symbf{e}_i=\sum_{j=1}^n U_{ji}\symbf{f}_j$), the matrix representation of $A$ in the new basis is given by
+\begin{equation}\label{eq:change_of_basis}
+[A]_{\symbf{e}}=U^{-1}[A]_{\symbf{f}}U.
+\end{equation}
+Let's now define some additional properties of linear operators.
+\begin{definition}[Null Space]
+For $A:V\to V$, the kernel (or null space) of $A$ is the set of vectors $\symbf{v}\in V$ such that $A\symbf{v}=\symbf{0}$. The image (or range) of $A$ is the set of vectors $\symbf{w}\in V$ such that $\symbf{w}=A\symbf{v}$ for some $\symbf{v}\in V$. If $\text{dim}(V)$ is finite, the rank-nullity theorem states that $\text{dim}(\text{ker}(A))+\text{dim}(\text{im}(A))=\text{dim}(V)$.
+\end{definition}
+Another important concept is the concept of eigenvalues and eigenvectors.
+\begin{definition}[Eigenvalues and Eigenvectors]
+A scalar $\lambda\in F$ is called an eigenvalue of a linear operator $A:V\to V$ if there exists a non-zero vector $\symbf{v}\in V$ such that $A\symbf{v}=\lambda\symbf{v}$. The vector $\symbf{v}$ is called an eigenvector associated with the eigenvalue $\lambda$. For a finite-dimensional vector space, the set of all eigenvalues of $A$ is called the spectrum of $A$. The subspace $E_\lambda=\symrm{ker}(A-\lambda I)$ is called the eigenspace associated with the eigenvalue $\lambda$, where $I$ is the identity operator on $V$.
+\end{definition}
+If $V$ is finite-dimensional, the eigenvalues of $A$ can be found by solving the characteristic polynomial equation $\text{det}(A-\lambda I)=0$.
