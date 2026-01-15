@@ -1,3 +1,28 @@
+\makeatletter\let\percentchar\@percentchar\makeatother
+
+\newcommand{\filetotitle}{
+    \directlua{
+        local name = status.filename:match("([^/]+).tex$"):gsub("_", " "):gsub("^\percentchar d+-", "")
+
+        local exceptions = {["and"] = true, ["of"] = true, ["the"] = true, ["in"] = true, ["with"] = true, ["vs"] = true}
+
+        local words = {}; local first = true
+
+        for word in name:gmatch("\percentchar S+") do
+
+            local word = word:lower()
+
+            if is_first or not exceptions[word] then
+                word = word:sub(1,1):upper() .. word:sub(2)
+            end
+
+            table.insert(words, word); first = false
+        end
+
+        tex.sprint(table.concat(words, " "))
+    }
+}
+
 \newcommand{\includechapters}{
     \directlua{
         local folders = {}
