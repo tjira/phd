@@ -3,6 +3,8 @@
 % arara: mkdir: {target: build/chapters/01-mathematical_background}
 % arara: mkdir: {target: build/chapters/02-time_evolution_in_quantum_mechanics}
 % arara: mkdir: {target: build/chapters/03-mixed_quantum_classical_dynamics}
+% arara: mkdir: {target: build/chapters/04-supporting_numerical_studies}
+% arara: mkdir: {target: build/chapters/05-primary_scientific_contributions}
 % arara: lualatex: {options: ["--output-directory=build"]}
 % arara: biber: {options: ["--output-directory=build"]}
 % arara: makeglossaries: {options: ["-d", "build"]}
@@ -10,16 +12,18 @@
 % arara: lualatex: {options: ["--output-directory=build"]}
 % arara: move: {files: ["build/main.pdf"], target: "main.pdf"}
 \directlua{if os.getenv("METADATA") == "1" then tex.print("\\input{frontmatter/metadata}") end}
-\documentclass[headsepline=true,open=right,parskip=half,twoside=true,12pt]{scrbook}\raggedbottom
+\documentclass[headsepline=true,parskip=half,12pt]{scrbook}\raggedbottom
 \title{Modeling of Ultrafast Processes in Radiation Chemistry}\author{Tomáš \textsc{Jíra}}
 \usepackage{style}
 \input{frontmatter/acronyms}
+\input{frontmatter/functions}
 \begin{document}
 \include{frontmatter/titlepage}
+\include{frontmatter/acknowledgements}
+\include{frontmatter/abstract}
 \tableofcontents
-\include{chapters/01-mathematical_background/main}
-\include{chapters/02-time_evolution_in_quantum_mechanics/main}
-\include{chapters/03-mixed_quantum_classical_dynamics/main}
+\include{frontmatter/introduction}
+\includechapters
 \printglossary[type=\acronymtype]
 \printbibliography
 \end{document}

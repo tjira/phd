@@ -1,0 +1,35 @@
+\newcommand{\includechapters}{
+    \directlua{
+        local folders = {}
+
+        for folder in require("lfs").dir("chapters") do
+            if folder ~= "." and folder ~= ".." then
+                table.insert(folders, folder)
+            end
+        end
+
+        table.sort(folders)
+
+        for _, folder in ipairs(folders) do
+            tex.sprint("\\include{chapters/" .. folder .. "/main" .. "}")
+        end
+    }
+}
+
+\newcommand{\inputfolder}[1]{
+    \directlua{
+        local files = {}
+
+        for file in require("lfs").dir("#1") do
+            if file:sub(-4) == ".tex" then
+                table.insert(files, file)
+            end
+        end
+
+        table.sort(files)
+
+        for _, file in ipairs(files) do
+            tex.sprint("\\input{" .. "#1" .. "/" .. file .. "}")
+        end
+    }
+}
