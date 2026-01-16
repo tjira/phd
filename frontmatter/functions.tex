@@ -1,20 +1,12 @@
 \begin{luacode*}
     function filetotitle()
-        local filename = status.filename:match("([^/]+).tex$")
-
-        local title = filename:gsub("_", " "):gsub("^%d+-", "")
-
-        tex.sprint(title)
+        tex.sprint((status.filename:match("([^/]+).tex$"):gsub("_", " "):gsub("^%d+-", "")))
     end
 \end{luacode*}
 
 \begin{luacode*}
     function foldertotitle()
-        local foldername = status.filename:match("([^/]+)/[^/]+.tex$")
-        
-        local title = foldername:gsub("_", " "):gsub("^%d+-", "")
-
-        tex.sprint(title)
+        tex.sprint((status.filename:match("([^/]+)/[^/]+.tex$"):gsub("_", " "):gsub("^%d+-", "")))
     end
 \end{luacode*}
 
