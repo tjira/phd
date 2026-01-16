@@ -1,0 +1,22 @@
+!config
+identifier: setup
+name: Project Setup
+commands:
+- name: Creating Build Folders
+  command: >
+    @{
+      import java.io.File;
+        
+      roots = ["chapters", "appendices", "frontmatter"]; 
+
+      for (root : roots) {
+
+        base = new File("build", root); base.mkdirs();
+          
+        for (file : new File(root).listFiles()) {
+          if (file.directory) new File(base, file.name).mkdirs();
+        }
+      }
+
+      return true;
+    }

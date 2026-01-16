@@ -1,21 +1,24 @@
 \begin{luacode*}
     function filetotitle()
-        tex.sprint((status.filename:match("([^/]+).tex$"):gsub("_", " "):gsub("^%d+-", "")))
+        tex.sprint((status.filename:match("([^/]+)%.tex$"):gsub("_", " "):gsub("^%d+-", "")))
     end
 \end{luacode*}
 
 \begin{luacode*}
     function foldertotitle()
-        tex.sprint((status.filename:match("([^/]+)/[^/]+.tex$"):gsub("_", " "):gsub("^%d+-", "")))
+        tex.sprint((status.filename:match("([^/]+)/[^/]+%.tex$"):gsub("_", " "):gsub("^%d+-", "")))
     end
 \end{luacode*}
 
 \begin{luacode*}
     function includechapters(path)
-        local folders = {}
+        local folders = {}; local papers = os.getenv("PAPERS") == "1"
 
         for folder in require("lfs").dir(path) do
-            if folder ~= "." and folder ~= ".." then
+
+            local include = not folder:find("Paper") or papers
+
+            if folder:sub(1, 1) ~= "." and include then
                 table.insert(folders, folder)
             end
         end
@@ -23,24 +26,20 @@
         table.sort(folders)
 
         for _, folder in ipairs(folders) do
-
-            local not_include = string.find(folder, "Papers") and os.getenv("PAPERS") ~= "1"
-
-            if not not_include then
-                tex.sprint("\\include{" .. path .. "/" .. folder .. "/main" .. "}")
-            end
+            tex.sprint(string.format("\\include{%s/%s/main}", path, folder))
         end
     end
 \end{luacode*}
 
 \begin{luacode*}
     function inputfolder(path)
-        local current_dir = status.filename:match("(.*)/") or "."
-
-        path = current_dir .. "/" .. path; local files = {}
+        path = status.filename:match("(.*)/") .. "/" .. path; local files = {}
 
         for file in require("lfs").dir(path) do
-            if file:sub(-4) == ".tex" then
+
+            local input = file:match("%.tex$")
+
+            if input then
                 table.insert(files, file)
             end
         end
@@ -48,7 +47,7 @@
         table.sort(files)
 
         for _, file in ipairs(files) do
-            tex.sprint("\\input{" .. path .. "/" .. file .. "}")
+            tex.sprint(string.format("\\input{%s/%s}", path, file))
         end
     end
 \end{luacode*}
