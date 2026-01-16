@@ -1,33 +1,28 @@
-\makeatletter\let\percentchar\@percentchar\makeatother
+\begin{luacode*}
+    function filetotitle()
+        local filename = status.filename:match("([^/]+).tex$")
 
-\newcommand{\filetotitle}{
-    \directlua{
-        local name = status.filename:match("([^/]+).tex$"):gsub("_", " "):gsub("^\percentchar d+-", "")
+        local title = filename:gsub("_", " "):gsub("^%d+-", "")
 
-        local exceptions = {["and"] = true, ["of"] = true, ["the"] = true, ["in"] = true, ["with"] = true, ["vs"] = true}
+        tex.sprint(title)
+    end
+\end{luacode*}
 
-        local words = {}; local first = true
+\begin{luacode*}
+    function foldertotitle()
+        local foldername = status.filename:match("([^/]+)/[^/]+.tex$")
+        
+        local title = foldername:gsub("_", " "):gsub("^%d+-", "")
 
-        for word in name:gmatch("\percentchar S+") do
+        tex.sprint(title)
+    end
+\end{luacode*}
 
-            local word = word:lower()
-
-            if is_first or not exceptions[word] then
-                word = word:sub(1,1):upper() .. word:sub(2)
-            end
-
-            table.insert(words, word); first = false
-        end
-
-        tex.sprint(table.concat(words, " "))
-    }
-}
-
-\newcommand{\includechapters}{
-    \directlua{
+\begin{luacode*}
+    function includechapters(path)
         local folders = {}
 
-        for folder in require("lfs").dir("chapters") do
+        for folder in require("lfs").dir(path) do
             if folder ~= "." and folder ~= ".." then
                 table.insert(folders, folder)
             end
@@ -36,16 +31,23 @@
         table.sort(folders)
 
         for _, folder in ipairs(folders) do
-            tex.sprint("\\include{chapters/" .. folder .. "/main" .. "}")
+
+            local not_include = string.find(folder, "Papers") and os.getenv("PAPERS") ~= "1"
+
+            if not not_include then
+                tex.sprint("\\include{" .. path .. "/" .. folder .. "/main" .. "}")
+            end
         end
-    }
-}
+    end
+\end{luacode*}
 
-\newcommand{\inputfolder}[1]{
-    \directlua{
-        local files = {}
+\begin{luacode*}
+    function inputfolder(path)
+        local current_dir = status.filename:match("(.*)/") or "."
 
-        for file in require("lfs").dir("#1") do
+        path = current_dir .. "/" .. path; local files = {}
+
+        for file in require("lfs").dir(path) do
             if file:sub(-4) == ".tex" then
                 table.insert(files, file)
             end
@@ -54,7 +56,12 @@
         table.sort(files)
 
         for _, file in ipairs(files) do
-            tex.sprint("\\input{" .. "#1" .. "/" .. file .. "}")
+            tex.sprint("\\input{" .. path .. "/" .. file .. "}")
         end
-    }
-}
+    end
+\end{luacode*}
+
+\newcommand{\filetotitle}{\directlua{filetotitle()}}
+\newcommand{\foldertotitle}{\directlua{foldertotitle()}}
+\newcommand{\includechapters}[1]{\directlua{includechapters("#1")}}
+\newcommand{\inputfolder}[1]{\directlua{inputfolder("#1")}}

@@ -1,0 +1,105 @@
+\section{\filetotitle}\label{sec:spectral_theory_in_hilbert_spaces}
+In this section we introduce the basic elements of spectral theory for operators on Hilbert spaces and connect them to the description of quantum observables and measurements. Throughout, $\mathcal{H}$ denotes a complex Hilbert space with inner product $\langle\cdot,\cdot\rangle$ conjugate-linear in the first argument and linear in the second. We write $\braket{\psi|\phi}:=\langle\psi,\phi\rangle$ in Dirac notation. The associated norm is
+\begin{equation}
+\lvert\ket{\psi}\rvert := \sqrt{\braket{\psi|\psi}},
+\end{equation}
+and, for brevity, we will often write $\lvert\psi\rvert$ instead of $\lvert\ket{\psi}\rvert$.
+\subsection{Self-adjoint Operators and Observables}\label{sec:self_adjoint_operators_and_observables}
+In quantum mechanics, observables are represented by self-adjoint operators on a Hilbert space. Spectral theory describes how such operators can be decomposed into their eigenvalue parts, both discrete and continuous, and how this decomposition encodes measurement statistics and time evolution.
+\begin{definition}[Self-Adjoint Operator]
+A linear operator $A$ on $\mathcal{H}$ is called self-adjoint if
+\begin{equation}
+\braket{\phi|A\psi}=\braket{A\phi|\psi}\quad\text{for all }\ket{\phi},\ket{\psi}\in\mathcal{H}
+\end{equation}
+and the domain of $A$ coincides with the domain of its adjoint.
+\end{definition}
+In physics terminology, self-adjoint operators are often called Hermitian. In nonrelativistic quantum mechanics, each observable is modeled by a self-adjoint operator $A$ on $\mathcal{H}$ and its spectral properties determine the possible measurement outcomes.
+
+Since a lot of operators in quantum mechanics require unitarity, we also define it here.
+\begin{definition}[Unitary Operator]
+A linear operator $U$ on a Hilbert space $\mathcal{H}$ is called unitary if
+\begin{equation}
+U^\dagger U=U U^\dagger=I,
+\end{equation}
+where $U^\dagger$ is the adjoint of $U$ and $I$ is the identity on $\mathcal{H}$.
+\end{definition}
+Unitary operators preserve the inner product and hence the norm
+\begin{equation}
+\braket{U\psi\vert U\phi}=\braket{\psi\vert\phi}\quad\text{for all }\psi,\phi\in\mathcal{H},
+\end{equation}
+so that $\lvert U\psi\rvert=\lvert\psi\rvert$. In quantum mechanics they represent symmetry
+transformations and the time evolution of isolated systems.
+
+\subsubsection*{Finite-Dimensional Case}\label{sec:finite_dimensional_case}
+If $\mathcal{H}$ is finite-dimensional, the spectral structure is simple.
+\begin{theorem}[Spectral Theorem]
+Let $\mathcal{H}$ be a finite-dimensional Hilbert space and $A$ self-adjoint. Then there exists an orthonormal basis $\{\ket{n}\}$ of $\mathcal{H}$ such that
+\begin{equation}
+A\ket{n}=\lambda_n\ket{n},\qquad\lambda_n\in\mathbb{R},
+\end{equation}
+and
+\begin{equation}
+A=\sum_n\lambda_n\ket{n}\bra{n}.
+\end{equation}
+\end{theorem}
+The real numbers $\lambda_n$ are the eigenvalues of $A$ and the kets $\ket{n}$ are the corresponding eigenstates. If the system is in a normalized state $\ket{\psi}$, the probability of obtaining the result $\lambda_n$ when measuring $A$ is
+\begin{equation}
+\mathbb P_A^\psi(\lambda_n)=\lvert\braket{n\vert\psi}\rvert^2,
+\end{equation}
+and the expectation value of $A$ is
+\begin{equation}
+\langle A\rangle_\psi=\braket{\psi\vert A\vert\psi}=\sum_n\lambda_n\lvert\braket{n\vert\psi}\rvert^2.
+\end{equation}
+This is the standard discrete version of the Born rule.
+\subsection{Spectral Decomposition in Infinite Dimensions}\label{sec:spectral_decompositions_in_infinite_dimenstions}
+In infinite-dimensional Hilbert spaces, self-adjoint operators may have both discrete and continuous parts of the spectrum. The finite sum in the previous subsection is replaced by a combination of sums and integrals.
+
+Heuristically, one can write the spectral decomposition of a self-adjoint operator $A$ as
+\begin{equation}\label{eq:heuristic_spectral_decomposition}
+A=\sum_n \lambda_n \ket{n}\bra{n}+\int_{\sigma_{\symrm{c}}(A)} \lambda\,\ket{\lambda}\bra{\lambda}\,\symrm{d}\lambda,
+\end{equation}
+where $\lambda_n$ are discrete eigenvalues with normalizable eigenstates $\ket{n}$ (bound states), $\sigma_{\symrm{c}}(A)$ is the continuous part of the spectrum. The generalized kets $\ket{\lambda}$ are not elements of $\mathcal{H}$ (they are not normalizable), but they can be treated formally in Dirac’s notation. More rigorously, the spectral decomposition is described using a projection-valued measure, but the heuristic form in Eq~\eqref{eq:heuristic_spectral_decomposition} is sufficient for most physical applications.
+
+For a normalized state $\ket{\psi}$, the discrete and continuous parts of the spectrum contribute to the normalization as
+\begin{equation}
+1=\lvert\psi\rvert^2=\sum_n\lvert\braket{n\vert\psi}\rvert^2+\int_{\sigma_{\symrm{c}}(A)}\lvert\braket{\lambda\vert\psi}\rvert^2\,\symrm{d}\lambda,
+\end{equation}
+and the probability of obtaining a measurement outcome in an interval $\Delta$ is
+\begin{equation}
+\mathbb P_A^\psi(\Delta)=\sum_{\lambda_n\in\Delta}\lvert\braket{n\vert\psi}\rvert^2+\int_{\Delta\cap\sigma_{\symrm{c}}(A)}\lvert\braket{\lambda\vert\psi}\rvert^2\,\symrm{d}\lambda.
+\end{equation}
+\subsection{Functions of Observables and Time Evolution}\label{sec:functions_of_observables_and_time_evolution}
+Once the spectral decomposition of a self-adjoint operator $A$ is known, one can define functions of $A$ by acting on its spectral components.
+
+In the purely discrete case,
+\begin{equation}
+A=\sum_n\lambda_n\ket{n}\bra{n},\qquad\ket{\psi}=\sum_n c_n\ket{n},
+\end{equation}
+a function $f(A)$ is defined by
+\begin{equation}
+f(A):=\sum_n f(\lambda_n)\ket{n}\bra{n},
+\end{equation}
+so that
+\begin{equation}
+f(A)\ket{n}=f(\lambda_n)\ket{n}.
+\end{equation}
+
+In the general (discrete + continuous) case, the same idea gives
+\begin{equation}
+f(A)=\sum_n f(\lambda_n)\ket{n}\bra{n}+\int_{\sigma_{\symrm{c}}(A)}f(\lambda)\ket{\lambda}\bra{\lambda}\,\symrm{d}\lambda,
+\end{equation}
+which is the heuristic form of the functional calculus. 
+
+The most important example in quantum mechanics is the time-evolution operator generated by a Hamiltonian $H$. For a time-independent Hamiltonian, the unitary time-evolution operator is
+\begin{equation}
+U(t)=e^{-i t H},
+\end{equation}
+which, in spectral form, reads
+\begin{equation}
+U(t)=\sum_n e^{-i t E_n} \ket{n}\bra{n}+\int_{\sigma_{\symrm{c}}(H)}e^{-i t E}\ket{E}\bra{E}\,\symrm{d}E,
+\end{equation}
+where $E_n$ and $E$ denote discrete and continuous energy values, respectively. This expression shows explicitly how each energy component of the state picks up a phase factor $e^{-i t E}$, while the norm
+\begin{equation}
+\lvert U(t)\psi\rvert=\lvert\psi\rvert
+\end{equation}
+is preserved, expressing conservation of total probability under Schr\"odinger time evolution.
