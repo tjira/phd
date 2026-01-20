@@ -1,5 +1,6 @@
 % arara: setup
 % arara: lualatex: {options: ["--output-directory=build"]}
+% arara: move: {files: ["build/main.pdf"], target: "main.pdf"}
 % arara: biber: {options: ["--output-directory=build"]}
 % arara: makeglossaries: {options: ["-d", "build"]}
 % arara: lualatex: {options: ["--output-directory=build"]}
