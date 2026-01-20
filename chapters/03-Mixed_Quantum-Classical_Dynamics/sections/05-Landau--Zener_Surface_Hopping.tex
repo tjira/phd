@@ -36,11 +36,11 @@ Now we have one integral left to evaluate. To evaluate it, we will need to inspe
 
 Since we now know that the integrand of the remaining integral behaves as $\frac{1}{t}\frac{\ddot B}{B}\sim t^{-3}$ when $\lvert t\rvert\to\infty$, we can evaluate the integral using same semicircular contour as before. The contribution from the semicircle vanishes, and we are left with the integral along the real axis. The integral is now equivalent to the residue of the integrand at $t=0$ times $2\pi i$
 \begin{equation}
-\int_{-\infty}^\infty\frac{1}{t}\frac{\ddot B}{B}\symrm{d}t=2\pi i\,\symrm{Res}\left(\frac{1}{t}\frac{\ddot B}{B},0\right)=2\pi i\frac{\ddot B(0)}{B(0)}=\mp2\pi i\frac{g^2}{4}\delta,
+\int_{-\infty}^\infty\frac{1}{t}\frac{\ddot B}{B}\symrm{d}t=\mp2\pi i\,\symrm{Res}\left(\frac{1}{t}\frac{\ddot B}{B},0\right)\delta=\mp2\pi i\frac{\ddot B(0)}{B(0)}\delta=\mp2\pi i\frac{g^2}{4}\delta,
 \end{equation}
 where $\delta=1$ when the contour contains the singularity and $\delta=0$ otherwise. Inserting this result back into the previous equation, we have
 \begin{equation}
-    i\alpha\ln(B_f)=\mp i\pi\frac{g^2}{4}\pm2\pi i\frac{g^2}{4}\delta\implies B_f=\exp\left(\pm\frac{\pi g^2}{4\alpha}(1-2\delta)\right).
+i\alpha\ln(B_f)=\mp i\pi\frac{g^2}{4}\pm2\pi i\frac{g^2}{4}\delta\implies B_f=\exp\left(\mp\frac{\pi g^2}{4\alpha}(1-2\delta)\right).
 \end{equation}
 Now, we want our final probability to be between 0 and 1, which means that we have to choose the contour such that $\delta=1$ and the sign in the exponent is positive or $\delta=0$ and the sign in the exponent is negative. This leaves us with the integration countours shown in Fig.~\ref{fig:landau_zener_contours}.
 \begin{figure}[H]
@@ -57,6 +57,6 @@ Now, we want our final probability to be between 0 and 1, which means that we ha
 \end{figure}
 Both of these contours yield the same result for the final population transfer. Thus, we have
 \begin{equation}
-    P_{2\to1}^{\symrm{dia}}=1-\lvert B_f\rvert^2=1-e^{-2\pi\Gamma},
+P_{2\to1}^{\symrm{dia}}=1-\lvert B_f\rvert^2=1-e^{-2\pi\Gamma},
 \end{equation}
 where $\Gamma=\frac{g^2}{4\alpha}$. This is the Landau--Zener formula for the diabatic transition probability between the two states.
