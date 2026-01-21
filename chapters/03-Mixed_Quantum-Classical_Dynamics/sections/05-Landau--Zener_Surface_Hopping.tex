@@ -1,16 +1,16 @@
 \section{\filetotitle}\label{sec:landau_zener}
-We now move to a slightly different approach to nonadiabatic dynamics. Instead of propagating the electronic wavefunction along with the nuclear trajectories, we will use a solution of a simplified two-state problem to determine the population transfer. The Landau--Zener model is a simple model for nonadiabatic transitions between two electronic states during a nuclear passage through an avoided crossing. The total population transfer between the two states is then used to determine the probability of a surface hop. This approach is known as \acrfull{lzsh}. This idea seems very approximative, since we do not need the \acrshort{tdc} or the electronic wavefunction at all. However, it has been shown that \acrshort{lzsh} can yield results comparable to \acrshort{fssh} in variety cases, while being computationally much cheaper. \supercite{}
+We now move to a slightly different approach to nonadiabatic dynamics. Instead of propagating the electronic wavefunction along with the nuclear trajectories, we will use a solution of a simplified two-state problem to determine the population transfer. The Landau--Zener model is a simple model for nonadiabatic transitions between two electronic states during a nuclear passage through an avoided crossing. The total population transfer between the two states is then used to determine the probability of a surface hop. This approach is known as \acrfull{lzsh}. This idea seems very approximative, since we do not need the \acrshort{tdc} or the electronic wavefunction at all. However, it has been shown that \acrshort{lzsh} can yield results comparable to \acrshort{fssh} in variety of cases, while being computationally much cheaper. \supercite{10.1021/acs.jctc.0c00512}
 
-The Landau--Zener model, first proposed by Landau, Zener, Stueckelberg, and Majorana in 1932,\supercite{} is an exact solution to \acrshort{tdse} with the time-dependent Hamiltonian in the diabatic representation given by
-\begin{equation}
-H=\frac{1}{2}\begin{pmatrix}
+The Landau--Zener model, first proposed by Landau, Zener, Stueckelberg, and Majorana in 1932,\supercite{10.1016/B978-0-08-010586-4.50014-6,10.1098/rspa.1932.0165,10.5169/seals-110177,10.1007/BF02960953} is an exact solution to \acrshort{tdse} with the time-dependent Hamiltonian in the diabatic representation given by
+\begin{equation}\label{eq:landau_zener_hamiltonian}
+H^{\symrm{dia}}=\frac{1}{2}\begin{pmatrix}
 \alpha t&g\\
 g&-\alpha t
 \end{pmatrix},
 \end{equation}
-where $\alpha$ is the rate of change of the energy difference between the two diabatic states, and $g$ is the time-independent coupling between them. For simplifity, we will also define $E_1=\frac{1}{2}\alpha t$ and $E_2=-\frac{1}{2}\alpha t$. The wavefunction is expressed as a linear combination of the two diabatic states $\ket{\tilde{\phi}_1}$ and $\ket{\tilde{\phi}_2}$ in the interaction picture as
+where $\alpha$ is the rate of change of the energy difference between the two diabatic states, and $g$ is the time-independent coupling between them. For simplicity, we will also define $E_1=\frac{1}{2}\alpha t$ and $E_2=-\frac{1}{2}\alpha t$. The wavefunction is expressed as a linear combination of the two diabatic states $\ket{\tilde{\phi}_1}$ and $\ket{\tilde{\phi}_2}$ in the interaction picture as
 \begin{equation}
-\ket{\Psi(t)}=Ae^{\int^tE_1\symrm{d}t}\ket{\tilde{\phi}_1}+Be^{\int^tE_2\symrm{d}t}\ket{\tilde{\phi}_2},
+\ket{\Psi(t)}=Ae^{-i\int^tE_1\symrm{d}t}\ket{\tilde{\phi}_1}+Be^{-i\int^tE_2\symrm{d}t}\ket{\tilde{\phi}_2},
 \end{equation}
 where $A$ and $B$ are time-dependent coefficients. The integrals in the exponents are simply phase factors that will simplify some of the following equations. The lower boundary for the integrals is not important, since we just want it to be some arbitrary primitive function of $E_1$ and $E_2$ respectively. Inserting this wavefunction into the \acrshort{tdse} leads to the coupled differential equations for $A$ and $B$
 \begin{align}
@@ -22,7 +22,7 @@ where $E_{12}=E_1-E_2=\alpha t$. After differentiating both equations once more 
 \ddot A-i\alpha t\dot A+\frac{g^2}{4}A&=0\\
 \ddot B+i\alpha t\dot B+\frac{g^2}{4}B&=0.\label{eq:landau_zener_uncoupled_b}
 \end{align}
-Zener solved these equations by transforming them into the Weber equations, whose solutions are known as parabolic cylinder functions.\supercite{} We will use a more modern approach described by Wittig.\supercite{} We will assume our system is initially in state $\ket{\tilde{\phi}_2}$, which means that $A(t\to-\infty)=0$ and $B(t\to-\infty)=1$. The goal is to obtain final populations at $t\to\infty$.
+Zener solved these equations by transforming them into the Weber equations, whose solutions are known as parabolic cylinder functions.\supercite{10.1017/9781009004091} We will use a more modern approach described by Wittig.\supercite{10.1021/jp040627u} We will assume our system is initially in state $\ket{\tilde{\phi}_2}$, which means that $A(t\to-\infty)=0$ and $B(t\to-\infty)=1$. The goal is to obtain final populations at $t\to\infty$.
 
 Let's start by rewriting Eq.~\eqref{eq:landau_zener_uncoupled_b} in an integral form
 \begin{equation}
@@ -32,17 +32,17 @@ where $B_f=B(t\to\infty)$. Obviously, if we considered real time $t$, the integr
 \begin{equation}
 i\alpha\ln(B_f)=\mp i\pi\frac{g^2}{4}-\int_{-\infty}^\infty\frac{1}{t}\frac{\ddot B}{B}\symrm{d}t.
 \end{equation}
-Now we have one integral left to evaluate. To evaluate it, we will need to inspect the asymptotic behavior of $\frac{\ddot B}{B}$ in the complex plane. Should whe assume that $\ddot B$ is negligible to the other terms in Eq~\eqref{eq:landau_zener_uncoupled_b} when $\lvert t\rvert\to\infty$, we can find assymptotic solution $B(t)\sim t^{i\gamma}$ where $\gamma=\frac{g^2}{4\alpha}$. But is this assumption valid? If we insert this asymptotic solution back into Eq~\eqref{eq:landau_zener_uncoupled_b}, we find that $\dot B(t)\sim t^{-1}t^{i\gamma}$ and $\ddot B(t)\sim t^{-2}t^{i\gamma}$ which makes the first term in Eq~\eqref{eq:landau_zener_uncoupled_b} negligible compared to the other two terms. So our assumption is valid, and we can use this asymptotic solution to evaluate the remaining integral.
+Now we have one integral left to evaluate. To evaluate it, we will need to inspect the asymptotic behavior of $\frac{\ddot B}{B}$ in the complex plane. Should we assume that $\ddot B$ is negligible to the other terms in Eq~\eqref{eq:landau_zener_uncoupled_b} when $\lvert t\rvert\to\infty$, we can find asymptotic solution $B(t)\sim t^{i\gamma}$ where $\gamma=\frac{g^2}{4\alpha}$. But is this assumption valid? If we insert this asymptotic solution back into Eq~\eqref{eq:landau_zener_uncoupled_b}, we find that $\dot B(t)\sim t^{-1}t^{i\gamma}$ and $\ddot B(t)\sim t^{-2}t^{i\gamma}$ which makes the first term in Eq~\eqref{eq:landau_zener_uncoupled_b} negligible compared to the other two terms. So our assumption is valid, and we can use this asymptotic solution to evaluate the remaining integral.
 
 Since we now know that the integrand of the remaining integral behaves as $\frac{1}{t}\frac{\ddot B}{B}\sim t^{-3}$ when $\lvert t\rvert\to\infty$, we can evaluate the integral using same semicircular contour as before. The contribution from the semicircle vanishes, and we are left with the integral along the real axis. The integral is now equivalent to the residue of the integrand at $t=0$ times $2\pi i$
 \begin{equation}
-\int_{-\infty}^\infty\frac{1}{t}\frac{\ddot B}{B}\symrm{d}t=\mp2\pi i\,\symrm{Res}\left(\frac{1}{t}\frac{\ddot B}{B},0\right)\delta=\mp2\pi i\frac{\ddot B(0)}{B(0)}\delta=\mp2\pi i\frac{g^2}{4}\delta,
+\int_{-\infty}^\infty\frac{1}{t}\frac{\ddot B}{B}\symrm{d}t=\pm2\pi i\,\symrm{Res}\left(\frac{1}{t}\frac{\ddot B}{B},0\right)\delta=\pm2\pi i\frac{\ddot B(0)}{B(0)}\delta=\mp2\pi i\frac{g^2}{4}\delta,
 \end{equation}
 where $\delta=1$ when the contour contains the singularity and $\delta=0$ otherwise. Inserting this result back into the previous equation, we have
 \begin{equation}
 i\alpha\ln(B_f)=\mp i\pi\frac{g^2}{4}\pm2\pi i\frac{g^2}{4}\delta\implies B_f=\exp\left(\mp\frac{\pi g^2}{4\alpha}(1-2\delta)\right).
 \end{equation}
-Now, we want our final probability to be between 0 and 1, which means that we have to choose the contour such that $\delta=1$ and the sign in the exponent is positive or $\delta=0$ and the sign in the exponent is negative. This leaves us with the integration countours shown in Fig.~\ref{fig:landau_zener_contours}.
+Now, we want our final probability to be between 0 and 1, which means that we have to choose the contour such that $\delta=1$ and the sign in the exponent is positive or $\delta=0$ and the sign in the exponent is negative. This leaves us with the integration contours shown in Fig.~\ref{fig:landau_zener_contours}.
 \begin{figure}[H]
 \centering
 \begin{subfigure}{.5\textwidth}
@@ -55,8 +55,29 @@ Now, we want our final probability to be between 0 and 1, which means that we ha
 \caption{Possible integration contours in the complex time plane for evaluating the Landau--Zener transition probability. Both contours yield the same result for the final population transfer.}
 \label{fig:landau_zener_contours}
 \end{figure}
-Both of these contours yield the same result for the final population transfer. Thus, we have
+Both of these contours yield the same result for the final population transfer. Thus, we obtained the final probability of nonadiabatic transition as
 \begin{equation}
-P_{2\to1}^{\symrm{dia}}=1-\lvert B_f\rvert^2=1-e^{-2\pi\Gamma},
+P=\lvert B_f\rvert^2=e^{-2\pi\Gamma},
 \end{equation}
-where $\Gamma=\frac{g^2}{4\alpha}$. This is the Landau--Zener formula for the diabatic transition probability between the two states.
+where $\Gamma=\frac{g^2}{4\alpha}$. Since we have defined the population transfer probability as the final population of state $\ket{\tilde{\phi}_1}$ given that the system started in state $\ket{\tilde{\phi}_2}$, in surface hopping simulations, we can use this probability to determine whether a surface hop occurs when the nuclear trajectory passes through the crossing region.
+\subsection{The Adiabatic Landau--Zener Formula}
+In practical applications, we usually do not have access to the diabatic representation of the electronic states. Therefore, it is useful to express the Landau--Zener formula in the adiabatic representation. To do this, we need to first express the Hamiltonian in Eq~\eqref{eq:landau_zener_hamiltonian} in the adiabatic representation as
+\begin{equation}
+H=\begin{pmatrix}
+-\frac{1}{2}\sqrt{(\alpha t)^2+g^2}&0\\
+0&\frac{1}{2}\sqrt{(\alpha t)^2+g^2}
+\end{pmatrix}.
+\end{equation}
+We also define the adiabatic energy gap $Z_{21}=\sqrt{(\alpha t)^2+g^2}$, which is the same quantity as defined in Sec~\ref{sec:baeck_an}. As mentioned in the diabatic case, in surface hopping simulations, we need to evaluate the Landau--Zener transition probability when the nuclear trajectory passes through the crossing region. This crossing region corresponds to the minimum energy gap, which occurs at $t=0$. To express all the diabatic parameters with the adiabatic energy difference $Z_{21}$ we differentiate $Z_{21}$ twice with respect to time to obtain
+\begin{equation}
+\ddot Z_{21}=\frac{\alpha^2Z_{21}-\alpha^2t\dot Z_{21}}{Z_{21}^2}.
+\end{equation}
+Using this expression and the definition of $Z_{21}$, we can express the probability of nonadiabatic transition in the adiabatic representation as
+\begin{equation}\label{eq:landau_zener_adiabatic_2to1}
+P_{2\to1}=\left.\exp\left(-\frac{\pi}{2}\sqrt{\frac{Z_{21}^3}{\ddot Z_{21}}}\right)\right\rvert_{t=0}
+\end{equation}
+Now, this is still the probability of transition between two states with a very specific Hamiltonian. However, in practical applications, we can approximate the energy gap $Z_{21}$ near the crossing region as a linear function of time and use the above formula to evaluate the transition probability. So instead of evaluating the probability $t=0$, we can evaluate it at the time $t_c$ when the energy gap is minimum along the nuclear trajectory. Thus, we arrive at the final form of the adiabatic Landau--Zener formula used in surface hopping simulations\supercite{10.1103/PhysRevA.84.014701}
+\begin{equation}\label{eq:landau_zener_adiabatic}
+P_{J\to I}=\left.\exp\left(-\frac{\pi}{2}\sqrt{\frac{Z_{JI}^3}{\ddot Z_{JI}}}\right)\right\rvert_{t=t_c}
+\end{equation}
+where $I$ and $J$ are the indices of the two states involved in the nonadiabatic transition and $t_c$ is the time when the energy gap between these two states is minimum along the nuclear trajectory. The extension to multiple states was purely heuristic, as the original Landau--Zener model only describes a two-state system. However, it has been shown that this extension works well in practice.\supercite{10.1021/acs.jctc.0c00512}
