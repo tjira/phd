@@ -1,7 +1,7 @@
 \section{\filetotitle}\label{sec:vector_spaces_and_linear_operators}
 Many concepts in quantum mechanics rest on the algebra of vector spaces and the action of linear operators. We review what is needed here. More complete accounts can be found in standard linear algebra and functional analysis texts. Throughout, the scalar field is a general field $F$, but in quantum mechanics we take $F=\mathbb{C}$ unless stated otherwise.
 \subsection{Vector Spaces and Basic Properties}\label{sec:vector_spaces_basic_properties}
-The object of interest is a vector space: a set with addition and scalar multiplication satisfying compatibility rules. The following definition states these axioms explicitly.
+To move beyond the familiar Euclidean spaces, we first define the abstract concept of a vector space. Without vector spaces, we cannot formally describe quantum states or operators. Let's begin with the definition.
 \begin{definition}[Vector Space]
 A vector space $(V,+,\cdot)$ over a field $F$ is a non-empty set that is closed under vector addition and scalar multiplication. Every vector space must satisfy the following axioms for all $\symbf{u},\symbf{v},\symbf{w}\in V$ and all scalars $a,b\in F$:
 \begin{enumerate}\def\labelenumi{\arabic{enumi}.}
@@ -15,7 +15,7 @@ A vector space $(V,+,\cdot)$ over a field $F$ is a non-empty set that is closed 
 \item Distributivity of scalar multiplication with respect to field addition: $(a+b)\symbf{u}=a\symbf{u}+b\symbf{u}$
 \end{enumerate}
 \end{definition}
-These axioms are necessary for a set to be considered a vector space. Examples of vector spaces include the Euclidean space $\mathbb{R}^n$, the set of all functions with continuous $m$-th derivatives $C^m(\mathbb{R}^n)$ or $C^\infty(\mathbb{R}^n)$, which is the set of all infinitely differentiable functions. In quantum mechanics we usually work in Hilbert spaces, which will be described in more detail in the next section.
+These axioms are necessary for a set to be considered a vector space. Examples of vector spaces include the Euclidean space $\mathbb{R}^n$, the set of all functions with continuous $m$-th derivatives $C^m(\mathbb{R}^n)$ or $C^\infty(\mathbb{R}^n)$, which is the set of all infinitely differentiable functions on $\mathbb{R}^n$. In quantum mechanics we usually work in Hilbert spaces, which will be described in more detail in the next section.
 
 Before we can use vector spaces effectively, we must identify and characterize smaller structures that inherit their properties. These are known as subspaces.
 \begin{definition}[Subspace]
@@ -24,7 +24,7 @@ A subset $W\subset V$ is a subspace if it is non-empty and closed under addition
 Every subspace necessarily contains the zero vector and is closed under both addition and scalar multiplication so it is itself a vector space. Subspaces are important because they capture smaller, self-contained portions of a larger space where similar operations remain valid.
 
 We now proceed to the concept of linear combinations, which provides a mechanism for generating new vectors from existing ones, and the related concept of the span, which describes the set of all such combinations.
-\begin{definition}[Linear Combination]
+\begin{definition}[Linear Combination and Span]
 Given a vector space $V$ over a field $F$, a linear combination of vectors $\symbf{v}_1,\symbf{v}_2,\ldots,\symbf{v}_n\in V$ is a vector
 \begin{equation}
 \symbf{u}=a_1\symbf{v}_1+a_2\symbf{v}_2+\ldots+a_n\symbf{v}_n,
@@ -35,7 +35,7 @@ where $a_1,a_2,\ldots,a_n\in F$. The set of all linear combinations of ${\symbf{
 \end{equation}
 The span of a set of vectors is the smallest subspace of $V$ that contains all the vectors in the set.
 \end{definition}
-The span formalizes the idea of building new vectors from known ones. In finite-dimensional spaces, the span of a finite set can fill the entire space (as in the case of a basis) or a lower-dimensional subspace.
+In finite-dimensional spaces, the span of a finite set can fill the entire space (as in the case of a basis) or a lower-dimensional subspace.
 
 To understand how vectors relate to one another within a span, we must determine whether some vectors can be expressed as combinations of others. This leads us to the notion of linear independence.
 \begin{definition}[Linear Independence]
@@ -45,9 +45,7 @@ a_1\symbf{v}_1+a_2\symbf{v}_2+\ldots+a_n\symbf{v}_n=\symbf{0}
 \end{equation}
 is $a_1=a_2=\ldots=a_n=0$, where $a_1,a_2,\ldots,a_n\in F$. If there exists a non-trivial solution (i.e., not all $a_i$ are zero), then the set is said to be linearly dependent.
 \end{definition}
-Linear independence ensures that no vector in the set can be constructed from others. This property is essential when defining a minimal generating set for the entire space. For linear operators (defined later), eigenvectors associated with distinct eigenvalues are linearly independent. No orthogonality is assumed here.
-
-Finally, the concepts of basis and dimension summarize the structure of a vector space in a concise form. A basis provides coordinates for states and a matrix representation for operators.
+This property is essential when defining a minimal generating set for the entire space. Finally, the concepts of basis and dimension summarize the structure of a vector space in a concise form. A basis provides coordinates for states and a matrix representation for operators.
 \begin{definition}[Basis]
 A basis of a vector space $V$ over a field $F$ is a set of vectors $\lbrace\symbf{v}_1,\symbf{v}_2,\ldots,\symbf{v}_n\rbrace$ in $V$ that is linearly independent and spans $V$. The dimension of $V$, denoted as $\text{dim}(V)$, is the number of vectors in any basis of $V$.
 \end{definition}
@@ -62,13 +60,11 @@ A normed vector space $(V,\lvert\cdot\rvert)$ is a vector space $V$ over a field
 \item Triangle inequality: $\lvert\symbf{u}+\symbf{v}\rvert\leq\lvert\symbf{u}\rvert+\lvert\symbf{v}\rvert$
 \end{enumerate}
 \end{definition}
-A norm provides a measure of the length or magnitude of vectors in the space, allowing us to discuss concepts such as convergence and continuity. The norm induces a metric (or distance function) on the vector space defined briefly as
+A norm provides a measure of the length or magnitude of vectors in the space, allowing us to discuss concepts such as convergence and continuity. The norm induces a metric (or distance function) on the vector space defined as
 \begin{equation}
 d(\symbf{u},\symbf{v})=\lvert\symbf{u}-\symbf{v}\rvert,
 \end{equation}
-which satisfies all the properties of a metric, thereby enabling the study of geometric properties within the vector space. More specialized normed vector space emerges after we define an inner product.
-
-The inner product generalizes the familiar Euclidean dot product to abstract vector spaces.
+which satisfies all the properties of a metric, thereby enabling the study of geometric properties within the vector space. More specialized normed vector space emerges after we define an inner product. The inner product generalizes the familiar Euclidean dot product to abstract vector spaces.
 \begin{definition}[Inner Product]\label{def:inner_product}
 An inner product on a vector space $V$ over a field $F$ is a function $\langle\cdot,\cdot\rangle:V\times V\to F$ that satisfies the following properties for all $\symbf{u},\symbf{v},\symbf{w}\in V$ and all scalars $a\in F$:
 \begin{enumerate}\def\labelenumi{\arabic{enumi}.}
@@ -87,12 +83,48 @@ The inner product gives rise to two key inequalities that determine much of the 
 \begin{equation}
 \lvert\langle\symbf{u},\symbf{v}\rangle\rvert\leq\lvert\symbf{u}\rvert\lvert\symbf{v}\rvert.
 \end{equation}
-This inequality ensures that the angle between two vectors is well-defined and implies the triangle inequality for the induced norm. A vector space equipped with an inner product is called an inner product space. Together, these results ensure that the norm induced by an inner product satisfies all metric axioms, endowing the space with a well-defined notion of distance. Thus, every inner product space is a normed vector space, although the converse is not generally true.
-
-Before we get to linear operators, we add one final definition that will become important when we discuss infinite-dimensional spaces.
+This inequality ensures that the angle between two vectors is well-defined and implies the triangle inequality for the induced norm. A vector space equipped with an inner product is called an inner product space. Together, these results ensure that the norm induced by an inner product satisfies all metric axioms, endowing the space with a well-defined notion of distance. Thus, every inner product space is a normed vector space, although the converse is not generally true. We add one final definition that will become important when we discuss infinite-dimensional spaces in the following subsection.
 \begin{definition}[Complete Vector Space]
 Let $(V,\lvert\cdot\rvert)$ be a normed vector space. A sequence $\lbrace\symbf{v}_n\rbrace$ in $V$ is called a Cauchy sequence if for every $\epsilon>0$, there exists an integer $N$ such that $\lvert\symbf{v}_m-\symbf{v}_n\rvert<\epsilon$ for all $m,n>N$. The space $V$ is said to be complete if every Cauchy sequence in $V$ converges to a limit that is also in $V$. A complete normed vector space is called a Banach space.
 \end{definition}
+\subsection{Hilbert Spaces and Quantum States}\label{sec:hilbert_spaces_and_quantum_states}
+Hilbert spaces are fundamental concepts in quantum mechanics, providing the mathematical framework for describing quantum states and their evolution. In this section, we will explore the definition of Hilbert spaces, their properties, and how they relate to quantum states. We will start with the definition.
+\begin{definition}[Hilbert Space]
+A Hilbert space $\mathcal{H}$ is a complete inner product space, which means it is a vector space equipped with an inner product that allows for the definition of length and angle, and it is complete with respect to the norm induced by the inner product.
+\end{definition}
+In the context of quantum mechanics we will always take $\mathcal{H}$ to be a complex vector space, and we adopt the physics convention for the inner product, where $\langle\cdot,\cdot\rangle$ is conjugate-linear in its first argument and linear in its second, consistent with Def~\ref{def:inner_product}. The norm induced by the inner product is
+\begin{equation}
+\lvert\psi\rvert=\sqrt{\langle\psi,\psi\rangle}.
+\end{equation}
+Some examples of Hilbert spaces include the finite-dimensional vector spaces $\mathbb{R}^n$ or $\mathbb{C}^n$ or, as is often the case in quantum mechanics, the space of all square-integrable functions $L^2(\mathbb{R}^n)$. Formally\footnote{We will skip here the talk about the Lebesgue measure, since we do not want to complicate our lives with edge cases.}
+\begin{equation}
+L^2(\mathbb{R}^n)=\left\lbrace\ket\psi :\mathbb{R}^n\to\mathbb{C}\middle\vert\int_{\mathbb{R}^n}\psi^*(\symbf{r})\psi(\symbf{r})\mathrm{d}\symbf{r}<\infty\right\rbrace
+\end{equation}
+where $\psi^*(\symbf{r})$ is the complex conjugate of $\psi(\symbf{r})$. In Dirac notation, elements of $\mathcal{H}$ are written as kets $\ket{\psi}$. The inner product of $\psi,\phi\in\mathcal{H}$ is then denoted by
+\begin{equation}
+\braket{\psi\vert\phi}:=\langle\psi,\phi\rangle.
+\end{equation}
+To each ket $\ket{\psi}$ there corresponds a bra $\bra{\psi}$, which is a linear functional
+\begin{equation}
+\bra{\psi} : \mathcal{H}\to\mathbb{C},\qquad\bra{\psi}\left(\ket{\phi}\right):=\braket{\psi|\phi}.
+\end{equation}
+This correspondence is guaranteed by the Riesz representation theorem.
+
+In quantum mechanics, physical (pure) states are represented by rays in a Hilbert space, i.e. one-dimensional subspaces of $\mathcal{H}$. Vectors that differ only by a nonzero complex scalar multiplication represent the same physical state:
+\begin{equation}
+\ket{\psi}\sim\ket{\phi}\Longleftrightarrow\exists\,c\in\mathbb{C}\setminus\lbrace 0\rbrace:\ket{\phi}=c\ket{\psi}.
+\end{equation}
+It is customary to choose a normalized representative $\ket{\psi}$ with
+\begin{equation}
+\braket{\psi\vert\psi}=1,
+\end{equation}
+in which case $\ket{\psi}$ is called a (normalized) state vector. The overall phase $e^{i\theta}\ket{\psi}$ has no observable physical effect.
+
+In most physical applications one assumes that $\mathcal{H}$ is separable, i.e. it possesses a countable orthonormal basis $\lbrace\ket{n}\rbrace_{n\in\mathbb{N}_0}$. Any vector $\ket{\psi}\in\mathcal{H}$ can then be then expanded as
+\begin{equation}
+\ket{\psi}=\sum_{n}c_n\ket{n},\qquad c_n=\braket{n\vert\psi},
+\end{equation}
+where the series converges in the norm of $\mathcal{H}$.
 \subsection{Linear Operators}\label{sec:linear_operators}
 Linear operators lie at the core of quantum mechanics, representing physical observables and the evolution of quantum states. We now define linear operators and explore their properties.
 \begin{definition}[Linear Operator]
@@ -114,12 +146,8 @@ This equation is consistent with Def~\ref{def:inner_product}, where we adopt the
 \begin{equation}\label{eq:change_of_basis}
 [A]_{\symbf{e}}=U^{-1}[A]_{\symbf{f}}U.
 \end{equation}
-Let's now define some additional properties of linear operators.
-\begin{definition}[Null Space]
-For $A:V\to V$, the kernel (or null space) of $A$ is the set of vectors $\symbf{v}\in V$ such that $A\symbf{v}=\symbf{0}$. The image (or range) of $A$ is the set of vectors $\symbf{w}\in V$ such that $\symbf{w}=A\symbf{v}$ for some $\symbf{v}\in V$. If $\text{dim}(V)$ is finite, the rank-nullity theorem states that $\text{dim}(\text{ker}(A))+\text{dim}(\text{im}(A))=\text{dim}(V)$.
-\end{definition}
-Another important concept is the concept of eigenvalues and eigenvectors.
+We now get to the concept of eigenvalues and eigenvectors, which lay at the heart of quantum mechanics, as they correspond to measurable quantities and their associated states. Every observable in quantum mechanics is represented by a linear operator, and the possible measurement outcomes are given by its eigenvalues.
 \begin{definition}[Eigenvalues and Eigenvectors]
 A scalar $\lambda\in F$ is called an eigenvalue of a linear operator $A:V\to V$ if there exists a non-zero vector $\symbf{v}\in V$ such that $A\symbf{v}=\lambda\symbf{v}$. The vector $\symbf{v}$ is called an eigenvector associated with the eigenvalue $\lambda$. For a finite-dimensional vector space, the set of all eigenvalues of $A$ is called the spectrum of $A$. The subspace $E_\lambda=\symrm{ker}(A-\lambda I)$ is called the eigenspace associated with the eigenvalue $\lambda$, where $I$ is the identity operator on $V$.
 \end{definition}
-If $V$ is finite-dimensional, the eigenvalues of $A$ can be found by solving the characteristic polynomial equation $\text{det}(A-\lambda I)=0$.
+If $V$ is finite-dimensional, the eigenvalues of $A$ can be found by solving the characteristic polynomial equation $\text{det}(A-\lambda I)=0$. The set of all eigenvalues is called the spectrum. The eigenvectors corresponding to distinct eigenvalues are linearly independent. If the operator $A$ has $n$ distinct eigenvalues in an $n$-dimensional space, its eigenvectors form a basis of $V$.

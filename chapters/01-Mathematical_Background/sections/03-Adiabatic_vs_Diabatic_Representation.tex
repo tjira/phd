@@ -3,13 +3,13 @@ In molecular quantum mechanics we often describe a system of electrons and nucle
 \subsection{Born--Oppenheimer Separation}\label{sec:born_oppenheimer_separation}
 The starting point is the separation of the Hamiltonian into nuclear and electronic parts. For a molecular system one typically writes
 \begin{equation}\label{eq:boa_hamiltonian}
-H=T_{\symrm{n}}(\symbf{R})+H_{\symrm{el}}(\symbf{r};\symbf{R}),
+H=T_{\symrm{n}}+H_{\symrm{el}},
 \end{equation}
 where $T_{\symrm{n}}$ is the nuclear kinetic energy operator and $H_{\symrm{el}}$ contains the electronic kinetic energy and all Coulomb interactions, with the nuclei treated as fixed at positions $\symbf{R}$.
 
 For each fixed nuclear configuration $\symbf{R}$ we can solve the electronic Schr\"odinger equation
 \begin{equation}
-H_{\symrm{el}}(\symbf{r};\symbf{R})\ket{\phi_I(\symbf{R})}=E_I(\symbf{R})\ket{\phi_I(\symbf{R})},
+H_{\symrm{el}}\ket{\phi_I(\symbf{R})}=E_I(\symbf{R})\ket{\phi_I(\symbf{R})},
 \end{equation}
 where $\{\ket{\phi_I(\symbf{R})}\}$ are electronic eigenstates and $E_I(\symbf{R})$ is the associated \acrfull{pes} for electronic state $I$.
 
@@ -23,15 +23,15 @@ Different choices of the electronic basis $\{\ket{\phi_I(\symbf{R})}\}$ lead to 
 \subsection{Adiabatic Representation}\label{sec:adiabatic_representation}
 In the adiabatic representation the electronic basis is chosen as the eigenstates of the electronic Hamiltonian. By construction,
 \begin{equation}
-H_{\symrm{el}}(\symbf{r};\symbf{R})\ket{\phi_I(\symbf{R})}=E_I(\symbf{R})\ket{\phi_I(\symbf{R})},
+H_{\symrm{el}}\ket{\phi_I(\symbf{R})}=E_I(\symbf{R})\ket{\phi_I(\symbf{R})},
 \end{equation}
 so the electronic Hamiltonian is diagonal in this basis.
 
-Inserting the expansion in Eq.~\eqref{eq:boa_expansion} into the time-dependent Schr\"odinger equation and projecting onto $\bra{\phi_I(\symbf{R})}$ yields coupled equations for the nuclear wavefunctions $\ket{\chi_I(\symbf{R},t)}$. These contain the potential energy surfaces $E_I(\symbf{R})$ and additional terms that arise from the nuclear kinetic energy acting on the $\symbf{R}$-dependent electronic states:
+Inserting the expansion in Eq.~\eqref{eq:boa_expansion} into the time-dependent Schr\"odinger equation and projecting onto $\bra{\phi_I(\symbf{R})}$ yields coupled equations for the nuclear wavefunctions $\ket{\chi_I(\symbf{R},t)}$. These contain the potential energy surfaces $E_I(\symbf{R})$ and additional terms that arise from the nuclear kinetic energy acting on the $\symbf{R}$-dependent electronic states
 \begin{equation}
-i\frac{\partial}{\partial{t}}\ket{\chi_I(\symbf{R},t)}=\left[T_{\symrm{n}}(\symbf{R})+E_I(\symbf{R})\right]\ket{\chi_I(\symbf{R},t)}+\sum_JC_{IJ}(\symbf{R})\,\ket{\chi_J(\symbf{R},t)},
+i\frac{\partial}{\partial{t}}\ket{\chi_I(\symbf{R},t)}=\left[T_{\symrm{n}}+E_I(\symbf{R})\right]\ket{\chi_I(\symbf{R},t)}+\sum_JC_{IJ}(\symbf{R})\,\ket{\chi_J(\symbf{R},t)},
 \end{equation}
-where operator $C_{IJ}(\symbf{R})$ contains all the derivative coupling terms arising from the application of $T_{\symrm{n}}(\symbf{R})$ on the full wavefunction $\ket{\Psi(\symbf{R},\symbf{r},t)}$.
+where operator $C_{IJ}(\symbf{R})$ contains all the derivative coupling terms arising from the application of $T_{\symrm{n}}$ on the full wavefunction $\ket{\Psi(\symbf{R},\symbf{r},t)}$.
 
 Physically, the adiabatic representation has two key features. The electronic Hamiltonian is diagonal which means that each $E_I(\symbf{R})$ defines a potential energy surface on which the nuclei move. And second, nonadiabatic effects appear as derivative couplings in the nuclear kinetic energy, encoded in $C_{IJ}(\symbf{R})$.
 
