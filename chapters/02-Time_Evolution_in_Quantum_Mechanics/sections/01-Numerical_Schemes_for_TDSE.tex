@@ -50,7 +50,7 @@ the propagator.
 
 We again consider the \acrshort{tdse} for a time-independent, self-adjoint Hamiltonian $H$,
 \begin{equation}\label{eq:tdse_cn}
-i\frac{\symrm{d}}{\symrm{d}t}\ket{\Psi(t)}=H\ket{\Psi(t)},
+i\frac{\partial}{\partial t}\ket{\Psi(t)}=H\ket{\Psi(t)},
 \end{equation}
 acting on the separable Hilbert space $\mathcal{H}$ introduced in Sec.~\ref{sec:hilbert_spaces_and_quantum_states}. Let $t_n=n\Delta t$ denote a uniform time grid with step $\Delta t>0$ and define
 \begin{equation}
@@ -86,12 +86,12 @@ propagation and renormalization project an initial state onto the ground state. 
 We again consider the \acrshort{tdse} for a time-independent, self-adjoint Hamiltonian
 $H$ acting on a vector from Hilbert space $\mathcal{H}$,
 \begin{equation}\label{eq:tdse_it_real}
-i\frac{\symrm{d}}{\symrm{d}t}\ket{\Psi(t)}=H\ket{\Psi(t)}.
+i\frac{\partial}{\partial t}\ket{\Psi(t)}=H\ket{\Psi(t)}.
 \end{equation}
 Introducing imaginary time $\tau$ via $\tau = i t$ (equivalently $t=-i\tau$) and writing
 $\ket{\Psi(\tau)}:=\ket{\Psi(t=-i\tau)}$ gives the imaginary-time evolution equation
 \begin{equation}\label{eq:tdse_it}
-\frac{\symrm{d}}{\symrm{d}\tau}\ket{\Psi(\tau)}=-H\ket{\Psi(\tau)},
+\frac{\partial}{\partial\tau}\ket{\Psi(\tau)}=-H\ket{\Psi(\tau)},
 \end{equation}
 with formal solution
 \begin{equation}\label{eq:wf_it}

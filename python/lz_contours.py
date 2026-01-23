@@ -1,6 +1,6 @@
 import matplotlib.patches as patches, matplotlib.pyplot as plt, numpy as np
 
-# set rcParams
+# Set rcParams
 plt.rcParams.update({
     "text.usetex": True,
     "font.family": "serif",
