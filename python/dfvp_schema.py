@@ -71,7 +71,7 @@ ax.text(1.2, -0.8,  3.3, "$T_{\Psi}\mathcal{M}$", fontsize=12, zorder=10)
 
 # Add labels for the points
 ax.text(point[0] + 0.2, point[1] - 0.2, point[2] - 1.5, r"$\ket{\Psi(\symbf{\alpha})}$", fontsize=12, zorder=10)
-ax.text(line1_end[0] + 0.3, line1_end[1] - 0.2, line1_end[2] - 1.7, r"$\partial_t\ket{\Psi(\symbf{\alpha})}$", fontsize=12, zorder=10)
+ax.text(line1_end[0] + 0.3, line1_end[1] - 0.2, line1_end[2] - 1.7, r"$\frac{\symrm{d}}{\symrm{d}t}\ket{\Psi(\symbf{\alpha})}$", fontsize=12, zorder=10)
 ax.text(line2_end[0] + 0.5, line2_end[1] + 0.6, line2_end[2] + 1.3, r"$-iH\ket{\Psi(\symbf{\alpha})}$", fontsize=12, zorder=10)
 
 # Adjust the view

@@ -1,0 +1,1 @@
+- [ ] Show that the norm and energy is conserved for the variational principles.
