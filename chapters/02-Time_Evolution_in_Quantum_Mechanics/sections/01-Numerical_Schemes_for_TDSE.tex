@@ -3,9 +3,9 @@ This section focuses on numerical solutions to \acrshort{tdse}. In the described
 \subsection{Split-Operator Method}\label{sec:split_operator_method}
 For a time-independent Hamiltonian, the solution to the \acrshort{tdse} can be written as
 \begin{equation}\label{eq:tdse_propagator}
-\ket{\Psi\left(t\right)}=e^{-i t H}\ket{\Psi\left(0\right)}.
+\ket{\Psi\left(t\right)}=\e^{-\i tH}\ket{\Psi\left(0\right)}.
 \end{equation}
-The action of the operator $e^{-i t H}$ on the initial wavefunction $\ket{\Psi\left(0\right)}$ propagates the state from time $0$ to time $t$, carrying all the information about the time evolution of the system. Since $H$ is self-adjoint, the spectral theorem yields a unitary propagator, ensuring $\lvert\Psi(t)\rvert=\lvert\Psi(0)\rvert$. This exponential operator contains the complete description of how the system evolves with time. In practical applications, however, evaluating $e^{-i t H}$ analytically is rarely straightforward for nontrivial Hamiltonians, which is exactly the problem the Split-Operator method solves.
+The action of the operator $\e^{-\i tH}$ on the initial wavefunction $\ket{\Psi\left(0\right)}$ propagates the state from time $0$ to time $t$, carrying all the information about the time evolution of the system. Since $H$ is self-adjoint, the spectral theorem yields a unitary propagator, ensuring $\lvert\Psi(t)\rvert=\lvert\Psi(0)\rvert$. This exponential operator contains the complete description of how the system evolves with time. In practical applications, however, evaluating $\e^{-\i tH}$ analytically is rarely straightforward for nontrivial Hamiltonians, which is exactly the problem the Split-Operator method solves.
 
 For an N-state system, the wavefunction in the diabatic basis can be written as
 \begin{equation}\label{eq:diabatic_wavefunction}
@@ -25,32 +25,32 @@ where $k$ is the coordinate in the Fourier space. In other words, to apply the k
 
 A remaining challenge is the non-commutativity of the potential and kinetic operators. Because $\tilde{V}$ and $\tilde{T}_{\symrm{n}}$ do not commute we cannot factorize the propagator as
 \begin{equation}
-e^{-i t H}\neq e^{-i t\tilde{V}}e^{-i t\tilde{T}_{\symrm{n}}}.
+\e^{-\i tH}\neq\e^{-\i t\tilde{V}}\e^{-\i t\tilde{T}_{\symrm{n}}}.
 \end{equation}
 If such a factorization were possible, we could apply the exponential of $\tilde{V}$ in the position space and the exponential of $\tilde{T}_{\symrm{n}}$ momentum space separately. To address this, we split the total propagation time $t$ into $n$ short steps $\Delta t$, so the full propagator becomes a product of short-time propagators as
 \begin{equation}
-U(t)=e^{-i t H}=\left(e^{-i\Delta t H}\right)^n,\qquad t=n\Delta t
+U(t)=\e^{-\i tH}=\left(\e^{-\i\Delta tH}\right)^n,\qquad t=n\Delta t
 \end{equation}
 where $\Delta t$ is a fixed time step. Now, each individual short-time propagator acts on the wave function and causes a small evolution. We can then use the symmetric splitting approximation
 \begin{equation}
-U(\Delta t)=e^{-i\frac{\Delta t}{2}\tilde{V}}e^{-i\Delta t\tilde{T}_{\symrm{n}}}e^{-i\frac{\Delta t}{2}\tilde{V}}+\mathcal{O}(\Delta t^3),
+U(\Delta t)=\e^{-\i\frac{\Delta t}{2}\tilde{V}}\e^{-\i\Delta t\tilde{T}_{\symrm{n}}}\e^{-\i\frac{\Delta t}{2}\tilde{V}}+\mathcal{O}(\Delta t^3),
 \end{equation}
 which is valid for small $\Delta t$. Now we have everything we need to propagate the wavefunction in time. The formula for propagating the wavefunction from time $t$ to time $t+\Delta t$ is
 \begin{equation}
-\Psi\left(\symbf{R},t+\Delta t\right)=e^{-i\frac{\Delta t}{2}\tilde V}\mathcal{F}^{-1}\left\lbrace e^{-i\Delta t\tilde{T}_{\symrm{n}}}\mathcal{F}\left\lbrace e^{-i\frac{\Delta t}{2}\tilde V}\Psi\left(\symbf{R},t\right)\right\rbrace\right\rbrace,
+\Psi\left(\symbf{R},t+\Delta t\right)=\e^{-\i\frac{\Delta t}{2}\tilde V}\mathcal{F}^{-1}\left\lbrace\e^{-\i\Delta t\tilde{T}_{\symrm{n}}}\mathcal{F}\left\lbrace\e^{-\i\frac{\Delta t}{2}\tilde V}\Psi\left(\symbf{R},t\right)\right\rbrace\right\rbrace,
 \end{equation}
 where $\tilde{T}_{\symrm{n}}$ is the kinetic operator in the momentum space, and $\tilde{V}$ is the potential operator in the position space. In a discrete grid representation these become matrices acting on the sampled wavefunction.
 \subsection{Crank--Nicolson Scheme}\label{sec:crank_nicolson_scheme}
 The Split-Operator method in Sec.~\ref{sec:split_operator_method} exploits the simple action
 of the kinetic and potential operators in Fourier and position representation, respectively,
 and approximates the short-time propagator by a symmetric factorization of
-$e^{-i\Delta t H}$. An alternative widely used time-integration scheme is the
+$\e^{-\i\Delta t H}$. An alternative widely used time-integration scheme is the
 Crank--Nicolson method, which can be viewed as applying a rational (Padé) approximation to
 the propagator.
 
 We again consider the \acrshort{tdse} for a time-independent, self-adjoint Hamiltonian $H$,
 \begin{equation}\label{eq:tdse_cn}
-i\ddt\ket{\Psi(t)}=H\ket{\Psi(t)},
+\i\ddt\ket{\Psi(t)}=H\ket{\Psi(t)},
 \end{equation}
 acting on the separable Hilbert space $\mathcal{H}$ introduced in Sec.~\ref{sec:hilbert_spaces_and_quantum_states}. Let $t_n=n\Delta t$ denote a uniform time grid with step $\Delta t>0$ and define
 \begin{equation}
@@ -58,22 +58,22 @@ acting on the separable Hilbert space $\mathcal{H}$ introduced in Sec.~\ref{sec:
 \end{equation}
 The Crank–Nicolson scheme is obtained by approximating the time derivative by a centered second-order accurate finite difference at the midpoint $t_{n+\frac{1}{2}}=t_n+\frac{\Delta t}{2}$ and evaluating the right-hand side via the trapezoidal rule (midpoint average) as
 \begin{equation}\label{eq:cn_trapezoidal}
-\frac{\ket{\Psi^{n+1}}-\ket{\Psi^n}}{\Delta t}=-\frac{i}{2}\left(H\ket{\Psi^{n+1}}+H\ket{\Psi^n}\right).
+\frac{\ket{\Psi^{n+1}}-\ket{\Psi^n}}{\Delta t}=-\frac{\i}{2}\left(H\ket{\Psi^{n+1}}+H\ket{\Psi^n}\right).
 \end{equation}
 Both sides of Eq.~\eqref{eq:cn_trapezoidal} approximate the exact quantities at the midpoint
 with an $\mathcal{O}(\Delta t^2)$ error. Rearranging Eq.~\eqref{eq:cn_trapezoidal} yields the linear system
 \begin{equation}\label{eq:cn_linear_system}
-\left(I+\frac{i\Delta t}{2}H\right)\ket{\Psi^{n+1}}=\left(I-\frac{i\Delta t}{2}H\right)\ket{\Psi^n},
+\left(I+\frac{\i\Delta t}{2}H\right)\ket{\Psi^{n+1}}=\left(I-\frac{i\Delta t}{2}H\right)\ket{\Psi^n},
 \end{equation}
 where $I$ is the identity operator on $\mathcal{H}$. For each time step one solves Eq.~\eqref{eq:cn_linear_system} for $\ket{\Psi^{n+1}}$ given $\ket{\Psi^n}$.
 
 Formally, Eq.~\eqref{eq:cn_linear_system} defines a one-step propagation
 \begin{equation}\label{eq:cn_propagator_operator}
-\ket{\Psi^{n+1}}=U_{\symrm{CN}}(\Delta t)\ket{\Psi^n},\qquad U_{\symrm{CN}}(\Delta t)=\left(I+\frac{i\Delta t}{2}H\right)^{-1}\left(I-\frac{i\Delta t}{2}H\right).
+\ket{\Psi^{n+1}}=U_{\symrm{CN}}(\Delta t)\ket{\Psi^n},\qquad U_{\symrm{CN}}(\Delta t)=\left(I+\frac{i\Delta t}{2}H\right)^{-1}\left(I-\frac{\i\Delta t}{2}H\right).
 \end{equation}
-The operator $U_{\symrm{CN}}(\Delta t)$ is equivalent to the $[1,1]$ Padé approximation to the exact propagator $e^{-i\Delta t H}$:
+The operator $U_{\symrm{CN}}(\Delta t)$ is equivalent to the $[1,1]$ Padé approximation to the exact propagator $e^{-\i\Delta t H}$:
 \begin{equation}
-U_{\symrm{CN}}(\Delta t)=e^{-i\Delta t H}+\mathcal{O}(\Delta t^3).
+U_{\symrm{CN}}(\Delta t)=\e^{-\i\Delta t H}+\mathcal{O}(\Delta t^3).
 \end{equation}
 Because $H$ is self-adjoint, $U_{\symrm{CN}}(\Delta t)$ is unitary so that $\lvert\Psi^{n+1}\rvert=\lvert\Psi^n\rvert$ and the total probability is conserved, as required by the unitary time evolution discussed in Sec.~\ref{sec:spectral_theory_in_hilbert_spaces}.
 \subsection{Imaginary Time Propagation}\label{sec:imaginary_time_propagation}
@@ -86,16 +86,16 @@ propagation and renormalization project an initial state onto the ground state. 
 We again consider the \acrshort{tdse} for a time-independent, self-adjoint Hamiltonian
 $H$ acting on a vector from Hilbert space $\mathcal{H}$,
 \begin{equation}\label{eq:tdse_it_real}
-i\frac{\mathrm{d}}{\mathrm{d}t}\ket{\Psi(t)}=H\ket{\Psi(t)}.
+\i\ddt\ket{\Psi(t)}=H\ket{\Psi(t)}.
 \end{equation}
-Introducing imaginary time $\tau$ via $\tau = i t$ (equivalently $t=-i\tau$) and writing
-$\ket{\Psi(\tau)}:=\ket{\Psi(t=-i\tau)}$ gives the imaginary-time evolution equation
+Introducing imaginary time $\tau$ via $\tau=\i t$ (equivalently $t=-\i\tau$) and writing
+$\ket{\Psi(\tau)}:=\ket{\Psi(t=-\i\tau)}$ gives the imaginary-time evolution equation
 \begin{equation}\label{eq:tdse_it}
 \frac{\mathrm{d}}{\mathrm{d}\tau}\ket{\Psi(\tau)}=-H\ket{\Psi(\tau)},
 \end{equation}
 with formal solution
 \begin{equation}\label{eq:wf_it}
-\ket{\Psi(\tau)}=e^{-\tau H}\ket{\Psi(0)}.
+\ket{\Psi(\tau)}=\e^{-\tau H}\ket{\Psi(0)}.
 \end{equation}
 Let $\{\ket{\phi_I}\}$ denote a complete orthonormal set of eigenstates of $H$,
 \begin{equation}
@@ -107,7 +107,7 @@ with real eigenvalues $E_I$ bounded from below. Expanding the initial state in t
 \end{equation}
 and substituting into Eq.~\eqref{eq:wf_it} yields
 \begin{equation}\label{eq:tdse_it_expansion}
-\ket{\Psi(\tau)}=\sum_I c_I(0)e^{-\tau E_I}\ket{\phi_I}.
+\ket{\Psi(\tau)}=\sum_I c_I(0)\e^{-\tau E_I}\ket{\phi_I}.
 \end{equation}
 For $\tau>0$, components with larger eigenvalues $E_I$ decay faster than those with
 smaller $E_I$. Assuming the ground-state coefficient $c_0(0)\neq 0$, the normalized state

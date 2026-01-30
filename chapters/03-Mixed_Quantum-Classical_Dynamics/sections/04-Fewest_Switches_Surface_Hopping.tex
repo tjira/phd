@@ -3,7 +3,7 @@ The \acrfull{fssh} method, developed by Tully in 1990,\supercite{10.1063/1.45917
 
 Befor we can obtain the hopping probabilities, it is convenient to express the Eq~\eqref{eq:tsh_eom} in terms of the density matrix elements $\rho_{IJ}=c_I c_J^\ast$ as
 \begin{equation}\label{eq:fssh_density_matrix_eom}
-i\dot\rho_{IJ}=\sum_K\left[\left(H_{IK}^{\symrm{el}}-i\sigma_{IK}\right)\rho_{KJ}-\left(H_{KJ}^{\symrm{el}}-i\sigma_{KJ}\right)\rho_{IK}\right],
+\i\dot\rho_{IJ}=\sum_K\left[\left(H_{IK}^{\symrm{el}}-\i\sigma_{IK}\right)\rho_{KJ}-\left(H_{KJ}^{\symrm{el}}-\i\sigma_{KJ}\right)\rho_{IK}\right],
 \end{equation}
 where the diagonal elements $\rho_{II}=\lvert c_I\rvert^2$ represent the populations of the adiabatic states, and the off-diagonal elements $\rho_{IJ}$ ($I\neq J$) represent the coherences between states. It is also useful to note that th electronic Hamiltonian (potential) is Hermitian and the \acrshort{tdc} is anti-Hermitian. From Eq~\eqref{eq:fssh_density_matrix_eom}, we can derive the time evolution of the populations $\rho_{II}$ using the properties of complex numbers as
 \begin{equation}\label{eq:fssh_population_eom}
@@ -17,7 +17,7 @@ If we consider an adiabatic basis where the electronic Hamiltonian is diagonal, 
 
 Our goal is to derive hopping algorithm that minimizes the number of switches between states while ensuring that the ensemble-averaged populations match the quantum mechanical populations. Let's consider a two-state system for simplicity. In this case, the total number of trajectories at a time $t$ on state 1 be expressed as $N_1(t)=N\rho_{11}(t)$, where $N$ is the total number of trajectories in the ensemble. Without the loss of generality, we can assume that the population of state 1 is increasing, i.e., $\rho_{11}(t+\Delta t)>\rho_{11}(t)$. This means that the amount of trajectories that need to hop from state 2 to state 1 during the time interval $\Delta t$ must be larger than the number of trajectories hopping from state 1 to state 2. Since we want to minimize the number of hops, we can assume that no trajectories hop from state 1 to state 2 during this time interval. Therefore, the number of trajectories hopping from state 2 to state 1 must be equal to $N\left(\rho_{11}(t+\Delta t)-\rho_{11}(t)\right)$. The probability of a trajectory on state 2 hopping to state 1 during the time interval $\Delta t$ can then be expressed as the ratio of the number of trajectories hopping to the total number of trajectories on state 2 as
 \begin{equation}\label{eq:fssh_hopping_probability_two_state}
-    P_{2\to 1}=\frac{N\left(\rho_{11}(t+\Delta t)-\rho_{11}(t)\right)}{N\rho_{22}}=\frac{\dot\rho_{11}\Delta t}{\rho_{22}}=\frac{b_{12}\Delta t}{\rho_{22}},
+P_{2\to 1}=\frac{N\left(\rho_{11}(t+\Delta t)-\rho_{11}(t)\right)}{N\rho_{22}}=\frac{\dot\rho_{11}\Delta t}{\rho_{22}}=\frac{b_{12}\Delta t}{\rho_{22}},
 \end{equation}
 where we used $\dot\rho_{11}=b_{12}$ from Eq~\eqref{eq:fssh_population_eom}. The ho probability from state 1 to state 2 can be derived similarly assuming that the population of state 1 is decreasing during the time interval $\Delta t$.
 

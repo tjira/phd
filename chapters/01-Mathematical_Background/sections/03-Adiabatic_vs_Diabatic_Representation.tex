@@ -29,7 +29,7 @@ so the electronic Hamiltonian is diagonal in this basis.
 
 Inserting the expansion in Eq.~\eqref{eq:boa_expansion} into the time-dependent Schr\"odinger equation and projecting onto $\bra{\phi_I(\symbf{R})}$ yields coupled equations for the nuclear wavefunctions $\ket{\chi_I(\symbf{R},t)}$. These contain the potential energy surfaces $E_I(\symbf{R})$ and additional terms that arise from the nuclear kinetic energy acting on the $\symbf{R}$-dependent electronic states
 \begin{equation}
-i\frac{\partial}{\partial{t}}\ket{\chi_I(\symbf{R},t)}=\left[T_{\symrm{n}}+E_I(\symbf{R})\right]\ket{\chi_I(\symbf{R},t)}+\sum_JC_{IJ}(\symbf{R})\,\ket{\chi_J(\symbf{R},t)},
+\i\frac{\partial}{\partial{t}}\ket{\chi_I(\symbf{R},t)}=\left[T_{\symrm{n}}+E_I(\symbf{R})\right]\ket{\chi_I(\symbf{R},t)}+\sum_JC_{IJ}(\symbf{R})\,\ket{\chi_J(\symbf{R},t)},
 \end{equation}
 where operator $C_{IJ}(\symbf{R})$ contains all the derivative coupling terms arising from the application of $T_{\symrm{n}}$ on the full wavefunction $\ket{\Psi(\symbf{R},\symbf{r},t)}$.
 
@@ -51,7 +51,7 @@ for all $\alpha,\beta$ (or at least for those states of interest). In such a bas
 
 However, removing the derivative couplings in this way introduces off-diagonal elements into the potential energy matrix. The nuclear Schr\"odinger equation in the diabatic representation then has the form
 \begin{equation}
-i\frac{\partial}{\partial{t}}\ket{\tilde\chi_\alpha(\symbf{R},t)}=\tilde{T}_{\symrm{n}}\ket{\tilde\chi_\alpha(\symbf{R},t)}+\sum_\beta\tilde{V}_{\alpha\beta}(\symbf{R})\ket{\tilde\chi_\beta(\symbf{R},t)},
+\i\frac{\partial}{\partial{t}}\ket{\tilde\chi_\alpha(\symbf{R},t)}=\tilde{T}_{\symrm{n}}\ket{\tilde\chi_\alpha(\symbf{R},t)}+\sum_\beta\tilde{V}_{\alpha\beta}(\symbf{R})\ket{\tilde\chi_\beta(\symbf{R},t)},
 \end{equation}
 where the couplings between electronic states now appear as off-diagonal potential terms rather than derivative couplings. The $\tilde{V}$ term is equivalent to the electronic Hamiltonian in Eq~\eqref{eq:boa_hamiltonian} in diabatic basis, we call it here potential, mainly for historical reasons.
 
@@ -63,7 +63,7 @@ In general, a globally exact diabatic basis free of derivative couplings may not
 \subsection{Adiabatic Transform}\label{sec:adiabatic_transform}
 The nuclear wavefunctions in the two representations are related by the same unitary transformation $U(\symbf{R})$ that relates the electronic bases. Writing the total wavefunction as
 \begin{equation}
-\ket{\Psi(\symbf{R},\symbf{r},t)}=\sum_I\ket{\chi_I(\symbf{R},t)}\otimes\ket{\phi_I(\symbf{R})}=\sum_\alpha \ket{\tilde\chi_\alpha(\symbf{R},t)}\otimes\ket{\tilde\phi_\alpha(\symbf{R})},
+\ket{\Psi(\symbf{R},\symbf{r},t)}=\sum_I\ket{\chi_I(\symbf{R},t)}\otimes\ket{\phi_I(\symbf{R})}=\sum_\alpha\ket{\tilde\chi_\alpha(\symbf{R},t)}\otimes\ket{\tilde\phi_\alpha(\symbf{R})},
 \end{equation}
 and inserting Eq~\eqref{eq:unitary_transform} into this equation and comparing the diabatic and adiabatic representation gives
 \begin{equation}
