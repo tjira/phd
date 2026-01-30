@@ -1,9 +1,9 @@
 \section{\filetotitle}\label{sec:variational_principles}
 The numerical schemes described in Sec~\ref{sec:numerical_schemes_for_time_dependent_schrodinger_equation} are theoretically exact, but in practice, they require the representation of the full wavefunction. This is computationally infeasible for large quantum systems due to the exponential growth of grid points required to sample the wavefunction. The variational principles discussed in this section approximate the time evolution by projecting the dynamics onto a lower-dimensional smooth submanifold $\mathcal{M}\subset\mathcal{H}$. We define this manifold as the set of all trial wavefunctions parametrized by a complex vector $\symbf{\alpha}(t)\in\mathbb{C}^N$ as
-\begin{equation}
+\begin{equation}\label{eq:variational_manifold}
 \mathcal{M}=\lbrace\ket{\Psi(\symbf{\alpha})}:\symbf{\alpha}\in\mathbb{C}^N\rbrace.
 \end{equation}
-This approach allows us to evolve the system's state using a manageable number of parameters $\symbf{\alpha}=(\alpha_1(t),\ldots,\alpha_N(t))$. In the following subsections, we will explore three key variational principles: the Dirac--Frenkel principle, McLachlan's variational principle, and the time-dependent variational principle. Throughout the following sections, we will sometimes use $\Psi:=\ket{\Psi(\symbf{\alpha})}$ to denote the parametrized state vector and $\dot\Psi:=\ddt\ket{\Psi(\symbf{\alpha})}$ to denote its time derivative when appropriate.
+This approach allows us to evolve the system's state using a manageable number of parameters $\symbf{\alpha}=(\alpha_1(t),\ldots,\alpha_N(t))$. We assume, that the manifold in Eq~\eqref{eq:variational_manifold} is holomorphic, i.e. the trial wavefunctions $\ket{\Psi(\symbf{\alpha})}$ do not depend on $\symbf{\alpha}^\ast$ as is the common practice. In the following subsections, we will explore three key variational principles: the Dirac--Frenkel principle, McLachlan's variational principle, and the time-dependent variational principle. Throughout the following sections, we will sometimes use $\Psi:=\ket{\Psi(\symbf{\alpha})}$ to denote the parametrized state vector and $\dot\Psi:=\ddt\ket{\Psi(\symbf{\alpha})}$ to denote its time derivative when appropriate.
 \subsection{Dirac--Frenkel Principle}\label{sec:dirac_frenkel_principle}
 The first variational principle we consider is the \acrfull{dfvp}. The exact time evolution for our parametrized wavefunction $\ket{\Psi(\symbf{\alpha})}$ is governed by the \acrshort{tdse}
 \begin{equation}
@@ -11,7 +11,7 @@ The first variational principle we consider is the \acrfull{dfvp}. The exact tim
 \end{equation}
 However, the vector $-iH\ket{\Psi(\symbf{\alpha})}$ generally leads out of the manifold $\mathcal{M}$. We therefore seek a time-derivative vector that lies strictly within the tangent space $T_{\Psi}\mathcal{M}$.
 
-Formalizing this, the tangent space at a point $\ket{\Psi(\symbf{\alpha})}$ is spanned by the partial derivatives of the wavefunction with respect to the parameters
+Formalizing this, the tangent space of the holomorphic manifold $\mathcal{M}$ at a point $\ket{\Psi(\symbf{\alpha})}$ is spanned by the partial derivatives of the wavefunction with respect to the parameters
 \begin{equation}
 T_{\Psi}\mathcal{M}=\text{span}\left\lbrace\frac{\partial}{\partial\alpha_k}\ket{\Psi(\symbf{\alpha})}\right\rbrace_{k=1}^N.
 \end{equation}
@@ -52,11 +52,18 @@ The Eq~\eqref{eq:mclachlan_variational_principle_intermediate} can be further si
 \begin{equation}\label{eq:mclachlan_variational_principle}
 \Re\Braket{\delta\Psi|\dot\Psi+iH\Psi}=0,
 \end{equation}
-where we have used the fact that $\ket{\delta\dot\Psi}$ and $\ket{\delta\Psi}$ live in the same tangent space $T_{\Psi}\mathcal{M}$. The Eq~\eqref{eq:mclachlan_variational_principle} defines McLachlan's variational principle, which aims to find the optimal time evolution within the manifold $\mathcal{M}$ by minimizing the norm of the residual vector $\ket{\epsilon}$. The noticable difference between McLachlan's principle and the Dirac--Frenkel principle (Eq~\eqref{eq:dfvp_orthogonality_condition}) is the presence of the real part operator $\Re$ in Eq~\eqref{eq:mclachlan_variational_principle}. This distinction implies that McLachlan's principle focuses on minimizing the overall error magnitude, while the Dirac--Frenkel principle enforces strict orthogonality of the residual vector to the tangent space. More on the relationship between variational principles can be found in Sec~\ref{sec:equality_of_variational_principles}.
+where we have used the fact that $\ket{\delta\dot\Psi}$ and $\ket{\delta\Psi}$ live in the same tangent space $T_{\Psi}\mathcal{M}$. The Eq~\eqref{eq:mclachlan_variational_principle} defines McLachlan's variational principle, which aims to find the optimal time evolution within the manifold $\mathcal{M}$ by minimizing the norm of the residual vector $\ket{\epsilon}$. The noticable difference between McLachlan's principle and the Dirac--Frenkel principle (Eq~\eqref{eq:dfvp_orthogonality_condition}) is the presence of the real part operator $\Re$ in Eq~\eqref{eq:mclachlan_variational_principle}. This distinction implies that McLachlan's principle focuses on minimizing the overall error magnitude, while the Dirac--Frenkel principle enforces strict orthogonality of the residual vector to the tangent space.
+
+Now the question arises: are these two variational principles (Eq~\eqref{eq:dfvp_orthogonality_condition} and Eq~\eqref{eq:mclachlan_variational_principle}) equivalent? Recall that we assumed the manifold $\mathcal{M}$ to be holomorphic, meaning that the trial wavefunctions $\ket{\Psi(\symbf{\alpha})}$ do not depend on the complex conjugates of the parameters $\symbf{\alpha}^\ast$. This assumption ensures that any vector from the tangent space $T_{\Psi}\mathcal{M}$ multiplied by the imaginary unit $i$ also lies within the tangent space $T_{\Psi}\mathcal{M}$ as follows from Eq~\eqref{eq:tangent_evolution}. By this logic and the fact that $\Im(z)=\Re(-iz)$ for any complex number $z$, we get
+\begin{equation}\label{eq:mclachlan_dfvp_equivalence}
+\Re\left(-i\Braket{\delta\Psi|\dot\Psi+iH\Psi}\right)=\Im\Braket{\delta\Psi|\dot\Psi+iH\Psi}=0,
+\end{equation}
+which shows that the Dirac--Frenkel principle (Eq~\eqref{eq:dfvp_orthogonality_condition}) and McLachlan's principle (Eq~\eqref{eq:mclachlan_variational_principle}) are indeed equivalent when the manifold $\mathcal{M}$ is holomorphic. Should the manifold $\mathcal{M}$ not be holomorphic, a derivative with respect to $\symbf{\alpha}^\ast$ would appear in the elements of the tangent space $T_{\Psi}\mathcal{M}$, and the Eq~\eqref{eq:mclachlan_dfvp_equivalence} would no longer hold. In such cases, the two variational principles would yield different equations of motion for the parameters $\symbf{\alpha}$.
+
 \subsection{Time-Dependent Variational Principle}\label{sec:time_dependent_variational_principle}
 The third perspective on variational principles is provided by the time-dependent variational principle, which is rooted in the action formalism of classical mechanics. In this approach, we define the Dirac-Lagrangian as
 \begin{equation}\label{eq:dirac_lagrangian}
-\mathcal{L}(\symbf{\alpha},\symbf{\alpha}^\ast)=\Braket{\Psi(\symbf{\alpha})|i\ddt-H|\Psi(\symbf{\alpha})}.
+\mathcal{L}(\symbf{\alpha},\symbf{\alpha}^\ast)=\Braket{\Psi|i\dot\Psi-H\Psi}.
 \end{equation}
 Should we use a non-parametrized wavefunction $\ket{\Psi(t)}$ and apply the principle of stationary action, we would recover the \acrshort{tdse} (and its conjugate). However, since we are working with a parametrized wavefunction $\ket{\Psi(\symbf{\alpha})}$, we restrict the variations to those allowed by the manifold $\mathcal{M}$. The time-dependent variational principle states that the optimal parameters $\symbf{\alpha}$ are those that make the action functional stationary
 with action given by the time integral of the Dirac-Lagrangian
@@ -68,4 +75,17 @@ Applying the principle of stationary action $\delta S=0$ to the action functiona
 \ddt\frac{\partial\mathcal{L}}{\partial\dot{\alpha}_k^\ast}-\frac{\partial\mathcal{L}}{\partial\alpha_k^\ast}=0,\quad k=1,\ldots,N.
 \end{equation}
 Note that applying the principle of stationary action to the parameter conjugates $\symbf{\alpha}^\ast$ yields equations of motion for the parameters $\symbf{\alpha}$. One can also derive equations of motion for the parameter conjugates $\symbf{\alpha}^\ast$ by applying the principle of stationary action to the parameters $\symbf{\alpha}$ instead. The Eq~\eqref{eq:euler_lagrange_equations} provides a set of coupled differential equations that govern the time evolution of the parameters $\symbf{\alpha}$ within the manifold $\mathcal{M}$. Solving these equations yields the optimal trajectory of the parameters that best approximates the true dynamics of the quantum system while remaining within the constraints of the chosen manifold.
-\subsection{Equality of Variational Principles}\label{sec:equality_of_variational_principles}
+
+To demonstrate the equivalence of this approach to the Dirac--Frenkel principle for holomorphic manifolds, we explicitly evaluate the terms in Eq~\eqref{eq:euler_lagrange_equations}. Assuming the parametrization is holomorphic, the ket vector $\ket{\Psi(\symbf{\alpha})}$ depends only on $\symbf{\alpha}$, while the bra vector $\bra{\Psi(\symbf{\alpha})}$ depends only on $\symbf{\alpha}^\ast$. Consequently, the Lagrangian in Eq~\eqref{eq:dirac_lagrangian} does not explicitly depend on the time derivatives of the conjugate parameters $\dot{\symbf{\alpha}}^\ast$, leading to
+\begin{equation}
+\frac{\partial\mathcal{L}}{\partial\dot{\alpha}_k^\ast}=0.
+\end{equation}
+The Euler--Lagrange equations therefore simplify to the condition $\frac{\partial\mathcal{L}}{\partial\alpha_k^\ast}=0$. Plugging in the Dirac-Lagrangian from Eq~\eqref{eq:dirac_lagrangian} leads to
+\begin{equation}\label{eq:tdvp_derivation}
+\frac{\partial\mathcal{L}}{\partial\alpha_k^\ast}=\frac{\partial}{\partial\alpha_k^\ast}\Braket{\Psi|i\dot\Psi-H\Psi}=0.
+\end{equation}
+Since $\frac{\partial}{\partial\alpha_k}\ket{\Psi}$ spans the tangent space $T_{\Psi}\mathcal{M}$ the condition holding for all $k$ implies it holds for any arbitrary variation $\ket{\delta\Psi}$ and we can rewrite Eq~\eqref{eq:tdvp_derivation} as
+\begin{equation}
+\Braket{\delta\Psi|i\dot\Psi-H\Psi}=0\implies\Braket{\delta\Psi|\dot\Psi+iH\Psi}=0,
+\end{equation}
+hence recovering the Dirac--Frenkel variational principle (Eq~\eqref{eq:dfvp_orthogonality_condition}). This demonstrates that the time-dependent variational principle is equivalent to the Dirac--Frenkel principle when the manifold $\mathcal{M}$ is holomorphic.
