@@ -32,7 +32,7 @@ With $\symbf{c}(t)=\left(c_1(t),c_2(t),\dots,c_N(t)\right)^{\symrm{T}}$ the Eq~\
 \i\symbf{\dot{c}}(t)=H_{\symrm{eff}}\symbf{c}(t),\qquad H_{IJ}^{\symrm{eff}}=E_I\delta_{IJ}-\i\sigma_{IJ}
 \end{equation}
 For electronic dynamics in Eq~\eqref{eq:sh_tdse_coefs} to be unitary, the effective Hamiltonian $H_{\symrm{eff}}$ must be self-adjoint, which in turn requires $\sigma_{IJ}$ to be antisymmetric, $\sigma^\dagger=-\sigma$, in accordance with Sec~\ref{sec:self_adjoint_operators_and_observables}. To evaluate $\sigma_{IJ}$ in practice, note that each adiabatic eigenfunction depends parametrically on the instantaneous nuclear coordinates $\symbf{R}(t)$. By the chain rule,
-\begin{equation}
+\begin{equation}\label{eq:tdc_nacv}
 \sigma_{IJ}=\Braket{\phi_I\vert\frac{\partial\phi_J}{\partial t}}=\dot{\symbf{R}}\cdot\Braket{\phi_I\vert\frac{\partial\phi_J}{\partial\symbf{R}}}=\symbf{v}\cdot\symbf{d}_{IJ},
 \end{equation}
 where $\symbf{v}=\dot{\symbf{R}}$ is the nuclear velocity and $\symbf{d}_{IJ}$ is the \acrfull{nacv}. Although many quantum‐chemistry packages provide \acrshort{nacv} and thus allow computation of the \acrshort{tdc} via $\sigma_{IJ}=\symbf{v}\cdot\symbf{d}_{IJ}$, \acrshort{nacv} can become ill-defined or numerically unstable near conical intersections (e.g., in multi-reference methods). In cases where a reliable \acrshort{nacv} is not available, one may instead employ a direct \acrshort{tdc} approximation using wavefunction overlaps.
