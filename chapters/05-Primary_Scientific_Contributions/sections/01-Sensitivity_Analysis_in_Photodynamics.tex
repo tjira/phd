@@ -6,7 +6,7 @@ The first published work of this thesis is focused on sensitivity analysis in ph
 In computational photodynamics, nonadiabatic dynamics simulations are becoming standard tools to investigate the excited-state behavior of molecular systems. However, the accuracy of these simulations strongly depends on the underlying electronic structure method used to compute the potential energy surfaces and nonadiabatic couplings. Researchers often face the challenge of selecting an appropriate electronic structure method, as different methods can yield varying results for the same system. This work exposes this challenge by performing a sensitivity analysis on the photodynamics of \textit{cis}-stilbene, a prototypical photoisomerization system. \textit{cis}-stilbene undergoes photoinduced isomerization around its central double bond, leading to the formation of either the trans isomer (\textit{trans}-stilbene) or a cyclized product called \acrfull{dhp}, making it an ideal candidate for studying nonadiabatic dynamics and the influence of electronic structure methods. The three isomers are depicted in Fig~\ref{fig:stilbene_isomers}.
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.9\linewidth]{/home/tojira/Projects/phd/chapters/05-Primary_Scientific_Contributions/sections/images/images_large_ct4c01008_0001}
+\includegraphics[width=0.9\linewidth]{chapters/05-Primary_Scientific_Contributions/sections/images/images_large_ct4c01008_0001}
 \caption{The three stilbene isomers.}
 \label{fig:stilbene_isomers}
 \end{figure}
@@ -15,7 +15,7 @@ The study uses the \acrfull{fssh} method, described in Sec~\ref{sec:fewest_switc
 To start the sensitivity analysis, the study first establishes the investigated \acrshort{pes} and all the important features that influence the photodynamics of \textit{cis}-stilbene. Upon excitation to the first excited state (S$_1$) there are two main relaxation pathways. The first pathway leads to through the \textit{cis}-stilbene S$_1$ minimum to an energetically close conical intersection between S$_1$ and the ground state (S$_0$) that facilitates the isomerization to \acrshort{dhp} or back to \textit{cis}-stilbene. The second pathway leads through another S$_1$ minimum to four conical intersections between S$_1$ and S$_0$ that facilitate the isomerization to \textit{trans}-stilbene or back to \textit{cis}-stilbene. Note that all of the conical intersections are energetically accessible from the S$_1$ Franck--Condon region. The \acrshort{pes} features on all three electronic structure levels are qualitatively similar, with no seemingly preferred pathway. The schematic representation of the \acrshort{pes} features is shown in Fig~\ref{fig:pes_features_stilbene}.
 \begin{figure}[H]
 \centering
-\includegraphics[width=\linewidth]{/home/tojira/Projects/phd/chapters/05-Primary_Scientific_Contributions/sections/images/images_large_ct4c01008_0003}
+\includegraphics[width=\linewidth]{chapters/05-Primary_Scientific_Contributions/sections/images/images_large_ct4c01008_0003}
 \caption{Schematic representation of the potential energy surface features of \textit{cis}-stilbene relevant to its photodynamics. The diagram illustrates the two main relaxation pathways from the S$_1$ excited state: one leading to the formation of \acrshort{dhp} via a conical intersection (CI) accessible from the S$_1$ minimum, and the other leading to \textit{trans}-stilbene via multiple conical intersections.}
 \label{fig:pes_features_stilbene}
 \end{figure}
@@ -46,7 +46,7 @@ The results show significant differences in the quantum yields and excited-state
 The study also analyzes the \acrshort{trpes} obtained from the simulations (Fig~\ref{fig:stilbene_spectra}) and compares them with experimental data. The \acrshort{trpes} provide insights into the electronic structure and dynamics of the system, and the results show that different electronic structure methods yield spectra that, except for XMS-SA2-CASPT2, exhibit features consistent with experimental observations. This observation further emphasizes the importance of selecting an appropriate electronic structure method, since the \acrshort{trpes} alone cannot be used to determine which method provides the most accurate description of the photodynamics.
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.7\linewidth]{/home/tojira/Projects/phd/chapters/05-Primary_Scientific_Contributions/sections/images/images_large_ct4c01008_0009}
+\includegraphics[width=0.7\linewidth]{chapters/05-Primary_Scientific_Contributions/sections/images/images_large_ct4c01008_0009}
 \caption{Simulated \acrshort{trpes} for surface hopping dynamics with various electronic structure methods}
 \label{fig:stilbene_spectra}
 \end{figure}
