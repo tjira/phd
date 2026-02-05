@@ -1,2 +1,46 @@
 \section{\filetotitle}
 \textit{Commentary on: \fullcite{10.1016/j.jqsrt.2025.109697}}
+
+The next published work of this thesis focuses on spin-orbit induced charge transfer from article \textit{Spin--Orbit Induced Charge Transfer in \ce{H^+}/\ce{D^+}/\ce{T^+}-\ce{N(^4S)} Collisions} in \textit{Journal of Quantitative Spectroscopy and Radiative Transfer}.
+
+The study focuses on the investigation of charge transfer processes in collisions between protons (\ce{H^+}), deuterons (\ce{D^+}), tritons (\ce{T^+}) and nitrogen atoms in their ground state (\ce{N}($^4$S)). The charge transfer in such collisions can be induced by spin-orbit coupling, rotational couplings, and radial nonadiabatic couplings. The first study of these collisions were performed more than 30 years ago using approximate potentials and Landau--Zener theory. Since then, no further studies have been conducted on this system.
+
+I context of nonadiabatic dynamics simulations, the accurate description of \acrfull{soc} is often challenging, expecially when combined with the need to cover a wide range of collision energies. The study presented in this article aims to address this challenge by employing a combination of high-level quantum-mechanical calculations, Landau--Zener theory, and nonadiabatic dynamics simulations to investigate the charge transfer processes in the \ce{N(^4S) + H^+ -> N^+(^3P) + H(^2S)} reaction.
+
+To calculate the cross sections for the charge transfer process, the study first computes the \acrshort{pes} for the relevant electronic states ($^4\Sigma$ and $^2\Pi$) of the \ce{N-H^+}, \ce{N-D^+} and \ce{N-T^+} systems using MRCI/aug-cc-pVQZ-F12 level of theory. The \acrshort{soc} matrix elements are also calculated at the same level of theory. The \acrshort{pes} and \acrshort{soc} matrix elements are then used to perform 1D quantum dynamics simulations (as described in Sec~\ref{sec:split_operator_method}) to obtain the charge transfer probabilities $P(E)$ as a function of collision energy $E$. Note that even though the impact factor dependence is not explicitly included in the 1D quantum dynamics simulations, the energy $E$ and impact factor $b$ are in Landau--Zener theory related via the crossing point $r_x$ and the activation energy $E_x$ and the charge transfer probabilities can be reduced to
+\begin{equation}
+P(E,b)=P\left(E-\frac{b^2E}{r_x^2}\right).
+\end{equation}
+This allows to calculate the cross sections $\sigma(E)$ from the 1D quantum dynamics simulations. The results from 2D quantum dynamics simulations are included in the supporint information as they are not the main subject of this article.
+
+The results from the quantum dynamics simulations are compared to the predictions from Landau--Zener theory, which provides an analytical expression for the charge transfer probabilities based on the \acrshort{soc} matrix elements and the slopes of the \acrshort{pes} at the crossing points. Using the charge transfer probabilities, the study calculates the cross sections for the charge transfer process using
+\begin{equation}
+\sigma(E)=2\pi\int_0^{(1-\frac{E_x}{E})r_x}bP(E,b)\symrm{d}b,
+\end{equation}
+where $E_x$ is the activation energy for the charge transfer process and $r_x$ is the crossing point between the relevant \acrshort{pes}.
+
+The calculated cross sections from 1D quantum dynamics simulations and Landau--Zener theory are presented in Fig~\ref{fig:soc_charge_transfer_cross_sections}. For brevity, only the results for the \ce{N-D^+} and \ce{N-T^+} system are shown here, the \ce{N-H^+} results can be found in the article. The results show that both methods yield similar cross sections which confirm the validity of Landau--Zener theory in describing the charge transfer process in this system.
+\begin{figure}[H]
+\centering
+\begin{subfigure}{.5\textwidth}
+\centering
+\includegraphics[width=\linewidth]{chapters/05-Primary_Scientific_Contributions/sections/images/1-s2.0-S0022407325003590-gr6_lrg}
+\end{subfigure}\begin{subfigure}{.5\textwidth}
+\centering
+\includegraphics[width=\linewidth]{chapters/05-Primary_Scientific_Contributions/sections/images/1-s2.0-S0022407325003590-gr7_lrg}
+\end{subfigure}
+\caption{The charge transfer cross sections for the \ce{N-D^+} (left) and \ce{N-T^+} (right) systems as a function of collision energy. The WP label represents line obtained from the 1D quantum dynamics.}
+\label{fig:soc_charge_transfer_cross_sections}
+\end{figure}
+Additionaly, rate constants for the charge transfer process are calculated by integrating the cross sections over a Maxwell--Boltzmann distribution of collision energies as
+\begin{equation}
+k(T)=\sqrt{\frac{8}{\pi\mu(k_BT)^3}}\int_0^\infty E\sigma(E)\e^{-\frac{E}{k_BT}}\symrm{d}E,
+\end{equation}
+where $k_B$ is the Boltzmann constant, $T$ is the temperature and $\mu$ is the reduced mass of the system. The calculated rate constants are presented in Fig~\ref{fig:soc_rate_constants} as a function of temperature.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\linewidth]{chapters/05-Primary_Scientific_Contributions/sections/images/1-s2.0-S0022407325003590-gr10_lrg}
+\caption{The rate constants for the collision reactions involving hydrogen ($k_H$), deuterium ($k_D$) and tritium ($k_T$) as a function of temperature. The straight red line represents the results from Landau--Zener theory for the hydrogen case.}
+\label{fig:soc_rate_constants}
+\end{figure}
+Overall, the study presented in this article provides a comprehensive investigation of spin-orbit induced charge transfer processes in \ce{H^+/D^+/T^+}-\ce{N(^4S)} collisions. The combination of high-level quantum-mechanical calculations, Landau--Zener theory, and nonadiabatic dynamics simulations allows for a detailed understanding of the charge transfer mechanisms and the calculation of accurate cross sections and rate constants.
