@@ -77,11 +77,7 @@ U_{\symrm{CN}}(\Delta t)=\e^{-\i\Delta t H}+\mathcal{O}(\Delta t^3).
 \end{equation}
 Because $H$ is self-adjoint, $U_{\symrm{CN}}(\Delta t)$ is unitary so that $\lvert\Psi^{n+1}\rvert=\lvert\Psi^n\rvert$ and the total probability is conserved, as required by the unitary time evolution discussed in Sec.~\ref{sec:spectral_theory_in_hilbert_spaces}.
 \subsection{Imaginary Time Propagation}\label{sec:imaginary_time_propagation}
-Imaginary time propagation is a numerical technique for obtaining the ground state of a
-quantum system by evolving it in imaginary time instead of real time. By replacing the real
-time variable by an imaginary one, contributions from higher-energy eigenstates are
-suppressed exponentially faster than that of the ground state, so that repeated
-propagation and renormalization project an initial state onto the ground state. As with real-time propagation, its practical applicability is restricted by the cost of repeatedly applying the Hamiltonian to the wavefunction.
+Imaginary time propagation is a numerical technique for obtaining the ground state of a quantum system by evolving it in imaginary time instead of real time. By replacing the real time variable by an imaginary one, contributions from higher-energy eigenstates are suppressed exponentially faster than that of the ground state, so that repeated propagation and renormalization project an initial state onto the ground state. As with real-time propagation, its practical applicability is restricted by the cost of repeatedly applying the Hamiltonian to the wavefunction.
 
 We again consider the \acrshort{tdse} for a time-independent, self-adjoint Hamiltonian
 $H$ acting on a vector from Hilbert space $\mathcal{H}$,
@@ -109,9 +105,6 @@ and substituting into Eq.~\eqref{eq:wf_it} yields
 \begin{equation}\label{eq:tdse_it_expansion}
 \ket{\Psi(\tau)}=\sum_I c_I(0)\e^{-\tau E_I}\ket{\phi_I}.
 \end{equation}
-For $\tau>0$, components with larger eigenvalues $E_I$ decay faster than those with
-smaller $E_I$. Assuming the ground-state coefficient $c_0(0)\neq 0$, the normalized state
-$\frac{\ket{\Psi(\tau)}}{\lvert\Psi(\tau)\rvert}$ converges to the ground state $\ket{\phi_0}$ in the limit
-$\tau\to\infty$. In numerical applications one therefore propagates in small imaginary-time
-steps and renormalizes the wavefunction after each step to prevent decay to the zero
-vector and to extract the ground state.
+For $\tau>0$, components with larger eigenvalues $E_I$ decay faster than those with smaller $E_I$. Assuming the ground-state coefficient $c_0(0)\neq 0$, the normalized state $\frac{\ket{\Psi(\tau)}}{\lvert\Psi(\tau)\rvert}$ converges to the ground state $\ket{\phi_0}$ in the limit $\tau\to\infty$. In numerical applications one therefore propagates in small imaginary-time steps and renormalizes the wavefunction after each step to prevent decay to the zero vector and to extract the ground state.
+
+Of course, the imaginary time propagation method can also be used to find excited states by projecting out lower-energy states after each propagation step (e.g., via Gram--Schmidt orthogonalization). However, this requires knowledge of all lower-energy states, which may or may not be available.

@@ -15,13 +15,13 @@ A vector space $(V,+,\cdot)$ over a field $F$ is a non-empty set that is closed 
 \item Distributivity of scalar multiplication with respect to field addition: $(a+b)\symbf{u}=a\symbf{u}+b\symbf{u}$
 \end{enumerate}
 \end{definition}
-These axioms are necessary for a set to be considered a vector space. Examples of vector spaces include the Euclidean space $\mathbb{R}^n$, the set of all functions with continuous $m$-th derivatives $C^m(\mathbb{R}^n)$ or $C^\infty(\mathbb{R}^n)$, which is the set of all infinitely differentiable functions on $\mathbb{R}^n$. In quantum mechanics we usually work in Hilbert spaces, which will be described in more detail in the next section.
+These axioms are necessary for a set to be considered a vector space. In quantum mechanics, the vector space axioms (especially the closure under addition and scalar multiplication) are manifestations of the superposition principle, if two vectors are valid quantum states (see Sec~\ref{sec:hilbert_spaces_and_quantum_states}), then every linear combination of them is also a valid quantum state. Examples of vector spaces include the Euclidean space $\mathbb{R}^n$, the set of all functions with continuous $m$-th derivatives $C^m(\mathbb{R}^n)$ or $C^\infty(\mathbb{R}^n)$, which is the set of all infinitely differentiable functions on $\mathbb{R}^n$. In this thesis we will usually work in Hilbert spaces, which will be described in more detail in the next section.
 
 Before we can use vector spaces effectively, we must identify and characterize smaller structures that inherit their properties. These are known as subspaces.
 \begin{definition}[Subspace]
 A subset $W\subset V$ is a subspace if it is non-empty and closed under addition and scalar multiplication. For all $\symbf{u},\symbf{v}\in W$ and $a\in F$, one has $\symbf{u}+\symbf{v}\in W$ and $a\symbf{u}\in W$. Equivalently, $W$ is a subspace iff $\symbf{0}\in W$, $\symbf{u}+\symbf{v}\in W$ and $a\symbf{u}\in W$.
 \end{definition}
-Every subspace necessarily contains the zero vector and is closed under both addition and scalar multiplication so it is itself a vector space. Subspaces are important because they capture smaller, self-contained portions of a larger space where similar operations remain valid.
+Every subspace necessarily contains the zero vector and is closed under both addition and scalar multiplication so it is itself a vector space. Subspaces are important because they capture smaller, self-contained portions of a larger space where similar operations remain valid. Subspaces ofthen arise naturally in quantum mechanics, for example, when considering the set of states that satisfy certain symmetry properties or constraints. When we restrict our space of quantum states to a specific energy level or spin configuration, we are utilizing the concept of subspaces.
 
 We now proceed to the concept of linear combinations, which provides a mechanism for generating new vectors from existing ones, and the related concept of the span, which describes the set of all such combinations.
 \begin{definition}[Linear Combination and Span]
@@ -108,7 +108,7 @@ To each ket $\ket{\psi}$ there corresponds a bra $\bra{\psi}$, which is a linear
 \begin{equation}
 \bra{\psi}:\mathcal{H}\to\mathbb{C},\qquad\bra{\psi}\left(\ket{\phi}\right):=\braket{\psi|\phi}.
 \end{equation}
-This correspondence is guaranteed by the Riesz representation theorem.
+This correspondence is guaranteed by the Riesz representation theorem.\supercite{1423848155}
 
 In quantum mechanics, physical (pure) states are represented by rays in a Hilbert space, i.e. one-dimensional subspaces of $\mathcal{H}$. Vectors that differ only by a nonzero complex scalar multiplication represent the same physical state:
 \begin{equation}
@@ -124,12 +124,18 @@ In most physical applications one assumes that $\mathcal{H}$ is separable, i.e. 
 \begin{equation}
 \ket{\psi}=\sum_{n}c_n\ket{n},\qquad c_n=\braket{n\vert\psi},
 \end{equation}
-where the series converges in the norm of $\mathcal{H}$.
+where the series converges in the norm of $\mathcal{H}$. The ability to expand a state in an orthonormal basis leads to the powerful concept of \acrfull{ri}
+\begin{equation}
+I=\sum_{n}\ket{n}\bra{n},
+\end{equation}
+where $I$ is the identity operator on $\mathcal{H}$. This is arguably one of the most useful tools in quantum mechanics, allowing us to insert the identity operator into expressions to change bases or simplify calculations.
 \subsection{Linear Operators}\label{sec:linear_operators}
 Linear operators lie at the core of quantum mechanics, representing physical observables and the evolution of quantum states. We now define linear operators and explore their properties.
 \begin{definition}[Linear Operator]
 A linear operator on a vector space $V$ over a field $F$ is a map $A:V\to V$ with $A(\symbf{u}+\symbf{v})=A\symbf{u}+A\symbf{v}$ and $A(a\symbf{u})=aA\symbf{u}$ for all $\symbf{u},\symbf{v}\in V$, $a\in F$.
 \end{definition}
+However, not all linear operators represent physical observables, since they must satisfy additional properties, such as being self-adjoint (or Hermitian) to ensure real eigenvalues. More on this in Sec.~\ref{sec:self_adjoint_operators_and_observables}.
+
 Using a basis of a vector space, we can represent linear operators as matrices. If $\lbrace\symbf{e}_i\rbrace_{i=1}^n$ is a basis of an $n$-dimensional vector space $V$, an operator $A$ can be represented by a matrix $[A]_{ij}=a_{ij}$ with the coefficients defined by
 \begin{equation}
 A\symbf{e}_j=\sum_{i=1}^n a_{ij}\symbf{e}_i.
@@ -142,7 +148,7 @@ If the vector space $V$ is equipped with an inner product and the basis $\lbrace
 \begin{equation}
 a_{ij}=\langle\symbf{e}_i,A\symbf{e}_j\rangle.
 \end{equation}
-This equation is consistent with Def~\ref{def:inner_product}, where we adopt the physics convention for the inner product. Note that the matrix representation of an operator depends on the choice of basis. If $U$ is a change of basis matrix from a new basis $\lbrace\symbf{f}_i\rbrace_{i=1}^n$ to the old basis $\lbrace\symbf{e}_i\rbrace_{i=1}^n$ (i.e., $\symbf{e}_i=\sum_{j=1}^n U_{ji}\symbf{f}_j$), the matrix representation of $A$ in the new basis is given by
+This equation is consistent with Def.~\ref{def:inner_product}, where we adopt the physics convention for the inner product. Note that the matrix representation of an operator depends on the choice of basis. If $U$ is a change of basis matrix from a new basis $\lbrace\symbf{f}_i\rbrace_{i=1}^n$ to the old basis $\lbrace\symbf{e}_i\rbrace_{i=1}^n$ (i.e., $\symbf{e}_i=\sum_{j=1}^n U_{ji}\symbf{f}_j$), the matrix representation of $A$ in the new basis is given by
 \begin{equation}\label{eq:change_of_basis}
 [A]_{\symbf{e}}=U^{-1}[A]_{\symbf{f}}U.
 \end{equation}
@@ -150,4 +156,6 @@ We now get to the concept of eigenvalues and eigenvectors, which lay at the hear
 \begin{definition}[Eigenvalues and Eigenvectors]
 A scalar $\lambda\in F$ is called an eigenvalue of a linear operator $A:V\to V$ if there exists a non-zero vector $\symbf{v}\in V$ such that $A\symbf{v}=\lambda\symbf{v}$. The vector $\symbf{v}$ is called an eigenvector associated with the eigenvalue $\lambda$. For a finite-dimensional vector space, the set of all eigenvalues of $A$ is called the spectrum of $A$. The subspace $E_\lambda=\symrm{ker}(A-\lambda I)$ is called the eigenspace associated with the eigenvalue $\lambda$, where $I$ is the identity operator on $V$.
 \end{definition}
-If $V$ is finite-dimensional, the eigenvalues of $A$ can be found by solving the characteristic polynomial equation $\text{det}(A-\lambda I)=0$. The set of all eigenvalues is called the spectrum. The eigenvectors corresponding to distinct eigenvalues are linearly independent. If the operator $A$ has $n$ distinct eigenvalues in an $n$-dimensional space, its eigenvectors form a basis of $V$.
+If $V$ is finite-dimensional, the eigenvalues of $A$ can be found by solving the characteristic polynomial equation $\symrm{det}(A-\lambda I)=0$. The set of all eigenvalues is called the spectrum. The eigenvectors corresponding to distinct eigenvalues are linearly independent. If the operator $A$ has $n$ distinct eigenvalues in an $n$-dimensional space, its eigenvectors form a basis of $V$.
+
+The eigenproblems lie at the heart of quantum mechanics and naturally lead to the Collapse Postulate. When we measure an observable represented by a self-adjoint operator $A$, the system collapses into one of the eigenvectors $\symbf{v}$ of $A$ and the value we read on our measurement device is the corresponding eigenvalue $\lambda$. The probability of collapsing into a particular eigenvector $\symbf{v}$ is given by the born rule, which will be described in more detail in Sec.~\ref{sec:spectral_theory_in_hilbert_spaces}. This is why finding spectrum of the Hamiltonian operator is the central task in quantum mechanics.
