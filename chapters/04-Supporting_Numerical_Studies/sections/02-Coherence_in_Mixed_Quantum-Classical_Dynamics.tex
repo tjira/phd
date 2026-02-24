@@ -62,9 +62,26 @@ Part of the motivation for this section was to analyze how well \acrshort{lzsh} 
 \end{figure}
 These results confirm that the \acrshort{lzsh} method, along with the scattering matrix extension, is correctly implemented and we can move on to analyzing more complex models. The simulations in Fig.~\ref{fig:sh_coherence_comparison} also confirm correct implementation of all the components of nonadiabatic dynamics methods, since the populations match the exact result, as well as the correctness of the exact quantum mechanical results.
 \subsection{Coherence in Avoided Crossing Dynamics}
+To evaluate the performance of the \acrshort{lzsh}, \acrshort{fssh}, and \acrshort{mash} methods in capturing coherence effects, we applied them to a standard avoided crossing model with Hamiltonian
+\begin{equation}
+H^{\symrm{el}}=\begin{pmatrix}
+\frac{1}{2}m\omega^2x^2+\kappa x+\epsilon&\delta\\
+\delta&\frac{1}{2}m\omega^2x^2-\kappa x-\epsilon
+\end{pmatrix},
+\end{equation}
+where $m=1$~a.u., $\omega=1$~a.u., $\kappa=3$~a.u., $\epsilon=4$~a.u., and $\delta=2$~a.u. The system was initialized in the upper state with a Gaussian nuclear wavepacket centered at $x=3$~a.u. with zero momentum. The simulations were performed with 100000 trajectories for each method. The simulations were set up this way so that the system encounters two consecutive avoided crossings, allowing us to analyze the importance of coherence effects in this scenario.
+
+Fig.~\ref{fig:sh_coherence_comparison} presents the time evolution of the Bloch vector components $\sigma_x$, $\sigma_y$, and $\sigma_z$, as well as the coherence magnitude $\sigma_\perp$ obtained from the \acrshort{lzsh}, \acrshort{fssh}, and \acrshort{mash} methods, compared against the exact quantum mechanical results. The results show that all three methods capture the general trend of the population transfer between the two states, as indicated by the agreement in $\sigma_z$. However, there are significant differences in how well they capture the coherence effects.
+
 \begin{figure}[H]
 \centering
 \includegraphics[width=\linewidth]{chapters/04-Supporting_Numerical_Studies/sections/images/SH_COHERENCE_COMPARE}
 \caption{Comparison of the coherences obtained from the \acrshort{lzsh}, \acrshort{fssh}, and \acrshort{mash} against the exact quantum mechanical results for an avoided crossing model.}
 \label{fig:sh_coherence_comparison}
 \end{figure}
+
+The \acrshort{mash} approach exhibits the best agreement with the exact quantum mechanical results for the coherence. This is not unexpected, since \acrshort{mash} is designed to propagate the full Bloch vector, allowing it to capture both the magnitude and phase of the coherence accurately. The \acrshort{fssh} method captures the coherences correctly up until the second avoided crossing, since the relative phase between the states is treated incorrectly after the first crossing. This is also a known issue with \acrshort{fssh}.
+
+The novel approach in \acrshort{tsh}, the usage of scattering matrix $S$ during \acrshort{lzsh} dynamics, captures a general trend of the coherence, but it significantly overestimates the coherence magnitude $\sigma_\perp$ after the first crossing. This could be caused by the fact that the scattering matrix $S$ only accounts for the phase shift during the crossing, but does not account for the phase accumulation during the propagation on the adiabatic surfaces. For this reason, subsequent crossings cannot be described by simply multiplying the scattering matrices of each crossing, since the relative phase between the states at the second crossing would not be correctly captured.
+
+Overall, capturing coherence effects in mixed quantum-classical dynamics is hardly a solved problem. While \acrshort{mash} performs well in this regard, it is not widely used due to its significantly different formalism and absence of a rigorous derivation for multi-state systems. The \acrshort{fssh} method, while widely used, has known issues with capturing coherence effects, especially in scenarios with multiple avoided crossings. The \acrshort{lzsh} method, even with the extension to utilize the full scattering matrix, still struggles to accurately capture coherence effects due to its inherent limitations in describing phase accumulation during propagation. Therefore, further research and development are needed to improve the ability of mixed quantum-classical dynamics methods to capture coherence effects accurately.
