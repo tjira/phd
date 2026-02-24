@@ -36,7 +36,7 @@ where $\Delta t$ is a fixed time step. Now, each individual short-time propagato
 U(\Delta t)=\e^{-\i\frac{\Delta t}{2}\tilde{V}}\e^{-\i\Delta t\tilde{T}_{\symrm{n}}}\e^{-\i\frac{\Delta t}{2}\tilde{V}}+\mathcal{O}(\Delta t^3),
 \end{equation}
 which is valid for small $\Delta t$. Now we have everything we need to propagate the wavefunction in time. The formula for propagating the wavefunction from time $t$ to time $t+\Delta t$ is
-\begin{equation}
+\begin{equation}\label{eq:split_operator_propagation}
 \Psi\left(\symbf{R},t+\Delta t\right)=\e^{-\i\frac{\Delta t}{2}\tilde V}\mathcal{F}^{-1}\left\lbrace\e^{-\i\Delta t\tilde{T}_{\symrm{n}}}\mathcal{F}\left\lbrace\e^{-\i\frac{\Delta t}{2}\tilde V}\Psi\left(\symbf{R},t\right)\right\rbrace\right\rbrace,
 \end{equation}
 where $\tilde{T}_{\symrm{n}}$ is the kinetic operator in the momentum space, and $\tilde{V}$ is the potential operator in the position space. In a discrete grid representation these become matrices acting on the sampled wavefunction.
