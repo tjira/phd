@@ -62,6 +62,6 @@ The simulations had set up a \acrshort{cap} that turns on after the wavefunction
 \centering
 \includegraphics[width=\linewidth]{chapters/04-Supporting_Numerical_Studies/sections/images/TP_TULLY_1}
 \caption{Probabilities of population transfer from the lower state to the upper state in two of the Tully's models\supercite{10.1063/1.459170} as a function of the initial momentum of the wavefunction. The probabilities are calculated at the end of the simulation, after the wavefunction has crossed the nonadiabatic region. The results are compared to the reference results by Tully.\supercite{10.1063/1.459170} The left panel shows the results for the Single Avoided Crossing model, while the right panel shows the results for the Dual Avoided Crossing model.}
-\label{fig:cap_analysis}
+\label{fig:tp_tully_1}
 \end{figure}
 As we can see, the results of our simulations (blue circles) are in excellent agreement with the reference results by Tully (orange line) for both models. This validates our implementation of the Split-Operator method in \textsc{Zinq}, and gives us confidence that we can use it to perform accurate quantum dynamics simulations for a wide range of systems. The small deviations from the reference results can be attributed to the digitalization of the reference results, as well as the fact that we may use different parameters for the simulations (e.g. different grid size, time step, etc.) than those used by Tully. However, these deviations are negligible and do not affect the overall agreement between our results and the reference results.
