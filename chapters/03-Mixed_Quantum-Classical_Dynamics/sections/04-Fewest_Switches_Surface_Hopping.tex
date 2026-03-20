@@ -26,3 +26,24 @@ Should we want to generalize the hopping probabilities to more than two states, 
 P_{J\to I}=\frac{b_{IJ}\Delta t}{\rho_{JJ}},
 \end{equation}
 where in the nominator we have the population flux only from state $J$ to state $I$, ignoring contributions from other states.
+\subsection{Decoherence Correction}
+The \acrshort{fssh} method seemingly provides us two different ways to calculate the population of the electronic states. One is the ensemble-averaged population obtained by counting the number of trajectories on each state, and the other is the quantum mechanical population obtained from the density matrix elements $\rho_{II}$. In an ideal scenario, these two populations should be equal. The \acrshort{tsh} method that satisfies this condition is called internally consistent. In practice, the \acrshort{fssh} method often fails to maintain this internal consistency, meaning that the ensemble-averaged population does not match the quantum mechanical population.\supercite{10.1063/1.474288,10.1063/1.1793991,10.1063/1.471791}
+
+In a truly quantum mechanical picture, when a wavepacket passes through a nonadiabatic coupling region, it can split into multiple components corresponding to different electronic states. These components usually end up evolving independently as they travel into distant regions of the \acrshort{pes}. The truly quantum mechanical time evolution therefore leads to a loss of coherence between the different components of the wavepacket.
+
+Conversely, the \acrshort{fssh} method treats the system as a single point in phase space, which can only be on one electronic state at a time. When a trajectory hops from one state to another, it does not account for the fact that the wavepacket has split and that there should be a loss of coherence between the different components. This leads to an overestimation of the coherence between states, which in turn causes the ensemble-averaged population to deviate from the quantum mechanical population.
+
+To address this issue, various decoherence correction schemes have been proposed. These schemes typically involve introducing a decoherence time scale or a decoherence factor that reduces the coherence between states after a hop occurs.\supercite{10.1063/1.1793991,10.1021/acs.jctc.2c00988,10.1021/jp991602b} We will desribe here a scheme proposed by Granucci and Persico in 2007.\supercite{10.1063/1.2715585}
+
+In this scheme, the electronic coefficients are modified after each integration step to account for the loss of coherence. Suppose the trajectory is currently on state $I$ and we are propagating the electronic coefficients from time $t$ to $t+\Delta t$. After the coefficient integration, we apply the transformation
+\begin{equation}\label{eq:granucci_persico_decoherence}
+c^\prime_J(t+\Delta t)=c_J(t+\Delta t)\exp\left(-\frac{\Delta t}{\tau_{IJ}}\right),\quad J\neq I,
+\end{equation}
+where $\tau_{IJ}$ is the decoherence time scale between states $I$ and $J$ and can be calculated as
+\begin{equation}\label{eq:granucci_persico_decoherence_time_scale}
+\tau_{IJ}=\frac{1}{\lvert E_I-E_J\rvert}\left(1+\frac{C}{E_{\symrm{kin}}}\right),
+\end{equation}where $E_I$ and $E_J$ are the energies of states $I$ and $J$, $E_{\symrm{kin}}$ is the kinetic energy of the trajectory, and $C$ is an empirical parameter that can be adjusted to improve the agreement with quantum mechanical results. To ensure that the total population remains normalized after the transformation, we have to renormalize the current state coefficient as
+\begin{equation}\label{eq:granucci_persico_decoherence_renormalization}
+c^\prime_I(t+\Delta t)=C_I\sqrt{\frac{1-\sum_{J\neq I}\lvert c^\prime_J(t+\Delta t)\rvert^2}{\lvert c_I\rvert^2}}.
+\end{equation}
+Using this decoherence correction scheme, the coherence between states is reduced after each integration step, which helps to maintain the internal consistency of the \acrshort{fssh} method and improve the agreement with quantum mechanical results. However, it is important to note that the choice of the empirical parameter $C$ can significantly affect the results, but we often choose $C=0.1$~Ha as it has been shown to provide good agreement with quantum mechanical results in many cases.\supercite{10.1063/1.1793991}

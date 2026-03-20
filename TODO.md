@@ -1,5 +1,5 @@
 - [ ] Show that the norm and energy is conserved for the variational principles.
 - [ ] Add three-state extension of LZSH at the end of LZSH section.
 - [ ] Reference the reaction video for the stilbene photoisomerization paper.
-- [ ] Describe decoherence correction to FSSH.
+- [x] Describe decoherence correction to FSSH.
 - [ ] Mention DFVP in unpublished results chapter.
