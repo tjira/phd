@@ -13,6 +13,7 @@
 \RequirePackage{subcaption} % subfigures
 \RequirePackage{float} % subfigures
 \RequirePackage[version=4]{mhchem} % chemical formulas
+\RequirePackage{xcolor} % custom colors
 
 \addbibresource{library.bib}\makeglossaries % set the library file and make glossaries
 
@@ -77,3 +78,30 @@
 \newtheorem{theorem}{Theorem}\numberwithin{theorem}{section} % theorem environment
 
 \renewcommand{\i}{\symrm{i}} % imaginary unit
+
+\definecolor{chapdark}{HTML}{0D2B40} % Dark blue for the title and horizontal line
+\definecolor{chapgold}{HTML}{D1A86F} % Gold for the chapter circle
+
+\setkomafont{chapter}{\Huge\bfseries\sffamily\color{chapdark}\raggedright}
+
+\makeatletter
+\renewcommand*{\chapterlinesformat}[3]{
+  \vspace*{-1cm}
+  \begin{tikzpicture}[baseline=(current bounding box.north)]
+    \draw[chapdark,line width=3.5pt] (0,0) -- (\textwidth,0);
+    \Ifstr{#2}{}{}{
+      \node[
+        draw=chapgold,
+        line width=2pt,
+        circle,
+        fill=white,
+        minimum size=3cm,
+        font=\sffamily\large\color{chapdark},
+        inner sep=0pt
+      ] at (\textwidth - 2.5cm,0) {Chapter \thechapter};
+    }
+  \end{tikzpicture}\par
+  \vspace{2ex}
+  {\usekomafont{chapter}#3\par}
+}
+\makeatother
