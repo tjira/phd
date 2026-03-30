@@ -88,7 +88,7 @@
 \renewcommand*{\chapterlinesformat}[3]{
   \vspace*{-1cm}
   \begin{tikzpicture}[baseline=(current bounding box.north)]
-    \draw[chapdark,line width=3.5pt] (0,0) -- (\textwidth,0);
+    \draw[chapdark,line width=3.5pt] (0,0) -- (0.99\textwidth,0);
     \Ifstr{#2}{}{}{
       \node[
         draw=chapgold,
