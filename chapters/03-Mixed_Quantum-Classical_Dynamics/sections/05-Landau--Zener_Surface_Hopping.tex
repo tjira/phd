@@ -57,9 +57,9 @@ Now, we want our final probability to be between 0 and 1, which means that we ha
 \end{figure}
 Both of these contours yield the same result for the final population transfer. Thus, we obtained the final probability of nonadiabatic transition as
 \begin{equation}
-P=\lvert B_f\rvert^2=e^{-2\pi\Gamma},
+P=\lvert B_f\rvert^2=e^{-2\pi\delta},
 \end{equation}
-where $\Gamma=\frac{g^2}{4\alpha}$. Since we have defined the population transfer probability as the final population of state $\ket{\tilde{\phi}_1}$ given that the system started in state $\ket{\tilde{\phi}_2}$, in surface hopping simulations, we can use this probability to determine whether a surface hop occurs when the nuclear trajectory passes through the crossing region.
+where $\delta=\frac{g^2}{4\alpha}$. Since we have defined the population transfer probability as the final population of state $\ket{\tilde{\phi}_1}$ given that the system started in state $\ket{\tilde{\phi}_2}$, in surface hopping simulations, we can use this probability to determine whether a surface hop occurs when the nuclear trajectory passes through the crossing region.
 \subsection{The Adiabatic Landau--Zener Formula}
 In practical applications, we usually do not have access to the diabatic representation of the electronic states. Therefore, it is useful to express the Landau--Zener formula in the adiabatic representation. To do this, we need to first express the Hamiltonian in Eq~\eqref{eq:landau_zener_hamiltonian} in the adiabatic representation as
 \begin{equation}
