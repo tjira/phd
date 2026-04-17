@@ -1,7 +1,7 @@
 \section{\filetotitle}\label{sec:variational_principles_eom}
 Having introduced the variational principles in the previous section, we now apply them to derive equations of motion for specific variational ansatz. We will focus on various Gaussian-based ansatz, which are widely used in quantum dynamics simulations due to their computational efficiency and ability to capture essential features of wavepacket evolution. We will also discuss the extension of these methods to non-adiabatic dynamics, where multiple electronic states are involved.
 \subsection{Single Gaussian Wavepacket Ansatz}
-We start with the simplest case of a single Gaussian wavepacket, which we will denote as $\ket{\Psi(t)}=\ket{G(\symbf{\alpha}(t))}$, where $\symbf{\alpha}(t)$ represents the set of parameters defining the Gaussian (e.g., center position, momentum, width). The gaussian wavepacket we will use can be expressed as
+We start with the simplest case of a single Gaussian wavepacket, which we will denote as $\ket{\Psi(t)}=\ket{G(\symbf{\alpha}(t))}$, where $\symbf{\alpha}(t)$ represents the set of parameters defining the Gaussian (e.g., center position, momentum, width). The Gaussian wavepacket we will use can be expressed as
 \begin{equation}
 \ket{G(\symbf{\alpha}(t))}=N\exp\left[\sum_j^D\left(-\frac{1}{2}\gamma_j(t)\left(R_j-q_j(t)\right)^2+\i p_j(t)\left(R_j-q_j(t)\right)\right)+\i\phi(t)\right],
 \end{equation}
@@ -37,7 +37,7 @@ Plugging this back into Eq.~\ref{eq:gaussian_eom_p}, we get
 \begin{equation}
 \dot p-\i\gamma\dot q=-\frac{\i\gamma p}{m}-\frac{\braket{(R-q)V}}{\braket{(R-q)^2}}=-\frac{\i\gamma p}{m}-\Braket{\frac{\partial V}{\partial R}}.
 \end{equation}
-where we have uset the Stein's lemma to evaluate $\braket{(R-q)V}$. Now, we would like to separate the equation into one equation for $\dot p$ and one for $\dot q$. Since $q$ and $p$ are real-valued parameters, we can take the real and imaginary parts of the above equation to get
+where we have used the Stein's lemma to evaluate $\braket{(R-q)V}$. Now, we would like to separate the equation into one equation for $\dot p$ and one for $\dot q$. Since $q$ and $p$ are real-valued parameters, we can take the real and imaginary parts of the above equation to get
 \begin{align}
 \dot q&=\frac{p}{m},\\
 \dot p&=-\Braket{\frac{\partial V}{\partial R}}.
@@ -80,4 +80,72 @@ which can be easily derived using the Stein's lemma. Putting everything together
 \end{equation}
 which shows that the width of the Gaussian wavepacket evolves according to a balance between the kinetic energy, which tends to spread the wavepacket, and the curvature of the potential energy surface, which can either focus or defocus the wavepacket depending on its sign.
 \subsection{Variational Multiconfigurational Gaussian (vMCG) Approach}
+The \acrshort{vmcg} approach extends the single Gaussian wavepacket ansatz to a linear combination of multiple Gaussian wavepackets, allowing for a more flexible representation of the wavefunction. In this approach, we slightly modify the ansatz of the Gaussian and remove the global phase factor, as it can be absorbed into the coefficients of the linear combination. The \acrshort{vmcg} ansatz can be expressed as
+\begin{equation}
+\ket{\Psi(t)}:=\sum_{j=1}^N c_j(t)\ket{G_j(\symbf{\alpha}_j(t))},
+\end{equation}
+where $N$ is the number of Gaussian wavepackets, $c_j(t)$ are the time-dependent coefficients, and
+\begin{equation}\label{eq:vmcg_gaussian_wavepacket}
+\ket{G_j(\symbf{\alpha}_j(t))}=N_j\exp\left[\sum_{k=1}^D\left(-\frac{1}{2}\gamma_{jk}(t)\left(R_k-q_{jk}(t)\right)^2+\i p_{jk}(t)\left(R_k-q_{jk}(t)\right)\right)\right].
+\end{equation}
+In the derivations below, we will again assume one nuclear degree of freedom for simplicity, but the generalization to multiple dimensions is straightforward. We will not split this section into frozen and thawed Gaussian cases, as the equations of motion for the parameters will have the same form in both cases.
+
+To derive the equations of motion for the parameters, we will again apply the \acrshort{dfvp} and project onto the tangent space defined by the derivatives of the wavefunction with respect to these parameters. We will start with the projection onto the coefficients $c_j(t)$. The derivative of the wavefunction with respect to $c_j(t)$ is simply the corresponding Gaussian wavepacket, i.e., $\ket{\delta\Psi}=\ket{G_j}$. Applying the \acrshort{dfvp}, we get
+\begin{align}
+\braket{G_j|\dot\Psi+\i H\Psi}&=0\\
+\sum_{k=1}^N\left(\dot c_k\braket{G_j|G_k}+c_k\braket{G_j|\dot G_k}+\i c_k\braket{G_j|H|G_k}\right)&=0.
+\end{align}
+Defining $S_{jk}=\braket{G_j|G_k}$, $\tau_{jk}=\braket{G_j|\dot G_k}$ and $H_{jk}=\braket{G_j|H|G_k}$, we can rewrite the above equation in a more compact form as
+\begin{equation}
+\i\symbf{S}\dot{\symbf{c}}=(\symbf{H}-\i\symbf{\tau})\symbf{c},
+\end{equation}
+where $\symbf{c}$ is the vector of coefficients $c_j(t)$. Obtaining the \acrshort{eom} for the center positions $q_j(t)$ and momenta $p_j(t)$ is more involved, as we need to consider the projection onto the derivatives of the wavefunction with respect to all Gaussian parameters. Applying the \acrshort{dfvp} and projecting onto the derivative with respect to $\alpha_{j,l}$, we get
+\begin{equation}
+\sum_{k=1}^Nc_j^\ast\left(\dot c_k\Braket{\frac{\partial G_j}{\partial\alpha_{j,l}}|G_k}+c_k\Braket{\frac{\partial G_j}{\partial \alpha_{j,l}}|\dot G_k}+\i c_k\Braket{\frac{\partial G_j}{\partial \alpha_{j,l}}|H|G_k}\right)=0.
+\end{equation}
+Expanding $\dot G_k$ in terms of the derivatives with respect to the parameters, we can express it as
+\begin{equation}
+\ket{\dot G_k}=\sum_{\beta\in\symbf{\alpha}_k}\dot\alpha_{k,\beta}\Ket{\frac{\partial G_k}{\partial \alpha_{k,\beta}}},
+\end{equation}
+which allows us to rewrite the above equation as
+\begin{equation}
+\sum_{k=1}^N\sum_{\beta\in\symbf{\alpha}_k}c_j^\ast c_k\Braket{\frac{\partial G_j}{\partial\alpha_{j,l}}|\frac{\vphantom{G_j}\partial G_k}{\partial\alpha_{k,\beta}}}\dot\alpha_{k,\beta}=-\sum_{k=1}^Nc_j^\ast\left(\dot c_k\Braket{\frac{\partial G_j}{\partial\alpha_{j,l}}|G_k}+\i c_k\Braket{\frac{\partial G_j}{\partial\alpha_{j,l}}|H|G_k}\right).
+\end{equation}
+By identifying the density matrix $\rho_{jk}=c_j^\ast c_k$, we define
+\begin{align}
+C_{jl,k\beta}&=\rho_{jk}\Braket{\frac{\partial G_j}{\partial \alpha_{j,l}}|\frac{\vphantom{G_j}\partial G_k}{\partial\alpha_{k,\beta}}},\\
+Y_{jl}&=-\sum_{k=1}^Nc_j^\ast\left(\dot c_k\Braket{\frac{\partial G_j}{\partial\alpha_{j,l}}|G_k}+\i c_k\Braket{\frac{\partial G_j}{\partial\alpha_{j,l}}|H|G_k}\right),
+\end{align}
+which allows us to express the equations of motion for all the parameters $\symbf{\alpha}$ in a compact form as
+\begin{equation}\label{eq:vmcg_eom_lambda}
+\symbf{C}\dot{\symbf{\alpha}}=\symbf{Y},
+\end{equation}
+where the vector $\symbf{\alpha}$ includes all the parameters for all the Gaussian wavepackets, i.e., $\symbf{\alpha}=\lbrace\symbf{\alpha}_1,\symbf{\alpha}_2,\dots,\symbf{\alpha}_N\rbrace$.
+
+It is important to note the mathematical consequence of Eq~\eqref{eq:vmcg_eom_lambda}. Because the matrix $\symbf{C}$ and vector $\symbf{Y}$ are complex-valued, directly solving the linear system for strictly real parameters (such as the position $q_j$ and momentum $p_j$) will yield complex parameter velocities $\dot{q}_j$ and $\dot{p}_j$. This is a limitation of the \acrshort{dfvp} when applied to real-valued parameters, as it provides two distinct constraints (the real and imaginary parts of the equation) for each real parameter, resulting in an overdetermined system. If integrated directly, the position and momentum parameters will drift into the complex plane. While the resulting equations of motion are mathematically consistent, this drift is physically meaningless. To overcome this issue, various strategies have been proposed in the literature. One such strategy is utilizing the McLachlan variational principle (discussed in Sec~\ref{sec:mclachlan_variational_principle}) instead of the \acrshort{dfvp}, which minimizes the norm of the error. Another strategy involves introducing a single complex-valued parameter that combines the position and momentum parameters into a coherent state representation.
 \subsection{Extension to Non-Adiabatic Dynamics: The Single-Set Formulation}
+In the sections above, we have always considered the dynamics on a single potential energy surface. But since this thesis is focused on methods for nonadiabatic dynamics, we will now discuss how to extend these Gaussian-based methods to the case where multiple electronic states are involved. The simplest way to do this is to use a single-set formulation, where we assume that all the Gaussian wavepackets share the same set of parameters $\symbf{\alpha}(t)$, but have different coefficients for each electronic state. This leads to the following ansatz for the wavefunction
+\begin{equation}
+\ket{\Psi(t)}=\sum_{s=1}^{N_s}\sum_{j=1}^{N_g} c_{s,j}(t)\ket{G_j(\symbf{\alpha}(t))}\otimes\ket{s},
+\end{equation}
+where $N_s$ is the number of electronic states, $N_g$ is the number of Gaussian wavepackets, $\ket{s}$ are the electronic state basis functions, and $\ket{G_j(\symbf{\alpha}(t))}$ are the same Gaussian wavepackets as in Eq~\eqref{eq:vmcg_gaussian_wavepacket}. When we project the Schr\"odinger equation onto variation with respect to the coefficients, we obtain
+\begin{align}
+\bra{s}\otimes\braket{G_j|\dot\Psi+\i H\Psi}&=0\\
+\sum_{k=1}^{N_g}\left(\dot c_{s,k}\braket{G_j|G_k}+c_{s,k}\braket{G_j|\dot G_k}\right)&=-\i\sum_{\vphantom{k}u=1}^{\vphantom{N_g}N_s}\sum_{k=1}^{N_g}c_{u,k}\braket{G_j|H_{su}|G_k},
+\end{align}
+where $H_{su}=\bra{s}H\ket{u}$ are the matrix elements of the Hamiltonian in the electronic state basis. Defining $S_{jk}=\braket{G_j|G_k}$, $\tau_{jk}=\braket{G_j|\dot G_k}$ and $H_{su,jk}=\braket{G_j|H_{su}|G_k}$, we can rewrite the above equation in a more compact form as
+\begin{equation}
+\i\symbf{S}\dot{\symbf{c}}_s=\sum_{u=1}^{N_s}\symbf{H}_{su}\symbf{c}_u-\i\symbf{\tau}\symbf{c}_s,
+\end{equation}
+where $\symbf{c}_s$ is the vector of coefficients for the $s$-th electronic state. As we can see, the equations are similar to the single-state case, but now we have coupling between different electronic states through the Hamiltonian matrix elements $\symbf{H}_{su}$.
+
+As for the equations of motion for the parameters $\symbf{\alpha}(t)$, they will have the same form as in the single-state case, but now the matrix $\symbf{Y}$ will include contributions from all electronic states. Specifically, we get
+\begin{align}
+C_{jl,k\beta}&=\rho_{jk}\Braket{\frac{\partial G_j}{\partial \alpha_{j,l}}|\frac{\vphantom{G_j}\partial G_k}{\partial\alpha_{k,\beta}}},\\
+Y_{jl}&=-\sum_{\vphantom{k}s=1}^{\vphantom{N_g}N_s}\sum_{k=1}^{N_g}c_{s,j}^\ast\left(\dot c_{s,k}\Braket{\frac{\partial G_j}{\partial\alpha_{j,l}}|G_k}+\i\sum_{u=1}^{N_s}c_{u,k}\Braket{\frac{\partial G_j}{\partial\alpha_{j,l}}|H_{su}|G_k}\right),
+\end{align}
+which allows us to express the equations of motion for the parameters $\symbf{\alpha}$ for the \acrshort{ssvmcg} method in a compact form as
+\begin{equation}\label{eq:ssvmcg_eom_lambda}
+\symbf{C}\dot{\symbf{\alpha}}=\symbf{Y}.
+\end{equation}
+These equations of motion for the parameters $\symbf{\alpha}(t)$ are similar to those in the single-state case, but now they include contributions from all electronic states through the coefficients $c_{s,j}(t)$ and the Hamiltonian matrix elements $H_{su,jk}$. As in the single-state case, we will encounter the same issue of complex-valued parameter velocities when directly applying the \acrshort{dfvp} to real-valued parameters. Therefore, similar strategies can be employed to ensure that the parameters remain physically meaningful throughout the evolution.
