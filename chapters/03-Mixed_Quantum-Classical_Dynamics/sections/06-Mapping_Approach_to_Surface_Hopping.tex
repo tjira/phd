@@ -21,7 +21,7 @@ The electronic variables evolve analogously to a classical spin in an effective 
 \end{equation}
 where $\sigma_{21}$ is the \acrfull{tdc} between the two adiabatic states defined in Eq.~\eqref{eq:tdc_nacv}.
 
-The equations of motion for the nuclei are obtained by enforcing the strict conservation of the total \acrshort{mash} energy $\left(\frac{\symrm{d}E(\symbf{R})}{\dt}=0\right)$. Taking the total time derivative of Eq.~\ref{eq:mash_energy} and utilizing the relation $\ddt\symrm{sgn}(x) = 2\delta(x)\dot{x}$, the \acrshort{mash} nuclear force is given as
+The equations of motion for the nuclei are obtained by enforcing the strict conservation of the total \acrshort{mash} energy $\left(\frac{\symrm{d}E(\symbf{R})}{\dt}=0\right)$. Taking the total time derivative of Eq.~\eqref{eq:mash_energy} and utilizing the relation $\ddt\symrm{sgn}(x) = 2\delta(x)\dot{x}$, the \acrshort{mash} nuclear force is given as
 \begin{equation}\label{eq:mash_force}
 F^{\symrm{MASH}}(\symbf{R},\symbf{S})=-\nabla_{\symbf{R}}\overline{E}(\symbf{R})-\nabla_{\symbf{R}}\Delta E(\symbf{R})\symrm{sgn}(S_z)+4\Delta E(\symbf{R})\symbf{d}_{12}(\symbf{R})S_x\delta(S_z),
 \end{equation}
@@ -29,7 +29,7 @@ where $\symbf{d}_{12}(\symbf{R})$ is the \acrfull{nacv} between the two adiabati
 \subsection{Deterministic Surface Hopping and Momentum Rescaling}\label{sec:mash_hopping}
 Unlike \acrshort{fssh}, where surface hops are determined by evaluating stochastic probabilities along the trajectory, \acrshort{mash} transitions are entirely deterministic. A hop occurs precisely when the electronic trajectory crosses the equator of the spin-sphere ($S_z=0$). 
 
-At the exact moment of an equator crossing, the $\delta(S_z)$ term in Eq.~\ref{eq:mash_force} applies an instantaneous momentum impulse to the nuclei. This impulse acts strictly along the direction of the nonadiabatic coupling vector $\symbf{d}_{12}(\symbf{R})$, rigorously preserving energy without the need for ad-hoc directional prescriptions. During a successful hop, the momentum is instantaneously updated to strictly conserve the total energy as
+At the exact moment of an equator crossing, the $\delta(S_z)$ term in Eq.~\eqref{eq:mash_force} applies an instantaneous momentum impulse to the nuclei. This impulse acts strictly along the direction of the nonadiabatic coupling vector $\symbf{d}_{12}(\symbf{R})$, rigorously preserving energy without the need for ad-hoc directional prescriptions. During a successful hop, the momentum is instantaneously updated to strictly conserve the total energy as
 \begin{equation}
 \frac{\tilde{p}_{\symrm{fin}}^2}{2M}=\frac{\tilde{p}_{\symrm{init}}^2}{2M}+2\Delta E(\symbf{R})\symrm{sgn}(\tilde{p}_{\symrm{init}}S_x),
 \end{equation}
