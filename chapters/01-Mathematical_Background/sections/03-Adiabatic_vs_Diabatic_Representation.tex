@@ -7,7 +7,7 @@ H=T_{\symrm{n}}+H_{\symrm{el}},
 \end{equation}
 where $T_{\symrm{n}}$ is the nuclear kinetic energy operator and $H_{\symrm{el}}$ contains the electronic kinetic energy and all Coulomb interactions, with the nuclei treated as fixed at positions $\symbf{R}$.
 
-For each fixed nuclear configuration $\symbf{R}$ we can solve the electronic Schr\"odinger equation
+For each fixed nuclear configuration $\symbf{R}$ we can solve the electronic \acrfull{tise}
 \begin{equation}
 H_{\symrm{el}}\ket{\phi_I(\symbf{R})}=E_I(\symbf{R})\ket{\phi_I(\symbf{R})},
 \end{equation}
@@ -27,15 +27,15 @@ H_{\symrm{el}}\ket{\phi_I(\symbf{R})}=E_I(\symbf{R})\ket{\phi_I(\symbf{R})},
 \end{equation}
 so the electronic Hamiltonian is diagonal in this basis.
 
-Inserting the expansion in Eq.~\eqref{eq:boa_expansion} into the time-dependent Schr\"odinger equation and projecting onto $\bra{\phi_I(\symbf{R})}$ yields coupled equations for the nuclear wavefunctions $\ket{\chi_I(\symbf{R},t)}$. These contain the potential energy surfaces $E_I(\symbf{R})$ and additional terms that arise from the nuclear kinetic energy acting on the $\symbf{R}$-dependent electronic states
+Inserting the expansion in Eq.~\eqref{eq:boa_expansion} into the \acrshort{tdse} and projecting onto $\bra{\phi_I(\symbf{R})}$ yields coupled equations for the nuclear wavefunctions $\ket{\chi_I(\symbf{R},t)}$. These contain the \glspl{pes} $E_I(\symbf{R})$ and additional terms that arise from the nuclear kinetic energy acting on the $\symbf{R}$-dependent electronic states
 \begin{equation}
 \i\frac{\partial}{\partial{t}}\ket{\chi_I(\symbf{R},t)}=\left[T_{\symrm{n}}+E_I(\symbf{R})\right]\ket{\chi_I(\symbf{R},t)}+\sum_JC_{IJ}(\symbf{R})\,\ket{\chi_J(\symbf{R},t)},
 \end{equation}
 where operator $C_{IJ}(\symbf{R})$ contains all the derivative coupling terms arising from the application of $T_{\symrm{n}}$ on the full wavefunction $\ket{\Psi(\symbf{R},\symbf{r},t)}$.
 
-Physically, the adiabatic representation has two key features. The electronic Hamiltonian is diagonal which means that each $E_I(\symbf{R})$ defines a potential energy surface on which the nuclei move. And second, nonadiabatic effects appear as derivative couplings in the nuclear kinetic energy, encoded in $C_{IJ}(\symbf{R})$.
+Physically, the adiabatic representation has two key features. The electronic Hamiltonian is diagonal which means that each $E_I(\symbf{R})$ defines a \acrshort{pes} on which the nuclei move. And second, nonadiabatic effects appear as derivative couplings in the nuclear kinetic energy, encoded in $C_{IJ}(\symbf{R})$.
 
-The adiabatic picture is particularly intuitive far from avoided crossings or conical intersections, where the nuclei move approximately on a single surface $E_I(\symbf{R})$. Near regions where surfaces approach or intersect, the derivative couplings become large and the adiabatic representation can become numerically inconvenient.
+The adiabatic picture is particularly intuitive far from avoided crossings or \acrfull{ci}, where the nuclei move approximately on a single surface $E_I(\symbf{R})$. Near regions where surfaces approach or intersect, the derivative couplings become large and the adiabatic representation can become numerically inconvenient.
 \subsection{Diabatic Representation}\label{sec:diabatic_representation}
 In the diabatic representation one chooses a different set of electronic basis functions $\{\ket{\tilde\phi_\alpha(\symbf{R})}\}$, related to the adiabatic states by an $\symbf{R}$-dependent unitary transformation
 \begin{equation}\label{eq:unitary_transform}
@@ -49,7 +49,7 @@ The defining property of an ideal diabatic basis is that the derivative coupling
 \end{equation}
 for all $\alpha,\beta$ (or at least for those states of interest). In such a basis, the nuclear kinetic energy operator acts trivially on the electronic functions and there are no derivative (nonadiabatic) couplings.
 
-However, removing the derivative couplings in this way introduces off-diagonal elements into the potential energy matrix. The nuclear Schr\"odinger equation in the diabatic representation then has the form
+However, removing the derivative couplings in this way introduces off-diagonal elements into the potential energy matrix. The nuclear \acrshort{tdse} in the diabatic representation then has the form
 \begin{equation}
 \i\frac{\partial}{\partial{t}}\ket{\tilde\chi_\alpha(\symbf{R},t)}=\tilde{T}_{\symrm{n}}\ket{\tilde\chi_\alpha(\symbf{R},t)}+\sum_\beta\tilde{V}_{\alpha\beta}(\symbf{R})\ket{\tilde\chi_\beta(\symbf{R},t)},
 \end{equation}
@@ -57,9 +57,9 @@ The $\tilde{V}$ term is equivalent to the electronic Hamiltonian in Eq.~\eqref{e
 
 Physically, the diabatic representation has the following features. First, the nuclear kinetic energy is diagonal and free of derivative couplings (or they are at least minimized). Second, the electronic couplings appear as smooth off-diagonal potentials in $\tilde{V}(\symbf{R})$.
 
-This is often advantageous for constructing low-dimensional model Hamiltonians and for simulating nonadiabatic dynamics, since the diabatic potentials can be chosen to vary smoothly through avoided crossings and conical intersections.
+This is often advantageous for constructing low-dimensional model Hamiltonians and for simulating nonadiabatic dynamics, since the diabatic potentials can be chosen to vary smoothly through avoided crossings and \glspl{ci}.
 
-In general, a globally exact diabatic basis free of derivative couplings may not exist due to topological obstructions (e.g. around conical intersections). In practice, one works with quasi-diabatic representations where the derivative couplings are small but not exactly zero.
+In general, a globally exact diabatic basis free of derivative couplings may not exist due to topological obstructions (e.g. around \glspl{ci}). In practice, one works with quasi-diabatic representations where the derivative couplings are small but not exactly zero.
 \subsection{Adiabatic Transform}\label{sec:adiabatic_transform}
 The nuclear wavefunctions in the two representations are related by the same unitary transformation $U(\symbf{R})$ that relates the electronic bases. Writing the total wavefunction as
 \begin{equation}
