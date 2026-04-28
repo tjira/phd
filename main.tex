@@ -12,7 +12,7 @@
 \usepackage{style}
 \input{frontmatter/functions}
 \begin{document}
-\include{frontmatter/titlepage}
+\directlua{if os.getenv("ENTRY") == "1" then tex.print("\\includepdf[pages=-]{frontmatter/pdf/entry}") end}
 \include{frontmatter/acknowledgements}
 \include{frontmatter/abstract}
 \tableofcontents

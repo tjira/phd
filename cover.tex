@@ -1,0 +1,32 @@
+% arara: setup
+% arara: lualatex: {options: ["--output-directory=build"]}
+% arara: move: {files: ["build/cover.pdf"], target: "cover.pdf"}
+\documentclass{article}
+\usepackage{fontspec}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{pdfpages}
+
+\setmainfont{Libertinus Serif}
+\setsansfont{Libertinus Sans}
+
+\geometry{paperwidth=460mm, paperheight=305mm, margin=0mm}
+
+\begin{document}
+\noindent
+\hspace*{210mm}
+\begin{minipage}[c][305mm]{40mm}
+    \rotatebox{90}{\makebox[260mm]{\hspace{40mm} Ing. Tomáš Jíra \hfill DISSERTATION \hspace{40mm} \Large Prague 2026\hspace{40mm}}}
+\end{minipage}
+\begin{minipage}[c][305mm]{210mm}
+    \centering
+    \vspace*{30mm}
+    {\LARGE UNIVERSITY OF \\ CHEMISTRY AND TECHNOLOGY PRAGUE\\[5mm]}
+    {\Large Faculty of Chemical Engineering\\[30mm]}
+    {\Huge \textbf{Computational Strategies \\ for Nonadiabatic \\ Molecular Dynamics}\\[30mm]}
+    {\LARGE DISSERTATION\\[30mm]}
+    {\Large Ing. Tomáš Jíra \\[5mm] Prague 2026}
+\end{minipage}
+\newpage
+\includepdf[pages=-]{frontmatter/pdf/cover}
+\end{document}
