@@ -1,5 +1,5 @@
 \section{\filetotitle}\label{sec:vector_spaces_and_linear_operators}
-Many concepts in quantum mechanics rest on the algebra of vector spaces and the action of linear operators. We review what is needed here. More complete accounts can be found in standard linear algebra and functional analysis texts. Throughout, the scalar field is a general field $F$, but in quantum mechanics we take $F=\mathbb{C}$ unless stated otherwise.
+Many concepts in quantum mechanics rest on the algebra of vector spaces and the action of linear operators. We review what is needed here. More complete accounts can be found in standard linear algebra and functional analysis texts.\supercite{1406837723,633612145} Throughout, the scalar field is a general field $F$, but in quantum mechanics we take $F=\mathbb{C}$ unless stated otherwise.
 \subsection{Vector Spaces and Basic Properties}\label{sec:vector_spaces_basic_properties}
 To move beyond the familiar Euclidean spaces, we first define the abstract concept of a vector space. Without vector spaces, we cannot formally describe quantum states or operators. Let's begin with the definition.
 \begin{definition}[Vector Space]
@@ -15,7 +15,7 @@ A vector space $(V,+,\cdot)$ over a field $F$ is a non-empty set that is closed 
 \item Distributivity of scalar multiplication with respect to field addition: $(a+b)\symbf{u}=a\symbf{u}+b\symbf{u}$
 \end{enumerate}
 \end{definition}
-These axioms are necessary for a set to be considered a vector space. In quantum mechanics, the vector space axioms (especially the closure under addition and scalar multiplication) are manifestations of the superposition principle. If two vectors are valid quantum states (see Sec.~\ref{sec:hilbert_spaces_and_quantum_states}), then every linear combination of them is also a valid quantum state. Examples of vector spaces include the Euclidean space $\mathbb{R}^n$, the set of all functions with continuous $m$-th derivatives $C^m(\mathbb{R}^n)$ or $C^\infty(\mathbb{R}^n)$, which is the set of all infinitely differentiable functions on $\mathbb{R}^n$. In this thesis we will usually work in Hilbert spaces, which will be described in more detail in the next section.
+These axioms are necessary for a set to be considered a vector space. In quantum mechanics, the vector space axioms (especially the closure under addition and scalar multiplication) are manifestations of the superposition principle.\supercite{1156991840} If two vectors are valid quantum states (see Sec.~\ref{sec:hilbert_spaces_and_quantum_states}), then every linear combination of them is also a valid quantum state. Examples of vector spaces include the Euclidean space $\mathbb{R}^n$, the set of all functions with continuous $m$-th derivatives $C^m(\mathbb{R}^n)$ or $C^\infty(\mathbb{R}^n)$, which is the set of all infinitely differentiable functions on $\mathbb{R}^n$. In this thesis we will usually work in Hilbert spaces, which will be described in more detail in the next section.
 
 Before we can use vector spaces effectively, we must identify and characterize smaller structures that inherit their properties. These are known as subspaces.
 \begin{definition}[Subspace]
@@ -73,7 +73,7 @@ An inner product on a vector space $V$ over a field $F$ is a function $\langle\c
 \item Positive-definiteness: $\langle\symbf{u},\symbf{u}\rangle\geq 0$, with equality if and only if $\symbf{u}=\symbf{0}$
 \end{enumerate}
 \end{definition}
-The linearity in second argument and conjugate symmetry together imply conjugate-linearity in the first argument. We note here that we use the definition that is commonly used un quantum mechanics. Mathematicians often require linearity in the first argument and conjugate-linearity in the second argument. For real vector spaces, the conjugate symmetry reduces to ordinary symmetry. The inner product induces a norm (or length) of a vector $\symbf{u}$ defined by
+The linearity in second argument and conjugate symmetry together imply conjugate-linearity in the first argument. We note here that we use the definition that is commonly used un quantum mechanics.\supercite{1164152357,633612145} Mathematicians often require linearity in the first argument and conjugate-linearity in the second argument. For real vector spaces, the conjugate symmetry reduces to ordinary symmetry. The inner product induces a norm (or length) of a vector $\symbf{u}$ defined by
 \begin{equation}
 \lvert\symbf{u}\rvert=\sqrt{\langle\symbf{u},\symbf{u}\rangle}.
 \end{equation}
@@ -83,7 +83,7 @@ The inner product gives rise to two key inequalities that determine much of the 
 \begin{equation}
 \lvert\langle\symbf{u},\symbf{v}\rangle\rvert\leq\lvert\symbf{u}\rvert\lvert\symbf{v}\rvert.
 \end{equation}
-This inequality ensures that the angle between two vectors is well-defined and implies the triangle inequality for the induced norm. A vector space equipped with an inner product is called an inner product space. Together, these results ensure that the norm induced by an inner product satisfies all metric axioms, endowing the space with a well-defined notion of distance. Thus, every inner product space is a normed vector space, although the converse is not generally true. We add one final definition that will become important when we discuss infinite-dimensional spaces in the following subsection.
+This inequality ensures that the angle between two vectors is well-defined and implies the triangle inequality for the induced norm. A vector space equipped with an inner product is called an inner product space. Together, these results ensure that the norm induced by an inner product satisfies all metric axioms, endowing the space with a well-defined notion of distance.\supercite{633612145} Thus, every inner product space is a normed vector space, although the converse is not generally true. We add one final definition that will become important when we discuss infinite-dimensional spaces in the following subsection.
 \begin{definition}[Complete Vector Space]
 Let $(V,\lvert\cdot\rvert)$ be a normed vector space. A sequence $\lbrace\symbf{v}_n\rbrace$ in $V$ is called a Cauchy sequence if for every $\epsilon>0$, there exists an integer $N$ such that $\lvert\symbf{v}_m-\symbf{v}_n\rvert<\epsilon$ for all $m,n>N$. The space $V$ is said to be complete if every Cauchy sequence in $V$ converges to a limit that is also in $V$. A complete normed vector space is called a Banach space.
 \end{definition}
@@ -118,7 +118,7 @@ It is customary to choose a normalized representative $\ket{\psi}$ with
 \begin{equation}
 \braket{\psi\vert\psi}=1,
 \end{equation}
-in which case $\ket{\psi}$ is called a (normalized) state vector. The overall phase $e^{i\theta}\ket{\psi}$ has no observable physical effect.
+in which case $\ket{\psi}$ is called a (normalized) state vector. The overall phase $e^{i\theta}\ket{\psi}$ has no observable physical effect. For a more complete bridge Hilbert space and quantum states, see Ref.~\cite{1021172445}.
 
 In most physical applications one assumes that $\mathcal{H}$ is separable, i.e. it possesses a countable orthonormal basis $\lbrace\ket{n}\rbrace_{n\in\mathbb{N}_0}$. Any vector $\ket{\psi}\in\mathcal{H}$ can then be then expanded as
 \begin{equation}

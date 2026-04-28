@@ -5,7 +5,7 @@ For a time-independent Hamiltonian, the solution to the \acrshort{tdse} can be w
 \begin{equation}\label{eq:tdse_propagator}
 \ket{\Psi\left(t\right)}=\e^{-\i tH}\ket{\Psi\left(0\right)}.
 \end{equation}
-The action of the operator $\e^{-\i tH}$ on the initial wavefunction $\ket{\Psi\left(0\right)}$ propagates the state from time $0$ to time $t$, carrying all the information about the time evolution of the system. Since $H$ is self-adjoint, the spectral theorem yields a unitary propagator, ensuring $\lvert\Psi(t)\rvert=\lvert\Psi(0)\rvert$. This exponential operator contains the complete description of how the system evolves with time. In practical applications, however, evaluating $\e^{-\i tH}$ analytically is rarely straightforward for nontrivial Hamiltonians, which is exactly the problem the Split-Operator method solves.
+The action of the operator $\e^{-\i tH}$ on the initial wavefunction $\ket{\Psi\left(0\right)}$ propagates the state from time $0$ to time $t$, carrying all the information about the time evolution of the system. Since $H$ is self-adjoint, the spectral theorem yields a unitary propagator, ensuring $\lvert\Psi(t)\rvert=\lvert\Psi(0)\rvert$. This exponential operator contains the complete description of how the system evolves with time. In practical applications, however, evaluating $\e^{-\i tH}$ analytically is rarely straightforward for nontrivial Hamiltonians, which is exactly the problem the Split-Operator method, originally utilized by Feit and Fleck, solves.\supercite{10.1063/1.447051}
 
 For an N-state system, the wavefunction in the diabatic basis can be written as
 \begin{equation}\label{eq:diabatic_wavefunction}
@@ -41,12 +41,7 @@ which is valid for small $\Delta t$. Now we have everything we need to propagate
 \end{equation}
 where $\tilde{T}_{\symrm{n}}$ is the kinetic operator in the momentum space, and $\tilde{V}$ is the potential operator in the position space. In a discrete grid representation these become matrices acting on the sampled wavefunction.
 \subsection{Crank--Nicolson Scheme}\label{sec:crank_nicolson_scheme}
-The Split-Operator method in Sec.~\ref{sec:split_operator_method} exploits the simple action
-of the kinetic and potential operators in Fourier and position representation, respectively,
-and approximates the short-time propagator by a symmetric factorization of
-$\e^{-\i\Delta t H}$. An alternative widely used time-integration scheme is the
-Crank--Nicolson method, which can be viewed as applying a rational (Padé) approximation to
-the propagator.
+The Split-Operator method in Sec.~\ref{sec:split_operator_method} exploits the simple action of the kinetic and potential operators in Fourier and position representation, respectively, and approximates the short-time propagator by a symmetric factorization of $\e^{-\i\Delta t H}$. An alternative widely used time-integration scheme is the Crank--Nicolson method, which can be viewed as applying a rational (Padé) approximation to the propagator. This method was originally developed for solving the heat equation by Crank and Nicolson.\supercite{10.1017/S0305004100023197}
 
 We again consider the \acrshort{tdse} for a time-independent, self-adjoint Hamiltonian $H$,
 \begin{equation}\label{eq:tdse_cn}
@@ -77,7 +72,7 @@ U_{\symrm{CN}}(\Delta t)=\e^{-\i\Delta t H}+\mathcal{O}(\Delta t^3).
 \end{equation}
 Because $H$ is self-adjoint, $U_{\symrm{CN}}(\Delta t)$ is unitary so that $\lvert\Psi^{n+1}\rvert=\lvert\Psi^n\rvert$ and the total probability is conserved, as required by the unitary time evolution discussed in Sec.~\ref{sec:spectral_theory_in_hilbert_spaces}.
 \subsection{Imaginary Time Propagation}\label{sec:imaginary_time_propagation}
-Imaginary time propagation is a numerical technique for obtaining the ground state of a quantum system by evolving it in imaginary time instead of real time. By replacing the real time variable by an imaginary one, contributions from higher-energy eigenstates are suppressed exponentially faster than that of the ground state, so that repeated propagation and renormalization project an initial state onto the ground state. As with real-time propagation, its practical applicability is restricted by the cost of repeatedly applying the Hamiltonian to the wavefunction.
+Imaginary time propagation is a numerical technique for obtaining the ground state of a quantum system by evolving it in imaginary time instead of real time. By replacing the real time variable by an imaginary one, contributions from higher-energy eigenstates are suppressed exponentially faster than that of the ground state, so that repeated propagation and renormalization project an initial state onto the ground state. As with real-time propagation, its practical applicability is restricted by the cost of repeatedly applying the Hamiltonian to the wavefunction. First applications of imaginary time propagation in quantum chemistry were made by Kosloff.\supercite{10.1021/j100319a003}
 
 We again consider the \acrshort{tdse} for a time-independent, self-adjoint Hamiltonian
 $H$ acting on a vector from Hilbert space $\mathcal{H}$,
