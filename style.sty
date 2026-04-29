@@ -73,7 +73,10 @@
 \definecolor{chapdark}{HTML}{0D2B40} % dark blue for the title and horizontal line
 \definecolor{chapgold}{HTML}{D1A86F} % gold for the chapter circle
 
-\setkomafont{chapter}{\Huge\bfseries\sffamily\color{chapdark}\raggedright}
+\setkomafont{chapter}{\Huge\bfseries\sffamily\color{chapdark}\raggedright} % chapter title formatting
+\setkomafont{section}{\Large\bfseries\sffamily\color{chapdark}\raggedright} % section title formatting
+\setkomafont{subsection}{\large\bfseries\sffamily\color{chapdark}\raggedright} % subsection title formatting
+\setkomafont{subsubsection}{\normalsize\bfseries\sffamily\color{chapdark}\raggedright} % subsubsection title formatting
 
 \makeatletter
 \renewcommand*{\chapterlinesformat}[3]{
@@ -94,5 +97,21 @@
   \end{tikzpicture}\par
   \vspace{2ex}
   {\usekomafont{chapter}#3\par}
+}
+\makeatother
+
+\makeatletter
+\renewcommand*{\sectionlinesformat}[4]{
+  \Ifstr{#1}{section}{
+    \ensuremath{\vcenter{\hbox{\color{chapgold}\rule{4pt}{1.4em}}}}\enspace#3#4
+  }{
+    \Ifstr{#1}{subsection}{
+      \ensuremath{\vcenter{\hbox{\color{chapgold}\rule{3pt}{1.2em}}}}\enspace#3#4
+    }{
+      \Ifstr{#1}{subsubsection}{
+        \ensuremath{\vcenter{\hbox{\color{chapgold}\rule{2pt}{1em}}}}\enspace#3#4
+      }
+    }
+  }
 }
 \makeatother
