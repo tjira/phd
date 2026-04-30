@@ -4,10 +4,7 @@ import matplotlib.pyplot as plt, numpy as np
 X, Y = np.meshgrid(np.linspace(-20, 20, 256), np.linspace(-25, 25, 256))
 
 # Complex wave function
-Z = 4.0 * np.sin(0.15 * X) * np.cos(0.2 * Y) + 3.0 * np.cos(0.1 * X + 0.3 * Y) + 16.0 * np.exp(-(X**2 + Y**2) / 150)
-
-# Add some localized features
-Z -= 3.0 * np.exp(-((X - 5)**2 + (Y + 10)**2) / 100); Z += 0.1 * X - 0.05 * Y 
+Z = 4.0 * np.sin(0.15 * X) * np.cos(0.2 * Y) + 3.0 * np.cos(0.1 * X + 0.3 * Y) + 16.0 * np.exp(-(X**2 + Y**2) / 150) - 3.0 * np.exp(-((X - 5)**2 + (Y + 10)**2) / 100) + 0.1 * X - 0.05 * Y
 
 # Set up the 3D plot
 fig, ax = plt.subplots(figsize=(15, 20), subplot_kw=dict(projection="3d"), constrained_layout=True)
