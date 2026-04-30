@@ -15,15 +15,10 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
-      - name: Compile LaTeX Document
+      - name: Compile LaTeX Documents
         uses: xu-cheng/texlive-action@v3
         with:
-          run: arara main
-
-      - name: Compile LaTeX Cover
-        uses: xu-cheng/texlive-action@v3
-        with:
-          run: arara cover
+          run: arara main cover
 
       - name: Obtain the Short SHA
         run: echo "SHA_SHORT=${GITHUB_SHA::7}" >> $GITHUB_ENV
