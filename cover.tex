@@ -10,6 +10,8 @@
 \usepackage{tikz}
 \usepackage{xcolor}
 
+\usetikzlibrary{fadings}
+
 \setmainfont{Libertinus Serif}
 \setsansfont{Libertinus Sans}
 
@@ -20,24 +22,32 @@
 \pagecolor{coverbg}
 \color{white}
 \begin{tikzpicture}[remember picture,overlay]
-    \node[inner sep=0pt,anchor=east,xshift=60mm,yshift=-20mm] at (current page.east) {
+    \node[inner sep=0pt,anchor=east,xshift=60mm,yshift=-20mm] (wave) at (current page.east) {
         \includegraphics[width=320mm,height=200mm,trim={3.75cm 0 3.25cm 0},clip]{frontmatter/pdf/wave.pdf}
+    };
+    \fill[coverbg]
+        (wave.north west) rectangle ([xshift=50mm] wave.south west);
+    \fill[coverbg,path fading=east]
+        ([xshift=50mm] wave.north west) rectangle ([xshift=80mm] wave.south west);
+    \fill[coverbg,path fading=west]
+        ([xshift=-30mm] current page.north east) rectangle (current page.south east);
+    \shade[left color=coverbg, right color=coverbg!70!black] 
+        ([xshift=210mm] current page.north west) rectangle ([xshift=230mm] current page.south west);
+    \shade[left color=coverbg!70!black, right color=coverbg] 
+        ([xshift=230mm] current page.north west) rectangle ([xshift=250mm] current page.south west);
+    \node[rotate=90,font=\Large] at ([xshift=230mm] current page.west) {
+        \makebox[260mm]{\sffamily Ing. Tomáš Jíra\hfill\textbf{DISSERTATION}\hfill Prague 2026}
     };
 \end{tikzpicture}
 \noindent
-\hspace*{210mm}
-\begin{minipage}[c][305mm]{40mm}
-    \centering
-    \rotatebox{90}{\makebox[260mm]{\hspace{40mm} Ing. Tomáš Jíra \hfill DISSERTATION \hspace{40mm} \Large Prague 2026\hspace{40mm}}}
-\end{minipage}
+\hspace*{250mm}
 \begin{minipage}[c][305mm]{210mm}
     \centering
-    {\LARGE UNIVERSITY OF \\ CHEMISTRY AND TECHNOLOGY PRAGUE\\[5mm]}
-    {\Large Faculty of Chemical Engineering\\[20mm]}
-    {\fontsize{32pt}{42pt}\selectfont \textbf{Computational Strategies \\ for Nonadiabatic \\ Molecular Dynamics\\}}
-    \vspace*{120mm}
-    {\LARGE DISSERTATION\\[20mm]}
-    {\Large Ing. Tomáš Jíra \\[5mm] Prague 2026}
+    {\sffamily\LARGE UNIVERSITY OF \\ CHEMISTRY AND TECHNOLOGY PRAGUE\\[5mm]}
+    {\sffamily\Large Faculty of Chemical Engineering\\[20mm]}
+    {\fontsize{32pt}{42pt}\selectfont \textbf{Computational Strategies \\ for Nonadiabatic \\ Molecular Dynamics\\[110mm]}}
+    {\sffamily\LARGE DISSERTATION\\[10mm]}
+    {\sffamily\Large Ing. Tomáš Jíra \\[5mm] Prague 2026}
 \end{minipage}
 \newpage
 \pagecolor{white}

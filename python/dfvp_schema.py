@@ -23,9 +23,11 @@ P = [0.5, 0]
 def f_manifold(x, y):
     return -1.0 * (x**2 + y**2)
 
+# dfdx of the manifold
 def df_manifold_dx(x, y):
     return -1.0 * 2 * x
 
+# dfdy of the manifold
 def df_manifold_dy(x, y):
     return -1.0 * 2 * y
 
