@@ -37,7 +37,7 @@ jobs:
           release_name: "Release: Commit ${{env.SHA_SHORT}}"
           tag: release-${{env.SHA_SHORT}}
 
-      - name: Release the Document
+      - name: Release the Cover
         uses: svenstaro/upload-release-action@v2
         with:
           asset_name: cover_${{env.SHA_SHORT}}.pdf
