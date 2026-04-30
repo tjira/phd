@@ -1,29 +1,37 @@
 import matplotlib.pyplot as plt, numpy as np
 
-# High density for fine detail in the oscillations
-X, Y = np.meshgrid(np.linspace(-11, 11, 512), np.linspace(-11, 11, 512))
+# High density for fine detail
+X, Y = np.meshgrid(np.linspace(-25, 25, 600), np.linspace(-20, 20, 600))
 
-# Wavefunction combining multiple sine and cosine waves with Gaussian peaks for visual interest
-Z = (
-    2.5 * np.sin(0.7 * X) * np.cos(0.5 * Y) +
-    1.5 * np.cos(0.4 * X + 0.8 * Y) +
-    1.0 * np.sin(1.2 * X) * np.sin(0.2 * Y) +
-    6.0 * np.exp(-(X**2 + Y**2) / 800) +
-    4.0 * np.exp(-((X - 45)**2 + (Y - 10)**2) / 400) +
-    4.0 * np.exp(-((X + 45)**2 + (Y + 10)**2) / 400)
+# Base wave pattern
+Z_wave = 0.9 * np.sin(0.6 * X) * np.cos(0.5 * Y) * np.exp(-(X**2 + Y**2) / 800)
+
+# Left side features (back cover)
+Z_left = (
+    6.0 * np.exp(-((X + 18)**2 + (Y - 8)**2) / 30) +
+    5.5 * np.exp(-((X + 15)**2 + (Y + 9)**2) / 25) +
+    4.5 * np.exp(-((X + 12)**2 + (Y - 2)**2) / 20)
 )
 
-# Set up the 3D plot with a very wide aspect ratio
-fig, ax = plt.subplots(figsize=(24, 8), subplot_kw={"projection": "3d"})
+# Right side features (front cover)
+Z_right = (
+    5.0 * np.exp(-((X - 8)**2 + (Y - 6)**2) / 15) +
+    13.0 * np.exp(-((X - 16)**2 + (Y - 4)**2) / 12)
+)
 
-# Remove axes
+Z = Z_wave + Z_left + Z_right
+
+# Set up the plot
+fig, ax = plt.subplots(subplot_kw={"projection": "3d"}, figsize=(24, 12), facecolor="#020617")
+
+# Remove axes for a cleaner look
 ax.axis("off")
 
 # Plot the surface
-surf = ax.plot_surface(X, Y, Z, cmap="PuBu_r", edgecolor='#0f172a', linewidth=0.1, antialiased=True, alpha=1, rcount=30, ccount=30)
+ax.plot_surface(X, Y, Z, facecolor="#1A1F2C", edgecolor="#22d3ee", linewidth=0.4, shade=False, rcount=60, ccount=60, antialiased=True)
 
-# Low-angle "horizon" view
-ax.view_init(elev=18, azim=-75); ax.set_zlim(-8, 15)
+# View adjustment
+ax.view_init(elev=22, azim=-85); ax.set_zlim(-3, 16)
 
-# Save the figure with a transparent background
-plt.savefig("frontmatter/pdf/wave.pdf", transparent=True, bbox_inches="tight", pad_inches=0)
+# Remove margins and save
+plt.savefig("frontmatter/pdf/wave.pdf", transparent=True, bbox_inches="tight", pad_inches=0, dpi=300)
