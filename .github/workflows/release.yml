@@ -20,6 +20,11 @@ jobs:
         with:
           run: arara main
 
+      - name: Compile LaTeX Cover
+        uses: xu-cheng/texlive-action@v3
+        with:
+          run: arara cover
+
       - name: Obtain the Short SHA
         run: echo "SHA_SHORT=${GITHUB_SHA::7}" >> $GITHUB_ENV
 
@@ -29,8 +34,14 @@ jobs:
           asset_name: phd_${{env.SHA_SHORT}}.pdf
           body: "Automated release for commit ${{github.sha}}."
           file: main.pdf
-          overwrite: true
           release_name: "Release: Commit ${{env.SHA_SHORT}}"
+          tag: release-${{env.SHA_SHORT}}
+
+      - name: Release the Document
+        uses: svenstaro/upload-release-action@v2
+        with:
+          asset_name: cover_${{env.SHA_SHORT}}.pdf
+          file: cover.pdf
           tag: release-${{env.SHA_SHORT}}
 
       - name: Setup Tmate Session
