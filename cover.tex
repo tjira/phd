@@ -6,6 +6,7 @@
 \usepackage{fontspec}
 \usepackage{geometry}
 \usepackage{graphicx}
+\usepackage{lipsum}
 \usepackage{pdfpages}
 \usepackage{tikz}
 \usepackage{xcolor}
@@ -16,39 +17,48 @@
 \setsansfont{Libertinus Sans}
 
 \definecolor{coverbg}{HTML}{1A1F2C}
-\geometry{paperwidth=460mm, paperheight=305mm, margin=0mm}
+\definecolor{chapgold}{HTML}{D1A86F}
+
+\geometry{paperwidth=460mm,paperheight=305mm,margin=0mm}
 
 \begin{document}
 \pagecolor{coverbg}
 \color{white}
 \begin{tikzpicture}[remember picture,overlay]
-    \node[inner sep=0pt,anchor=east,xshift=60mm,yshift=-25mm] (wave) at (current page.east) {
-        \includegraphics[width=320mm,height=220mm,trim={3.75cm 0 3.25cm 0},clip]{frontmatter/pdf/wave.pdf}
-    };
     \fill[coverbg]
-        (wave.north west) rectangle ([xshift=50mm] wave.south west);
-    \fill[coverbg,path fading=east]
-        ([xshift=50mm] wave.north west) rectangle ([xshift=80mm] wave.south west);
-    \fill[coverbg,path fading=west]
-        ([xshift=-30mm] current page.north east) rectangle (current page.south east);
-    \shade[left color=coverbg, right color=coverbg!85!black]
+        (current page.north west) rectangle ([yshift=140mm] current page.south east);
+    \fill[coverbg,path fading=south]
+        ([yshift=140mm] current page.south west) rectangle ([yshift=90mm] current page.south east);
+    \shade[left color=coverbg,right color=coverbg!85!black]
         ([xshift=210mm] current page.north west) rectangle ([xshift=230mm] current page.south west);
-    \shade[left color=coverbg!85!black, right color=coverbg]
+    \shade[left color=coverbg!85!black,right color=coverbg]
         ([xshift=230mm] current page.north west) rectangle ([xshift=250mm] current page.south west);
-    \node[rotate=-90,font=\Large] at ([xshift=230mm] current page.west) {
-        \makebox[260mm]{\sffamily Ing. Tomáš Jíra\hfill\textbf{DISSERTATION}\hfill Prague 2026}
+    \node[rotate=-90,font=\Large] at ([yshift=30mm] current page.center) {
+        \makebox[190mm]{\sffamily Ing. Tomáš Jíra\hfill\textbf{DISSERTATION}\hfill Prague 2026}
+    };
+    \node[inner sep=0pt,anchor=center,yshift=-140mm] (wave) at (current page.center) {
+        \includegraphics[width=460mm,height=200mm,trim={3.75cm 0 3.25cm 0},clip]{frontmatter/pdf/wave.pdf}
+    };
+    \begin{scope}[shift={(current page.north west)}]
+        \node[anchor=north west,text width=160mm,align=justify,font=\sffamily] at (25mm,-50mm) {
+            {\fontsize{24pt}{28pt}\selectfont\textbf{\color{chapgold}Abstract}\\[10mm]}\textcolor{white!85}{
+                \lipsum[1-2]
+            }
+        };
+    \end{scope}
+    \node[anchor=north west,inner sep=0pt] at ([xshift=260mm, yshift=-25mm]current page.north west) {
+        \begin{minipage}[t]{170mm}
+            \raggedright
+            {\sffamily\Large\color{chapgold}\uppercase{University of Chemistry\\and Technology Prague}\\[3mm]}
+            {\sffamily\large Faculty of Chemical Engineering\\[25mm]}
+            \textcolor{chapgold}{\rule{170mm}{2pt}}\\[5mm]
+            {\fontsize{40pt}{50pt}\selectfont\textbf{Computational Strategies\\[2mm]for Nonadiabatic\\[2mm]Molecular Dynamics}\\[10mm]}
+            \textcolor{chapgold}{\rule{170mm}{2pt}}\\[20mm]
+            {\sffamily\Large\color{chapgold}\uppercase{Dissertation}\\[5mm]}
+            {\sffamily\LARGE Ing. Tomáš Jíra \\[2mm] \large Prague 2026}
+        \end{minipage}
     };
 \end{tikzpicture}
-\noindent
-\hspace*{250mm}
-\begin{minipage}[c][305mm]{210mm}
-    \centering
-    {\sffamily\LARGE UNIVERSITY OF \\ CHEMISTRY AND TECHNOLOGY PRAGUE\\[5mm]}
-    {\sffamily\Large Faculty of Chemical Engineering\\[15mm]}
-    {\fontsize{32pt}{42pt}\selectfont\textbf{Computational Strategies\\for Nonadiabatic\\Molecular Dynamics\\[130mm]}}
-    {\sffamily\LARGE DISSERTATION\\[10mm]}
-    {\sffamily\Large Ing. Tomáš Jíra \\[5mm] Prague 2026}
-\end{minipage}
 \newpage
 \pagecolor{white}
 \includepdf[pages=-]{frontmatter/pdf/cover}
