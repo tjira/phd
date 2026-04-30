@@ -16,7 +16,7 @@ fig, ax = plt.subplots(figsize=(15, 20), subplot_kw=dict(projection="3d"), const
 ax.axis("off")
 
 # Sparser grid for a technical look
-surf = ax.plot_surface(X, Y, Z, cmap="PuBu_r", edgecolor='#0f172a', linewidth=0.3, antialiased=True, alpha=0.98, rcount=25, ccount=15) 
+surf = ax.plot_surface(X, Y, Z, cmap="PuBu_r", edgecolor='#0f172a', linewidth=0.3, antialiased=True, alpha=0.98, rcount=20, ccount=10) 
 
 # Dynamic low-angle view
 ax.view_init(elev=35, azim=-60); ax.set_zlim(-15, 20)
