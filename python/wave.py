@@ -1,22 +1,29 @@
 import matplotlib.pyplot as plt, numpy as np
 
-# Grid of points
-X, Y = np.meshgrid(np.linspace(-20, 20, 256), np.linspace(-25, 25, 256))
+# High density for fine detail in the oscillations
+X, Y = np.meshgrid(np.linspace(-11, 11, 512), np.linspace(-11, 11, 512))
 
-# Complex wave function
-Z = 4.0 * np.sin(0.15 * X) * np.cos(0.2 * Y) + 3.0 * np.cos(0.1 * X + 0.3 * Y) + 16.0 * np.exp(-(X**2 + Y**2) / 150) - 3.0 * np.exp(-((X - 5)**2 + (Y + 10)**2) / 100) + 0.1 * X - 0.05 * Y
+# Wavefunction combining multiple sine and cosine waves with Gaussian peaks for visual interest
+Z = (
+    2.5 * np.sin(0.7 * X) * np.cos(0.5 * Y) +
+    1.5 * np.cos(0.4 * X + 0.8 * Y) +
+    1.0 * np.sin(1.2 * X) * np.sin(0.2 * Y) +
+    6.0 * np.exp(-(X**2 + Y**2) / 800) +
+    4.0 * np.exp(-((X - 45)**2 + (Y - 10)**2) / 400) +
+    4.0 * np.exp(-((X + 45)**2 + (Y + 10)**2) / 400)
+)
 
-# Set up the 3D plot
-fig, ax = plt.subplots(figsize=(15, 20), subplot_kw=dict(projection="3d"), constrained_layout=True)
+# Set up the 3D plot with a very wide aspect ratio
+fig, ax = plt.subplots(figsize=(24, 8), subplot_kw={"projection": "3d"})
 
 # Remove axes
 ax.axis("off")
 
-# Sparser grid for a technical look
-surf = ax.plot_surface(X, Y, Z, cmap="PuBu_r", edgecolor='#0f172a', linewidth=0.3, antialiased=True, alpha=0.98, rcount=20, ccount=10) 
+# Plot the surface
+surf = ax.plot_surface(X, Y, Z, cmap="PuBu_r", edgecolor='#0f172a', linewidth=0.1, antialiased=True, alpha=1, rcount=30, ccount=30)
 
-# Dynamic low-angle view
-ax.view_init(elev=35, azim=-60); ax.set_zlim(-15, 20)
+# Low-angle "horizon" view
+ax.view_init(elev=18, azim=-75); ax.set_zlim(-8, 15)
 
-# Save the figure with a transparent background and tight layout
+# Save the figure with a transparent background
 plt.savefig("frontmatter/pdf/wave.pdf", transparent=True, bbox_inches="tight", pad_inches=0)
