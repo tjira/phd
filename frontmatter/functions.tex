@@ -1,4 +1,12 @@
 \begin{luacode*}
+    function filedirpath()
+        local path = status.filename:match("(.*)/")
+
+        tex.sprint(path or ".")
+    end
+\end{luacode*}
+
+\begin{luacode*}
     function filetotitle()
         tex.sprint((status.filename:match("([^/]+)%.tex$"):gsub("_", " "):gsub("^%d+-", "")))
     end
@@ -52,6 +60,7 @@
     end
 \end{luacode*}
 
+\newcommand{\filedirpath}{\directlua{filedirpath()}}
 \newcommand{\filetotitle}{\directlua{filetotitle()}}
 \newcommand{\foldertotitle}{\directlua{foldertotitle()}}
 \newcommand{\includechapters}[1]{\directlua{includechapters("#1")}}
