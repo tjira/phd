@@ -73,10 +73,35 @@
 \definecolor{chapdark}{HTML}{0D2B40} % dark blue for the title and horizontal line
 \definecolor{chapgold}{HTML}{D1A86F} % gold for the chapter circle
 
+\setkomafont{part}{\fontsize{32}{38}\selectfont\bfseries\sffamily\color{chapdark}\centering}
 \setkomafont{chapter}{\Huge\bfseries\sffamily\color{chapdark}\raggedright} % chapter title formatting
 \setkomafont{section}{\Large\bfseries\sffamily\color{chapdark}\raggedright} % section title formatting
 \setkomafont{subsection}{\large\bfseries\sffamily\color{chapdark}\raggedright} % subsection title formatting
 \setkomafont{subsubsection}{\normalsize\bfseries\sffamily\color{chapdark}\raggedright} % subsubsection title formatting
+
+\makeatletter
+\renewcommand*{\partlineswithprefixformat}[3]{
+  \begin{center}
+  \begin{tikzpicture}[baseline=(current bounding box.center)]
+    \draw[chapdark, line width=4.5pt] (-0.48\textwidth,0) -- (0.48\textwidth,0);
+    \Ifstr{#2}{}{}{
+      \node[
+        draw=chapgold,
+        line width=2.5pt,
+        circle,
+        fill=white,
+        minimum size=4.5cm,
+        font=\sffamily\color{chapdark},
+        align=center,
+        inner sep=0pt
+      ] at (0,0) {\Large PART\\[3ex]\fontsize{42}{48}\selectfont\bfseries \thepart};
+    }
+  \end{tikzpicture}\par
+  \vspace{1.5cm}
+  {\usekomafont{part}#3\par}
+  \end{center}
+}
+\makeatother
 
 \makeatletter
 \renewcommand*{\chapterlinesformat}[3]{
