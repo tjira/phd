@@ -13,12 +13,12 @@
 \input{frontmatter/functions}
 \begin{document}
 \directlua{if os.getenv("ENTRY") == "1" then tex.print("\\includepdf[pages=-]{frontmatter/pdf/entry}") end}
-\include{frontmatter/acknowledgements}
-\include{frontmatter/abstract}
+\directlua{if os.getenv("NOACKNOWLEDGEMENTS") == "1" then else tex.print("\\include{frontmatter/acknowledgements}") end}
+\directlua{if os.getenv("NOABSTRACT") == "1" then else tex.print("\\include{frontmatter/abstract}") end}
 \tableofcontents
-\include{frontmatter/introduction}
+\directlua{if os.getenv("NOINTRODUCTION") == "1" then else tex.print("\\include{frontmatter/introduction}") end}
 \includechapters{chapters}
-\include{frontmatter/conclusion}
+\directlua{if os.getenv("NOCONCLUSION") == "1" then else tex.print("\\include{frontmatter/conclusion}") end}
 \appendix
 \includechapters{appendices}
 \printglossary[type=\acronymtype]

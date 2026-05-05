@@ -20,11 +20,15 @@
 
 \begin{luacode*}
     function includechapters(path)
-        local folders = {}; local papers = os.getenv("PAPERS") == "1"
+        local folders = {}; local papers = os.getenv("PAPERS") == "1"; local chapter = os.getenv("CHAPTER")
 
         for folder in require("lfs").dir(path) do
 
             local include = not folder:find("Paper") or papers
+
+            if chapter and chapter ~= "" then
+                include = include and (folder == chapter)
+            end
 
             if folder:sub(1, 1) ~= "." and include then
                 table.insert(folders, folder)
