@@ -18,7 +18,7 @@ jobs:
       - name: Compile LaTeX Documents
         uses: xu-cheng/texlive-action@v3
         with:
-          run: METADATA=1 arara main cover
+          run: arara main cover
 
       - name: Obtain the Short SHA
         run: echo "SHA_SHORT=${GITHUB_SHA::7}" >> $GITHUB_ENV
