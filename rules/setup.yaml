@@ -2,7 +2,7 @@
 identifier: setup
 name: Project Setup
 commands:
-- name: Creating Build Folders
+- name: Creating build folders
   command: >
     @{
       import java.io.File;
