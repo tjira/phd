@@ -6,13 +6,15 @@
 % arara: lualatex: {options: ["--output-directory=build"]}
 % arara: lualatex: {options: ["--output-directory=build"]}
 % arara: move: {files: ["build/main.pdf"], target: "main.pdf"}
-\directlua{if os.getenv("METADATA") == "1" then tex.print("\\input{frontmatter/metadata}") end}
+\input{frontmatter/metadata}
 \documentclass[headsepline=true,parskip=half,12pt]{scrbook}\raggedbottom
 \title{Computational Strategies for Nonadiabatic Molecular Dynamics}\author{Tomáš \textsc{Jíra}}
 \usepackage{style}
 \input{frontmatter/functions}
 \begin{document}
-\directlua{if os.getenv("ENTRY") == "1" then tex.print("\\includepdf[pages=-]{frontmatter/pdf/entry}") end}
+\ifnum\directlua{tex.print(os.getenv("ENTRY")=="1" and 1 or 0)}=1
+    \includepdf[pages=-]{frontmatter/pdf/entry}
+\fi
 \include{frontmatter/acknowledgements}
 \include{frontmatter/abstract}
 \tableofcontents
@@ -21,7 +23,9 @@
 \include{parts/02-Original_Research_and_Contributions/main.tex}
 \include{frontmatter/conclusion}
 \appendix
-\directlua{if os.getenv("PAPERS") == "1" then tex.print("\\include{appendices/01-Attached_Papers/main.tex}") end}
+\ifnum\directlua{tex.print(os.getenv("PAPERS")=="1" and 1 or 0)}=1
+    \include{appendices/01-Attached_Papers/main.tex}
+\fi
 \printglossary[type=\acronymtype]
 \printbibliography[heading=bibintoc,title={References}]
 \end{document}
