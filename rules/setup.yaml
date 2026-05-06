@@ -6,13 +6,11 @@ commands:
   command: >
     @{
       import java.io.File;
-        
-      roots = ["parts", "appendices", "frontmatter"]; 
 
-      for (root : roots) {
+      for (root : ["parts"]) {
 
         base = new File("build", root); base.mkdirs();
-          
+
         for (file : new File(root).listFiles()) {
           if (file.directory) new File(base, file.name).mkdirs();
         }

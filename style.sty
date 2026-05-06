@@ -2,13 +2,13 @@
 
 \RequirePackage[onehalfspacing]{setspace} % setting the line spacing
 \RequirePackage[top=25mm,bottom=30mm,inner=20mm,outer=15mm,bindingoffset=10mm]{geometry} % page composition
-\RequirePackage[hidelinks]{hyperref} % hyperlinks and metadata
+\RequirePackage[hidelinks,linktoc=all]{hyperref} % hyperlinks and metadata
 \RequirePackage[backend=biber,style=chem-acs]{biblatex} % bibliography package
 \RequirePackage{braket} % braket notation
 \RequirePackage[acronym,nogroupskip,nomain,toc]{glossaries} % glossary package
 \RequirePackage[automark]{scrlayer-scrpage} % page styles
 \RequirePackage{unicode-math} % unicode math support
-\RequirePackage{microtype} % better typesetting
+\RequirePackage[nopatch=footnote]{microtype} % better typesetting
 \RequirePackage{tikz} % graphics
 \RequirePackage{luacode} % Lua code embedding
 \RequirePackage{pdfpages} % including PDF files
@@ -16,6 +16,19 @@
 \RequirePackage{float} % subfigures
 \RequirePackage[version=4]{mhchem} % chemical formulas
 \RequirePackage{xcolor} % custom colors
+\RequirePackage{bookmark} % better PDF bookmarks
+
+\hypersetup{pdftitle={\@title},pdfauthor={\@author}} % set PDF metadata from the title and author defined in the main document
+
+\hypersetup{pdfpagemode=UseOutlines,pdfdisplaydoctitle=true,bookmarksnumbered=true,bookmarksopen=true,bookmarksopenlevel=0} % set PDF viewing options and bookmark behavior
+
+\ifnum\directlua{tex.print(os.getenv("ONLINE")=="1" and 1 or 0)}=1
+    \geometry{bindingoffset=0mm,margin=25mm} % adjust margins for online viewing
+\fi
+
+\ifnum\directlua{tex.print(os.getenv("ONLINE")=="1" and 1 or 0)}=1
+    \hypersetup{colorlinks=true,linkcolor=blue,citecolor=magenta,urlcolor=blue} % enable colored links for online viewing
+\fi
 
 \addbibresource{library.bib}\makeglossaries % set the library file and make glossaries
 
