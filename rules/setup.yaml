@@ -7,7 +7,7 @@ commands:
     @{
       import java.io.File;
         
-      roots = ["chapters", "appendices", "frontmatter"]; 
+      roots = ["parts", "appendices", "frontmatter"]; 
 
       for (root : roots) {
 

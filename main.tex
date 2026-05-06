@@ -17,10 +17,11 @@
 \directlua{if os.getenv("CHAPTER") == nil then tex.print("\\include{frontmatter/abstract}") end}
 \tableofcontents
 \directlua{if os.getenv("CHAPTER") == nil then tex.print("\\include{frontmatter/introduction}") end}
-\includechapters{chapters}
+\include{parts/01-Theoretical_Foundations/main.tex}
+\include{parts/02-Original_Research_and_Contributions/main.tex}
 \directlua{if os.getenv("CHAPTER") == nil then tex.print("\\include{frontmatter/conclusion}") end}
 \appendix
-\includechapters{appendices}
+\directlua{if os.getenv("PAPERS") == "1" then tex.print("\\include{appendices/01-Attached_Papers/main.tex}") end}
 \printglossary[type=\acronymtype]
 \printbibliography[heading=bibintoc,title={References}]
 \end{document}

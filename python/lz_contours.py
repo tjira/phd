@@ -58,4 +58,4 @@ for clockwise in [False, True]:
     ax.set_xticks([]); ax.set_yticks([])
 
     # Export the figure as a PDF
-    fig.savefig(f"chapters/03-Mixed_Quantum-Classical_Dynamics/sections/images/lz_contour_{'clockwise' if clockwise else 'counterclockwise'}.pdf", bbox_inches="tight")
+    fig.savefig(f"parts/01-Theoretical_Foundations/chapters/03-Mixed_Quantum-Classical_Dynamics/sections/images/lz_contour_{'clockwise' if clockwise else 'counterclockwise'}.pdf", bbox_inches="tight")

@@ -80,4 +80,4 @@ ax.text(line2_end[0] + 0.5, line2_end[1] + 0.6, line2_end[2] + 1.3, r"$-iH\ket{\
 ax.view_init(elev=25, azim=45); ax.set_zlim(-1, 0); ax.set_box_aspect((1, 1.1, 0.05))
 
 # Save the figure
-plt.savefig("chapters/02-Time_Evolution_in_Quantum_Mechanics/sections/images/dfvp_schema.pdf", bbox_inches="tight", pad_inches=0)
+plt.savefig("parts/01-Theoretical_Foundations/chapters/02-Time_Evolution_in_Quantum_Mechanics/sections/images/dfvp_schema.pdf", bbox_inches="tight", pad_inches=0)
