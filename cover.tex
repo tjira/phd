@@ -4,6 +4,9 @@
 % arara: lualatex: {options: ["--output-directory=build"]}
 % arara: move: {files: ["build/cover.pdf"], target: "cover.pdf"}
 \documentclass{article}
+
+\RequirePackage{pdfmanagement}\SetKeys[document/metadata]{pdfversion=1.7,pdfstandard=a-3b}
+
 \usepackage{fontspec}
 \usepackage{geometry}
 \usepackage{graphicx}
