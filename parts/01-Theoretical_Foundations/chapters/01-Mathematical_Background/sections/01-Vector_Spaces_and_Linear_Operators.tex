@@ -4,7 +4,7 @@ Many concepts in quantum mechanics rest on the algebra of vector spaces and the 
 To move beyond the familiar Euclidean spaces, we first define the abstract concept of a vector space. Without vector spaces, we cannot formally describe quantum states or operators. Let's begin with the definition.
 \begin{definition}[Vector Space]
 A vector space $(V,+,\cdot)$ over a field $F$ is a non-empty set that is closed under vector addition and scalar multiplication. Every vector space must satisfy the following axioms for all $\symbf{u},\symbf{v},\symbf{w}\in V$ and all scalars $a,b\in F$:
-\begin{enumerate}\def\labelenumi{\arabic{enumi}.}
+\begin{enumerate}[label=\arabic*.]
 \item Associativity of vector addition: $(\symbf{u}+\symbf{v})+\symbf{w}=\symbf{u}+(\symbf{v}+\symbf{w})$
 \item Commutativity of vector addition: $\symbf{u}+\symbf{v}=\symbf{v}+\symbf{u}$
 \item Identity element of vector addition: $\exists\,\symbf{0}\in V$ such that $\symbf{u}+\symbf{0}=\symbf{u}$
@@ -54,7 +54,7 @@ Every vector in a vector space can be written uniquely as a linear combination o
 To introduce geometric concepts into vector spaces, we first define the normed vector space.
 \begin{definition}[Normed Vector Space]
 A normed vector space $(V,\lvert\cdot\rvert)$ is a vector space $V$ over a field $F$ (here, $F$ is $\mathbb{R}$ or $\mathbb{C}$) equipped with a norm, which is a function $\lvert\cdot\rvert:V\to\left[0,\infty\right)\subset\mathbb{R}$ that satisfies the following properties for all $\symbf{u},\symbf{v}\in V$ and all scalars $a\in F$:
-\begin{enumerate}\def\labelenumi{\arabic{enumi}.}
+\begin{enumerate}[label=\arabic*.]
 \item Non-negativity: $\lvert\symbf{u}\rvert\geq 0$, with equality iff $\symbf{u}=\symbf{0}$
 \item Absolute scalability: $\lvert a\symbf{u}\rvert=\lvert a\rvert\lvert\symbf{u}\rvert$
 \item Triangle inequality: $\lvert\symbf{u}+\symbf{v}\rvert\leq\lvert\symbf{u}\rvert+\lvert\symbf{v}\rvert$
@@ -67,7 +67,7 @@ d(\symbf{u},\symbf{v})=\lvert\symbf{u}-\symbf{v}\rvert,
 which satisfies all the properties of a metric, thereby enabling the study of geometric properties within the vector space. More specialized normed vector space emerges after we define an inner product. The inner product generalizes the familiar Euclidean dot product to abstract vector spaces.
 \begin{definition}[Inner Product]\label{def:inner_product}
 An inner product on a vector space $V$ over a field $F$ is a function $\langle\cdot,\cdot\rangle:V\times V\to F$ that satisfies the following properties for all $\symbf{u},\symbf{v},\symbf{w}\in V$ and all scalars $a\in F$:
-\begin{enumerate}\def\labelenumi{\arabic{enumi}.}
+\begin{enumerate}[label=\arabic*.]
 \item Conjugate symmetry: $\langle\symbf{u},\symbf{v}\rangle=\overline{\langle\symbf{v},\symbf{u}\rangle}$
 \item Linearity in the second argument: $\langle \symbf{u},a\symbf{v}+\symbf{w}\rangle=a\langle\symbf{u},\symbf{v}\rangle+\langle\symbf{u},\symbf{w}\rangle$
 \item Positive-definiteness: $\langle\symbf{u},\symbf{u}\rangle\geq 0$, with equality if and only if $\symbf{u}=\symbf{0}$

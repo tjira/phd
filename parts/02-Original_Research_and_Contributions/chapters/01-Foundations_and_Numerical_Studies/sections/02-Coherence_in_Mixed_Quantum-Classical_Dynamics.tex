@@ -54,7 +54,7 @@ where $\phi_S$ is the Stokes phase, which can be calculated as
 where $\Gamma$ is the Gamma function. By utilizing the full scattering matrix $S$, we can extract both the transition probability and the phase information, allowing us to capture the coherence effects in \acrshort{lzsh}. Note that the Stokes phase $\phi_S$ only accounts for the phase shift during the crossing, but does not account for the phase accumulation during the propagation on the adiabatic surfaces. Therefore, subsequent crossings cannot be described by simply multiplying the scattering matrices of each crossing, since the relative phase between the states at the second crossing would not be correctly captured.
 
 Part of the motivation for this section was to analyze how well \acrshort{lzsh} captures coherence effects. To do this, the implementation of \acrshort{lzsh} was extended to utilize the full scattering matrix $S$ instead of just the transition probability $P$. This allows us to extract the coherence from \acrshort{lzsh} and compare it against the exact quantum mechanical results. After implementing this extension, we applied it to the original \acrshort{lzsh} model in Eq.~\eqref{eq:landau_zener_hamiltonian}, with parameters $g=4$~a.u. and $\alpha=20$~a.u. As shown in Fig.~\ref{fig:lzsh_coherence_comparison}, the coherences obtained from the \acrshort{lzsh} scattering matrix are in perfect agreement with the exact quantum mechanical results, as expected.
-\begin{figure}[H]
+\begin{figure}[!ht]
 \centering
 \includegraphics[width=\linewidth]{\filedirpath/images/LZSH_COMPARE}
 \caption{Comparison of the coherences obtained from the \acrshort{lzsh} scattering matrix with the exact quantum mechanical results for the original \acrshort{lzsh} model (Eq.~\eqref{eq:landau_zener_hamiltonian}), where both results should be identical. The simulations were performed with parameters $g=4$~a.u. and $\alpha=20$~a.u. and 10000 trajectories.}
@@ -72,7 +72,7 @@ H^{\symrm{el}}=\begin{pmatrix}
 where $m=1$~a.u., $\omega=1$~a.u., $\kappa=3$~a.u., $\epsilon=4$~a.u., and $\delta=2$~a.u. The system was initialized in the upper state with a Gaussian nuclear wavepacket centered at $x=3$~a.u. with zero momentum. The simulations were performed with 100000 trajectories for each method. The simulations were set up this way so that the system encounters two consecutive avoided crossings, allowing us to analyze the importance of coherence effects in this scenario.
 
 Fig.~\ref{fig:sh_coherence_comparison} presents the time evolution of the Bloch vector components $\sigma_x$, $\sigma_y$, and $\sigma_z$, as well as the coherence magnitude $\sigma_\perp$ obtained from the \acrshort{lzsh}, \acrshort{fssh}, and \acrshort{mash} methods, compared against the exact quantum mechanical results. The results show that all three methods capture the general trend of the population transfer between the two states, as indicated by the agreement in $\sigma_z$. However, there are significant differences in how well they capture the coherence effects.
-\begin{figure}[H]
+\begin{figure}[!ht]
 \centering
 \includegraphics[width=0.9\linewidth]{\filedirpath/images/SH_COHERENCE_COMPARE}
 \caption{Comparison of the coherences obtained from the \acrshort{lzsh}, \acrshort{fssh}, and \acrshort{mash} against the exact quantum mechanical results for an avoided crossing model.}

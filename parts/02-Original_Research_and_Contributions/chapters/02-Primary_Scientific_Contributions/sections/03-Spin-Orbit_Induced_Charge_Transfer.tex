@@ -20,7 +20,7 @@ This transformation allows for the rapid calculation of 3D cross sections $\sigm
 where $E_x$ is the activation energy for the charge transfer process and $r_x$ is the crossing point between the relevant \acrshort{pes}.
 \subsection{Scattering Cross Sections and Rate Constants}
 The calculated cross sections from 1D quantum dynamics (WP) and \acrshort{lz} theory are presented in Fig.~\ref{fig:soc_charge_transfer_cross_sections}. For brevity, only the results for the \ce{N-D^+} and \ce{N-T^+} systems are shown here. The results reveal two critical physical insights. First, at low to moderate energies, both methods yield similar cross sections, confirming the validity of \acrshort{lz} theory for the primary crossing event. However, at high collision energies, the wavepacket cross sections diverge and become distinctly larger than the \acrshort{lz} predictions. This deviation is physically driven by the wavepacket accessing the short-range region where the \acrshort{soc} is drastically enhanced. Second, there is a pronounced isotope effect in the cross sections, with the heavier tritium and deuterium isotopes yielding larger cross sections than hydrogen.
-\begin{figure}[H]
+\begin{figure}[!ht]
 \centering
 \begin{subfigure}{.5\textwidth}
 \centering
@@ -37,7 +37,7 @@ Additionally, rate constants for the charge transfer process are calculated by i
 k(T)=\sqrt{\frac{8}{\pi\mu(k_BT)^3}}\int_0^\infty E\sigma(E)\e^{-\frac{E}{k_BT}}\symrm{d}E,
 \end{equation}
 where $k_B$ is the Boltzmann constant, $T$ is the temperature and $\mu$ is the reduced mass of the system. The calculated rate constants are presented in Fig.~\ref{fig:soc_rate_constants} as a function of temperature.
-\begin{figure}[H]
+\begin{figure}[!ht]
 \centering
 \includegraphics[width=0.7\linewidth]{\filedirpath/images/1-s2.0-S0022407325003590-gr10_lrg}
 \caption{The rate constants for the collision reactions involving hydrogen ($k_H$), deuterium ($k_D$) and tritium ($k_T$) as a function of temperature. The straight red line represents the results from \acrshort{lz} theory for the hydrogen case.}
