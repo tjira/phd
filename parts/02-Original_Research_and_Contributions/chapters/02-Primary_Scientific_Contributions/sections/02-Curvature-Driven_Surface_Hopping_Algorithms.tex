@@ -1,4 +1,4 @@
-\section{\filetotitle}\label{sec:curvature_driven_surface_hopping_algorithms}
+\section{Curvature-Driven Surface Hopping Algorithms}\label{sec:curvature_driven_surface_hopping_algorithms}
 \textit{Commentary on: \fullcite{10.1021/acs.jctc.5c01176}}
 
 The second published work of this thesis focuses on curvature-driven surface hopping algorithms from article \textit{Curvature-Driven Nonadiabatic Dynamics without Explicit Nonadiabatic Couplings} in \textit{Journal of Chemical Theory and Computation}. All simulations on model potentials in this work were performed by custom built \textsc{Zinq} package.\supercite{10.5281/zenodo.18386143}
@@ -14,21 +14,21 @@ Since the standard \acrshort{lzsh} algorithm is strictly formulated for two-leve
 The results from the simulations on a single avoided crossing model in Fig.~\ref{fig:curvature_single_avoided_crossing} show that the $\kappa$\acrshort{fssh} already performs significantly worse than the traditional \acrshort{fssh} and \acrshort{lzsh} methods in terms of state populations. Inspecting the \acrshort{tdc} in this case reveals that the $\kappa$\acrshort{fssh} method produces a narrower peak compared to the reference \acrshort{npi} values, which likely contributes to the poorer performance in state populations.
 \begin{figure}[!ht]
 \centering
-\includegraphics[width=\linewidth]{\filedirpath/images/images_large_ct5c01176_0002}
+\includegraphics[width=\linewidth]{parts/02-Original_Research_and_Contributions/chapters/02-Primary_Scientific_Contributions/sections/images/images_large_ct5c01176_0002}
 \caption{Nonadiabatic dynamics simulations on Tully’s Simple Avoided Crossing potential defined using two different sets of diabatic coupling constants.}
 \label{fig:curvature_single_avoided_crossing}
 \end{figure}
 In the three-state crossing model (Fig.~\ref{fig:curvature_three-state_crossing}), the performance of the $\kappa$\acrshort{fssh} method is even more unsatisfactory. The fundamental flaw of the curvature-driven approach becomes apparent here: because $\kappa$\acrshort{fssh} relies solely on the adiabatic energy gap ($Z_{ik}$) and its temporal derivatives, it assigns non-zero \acrshort{tdc} values between any states that are energetically close, even if their wavefunctions are strictly orthogonal and no physical coupling exists. For instance, while the reference \acrshort{npi} method correctly predicts zero coupling between states 0 and 2, $\kappa$\acrshort{fssh} artificially forces population transfer between them, leading to unphysical trajectory outcomes.
 \begin{figure}[!ht]
 \centering
-\includegraphics[width=\linewidth]{\filedirpath/images/images_large_ct5c01176_0003}
+\includegraphics[width=\linewidth]{parts/02-Original_Research_and_Contributions/chapters/02-Primary_Scientific_Contributions/sections/images/images_large_ct5c01176_0003}
 \caption{Nonadiabatic dynamics simulations on three-state crossing potential defined using two different sets of diabatic coupling constants.}
 \label{fig:curvature_three-state_crossing}
 \end{figure}
 Moving on to the trivial crossing models (Fig.~\ref{fig:curvature_trivial_crossing}), the $\kappa$\acrshort{fssh} method again fails to reproduce the correct state populations, while the traditional \acrshort{fssh} and \acrshort{lzsh} methods perform without issues. At a trivial crossing, the true nonadiabatic coupling vector theoretically approaches a singularity (a Dirac delta function), necessitating a complete 100\% population transfer. However, investigating the \acrshort{tdc} values reveals that the analytical form of the $\kappa$\acrshort{fssh} and $\lambda$\acrshort{fssh} approximations fundamentally caps the maximum coupling magnitude, producing a finite, broadened peak instead of a singularity. This insufficient coupling magnitude traps residual population in the excited state.
 \begin{figure}[!ht]
 \centering
-\includegraphics[width=\linewidth]{\filedirpath/images/images_large_ct5c01176_0004}
+\includegraphics[width=\linewidth]{parts/02-Original_Research_and_Contributions/chapters/02-Primary_Scientific_Contributions/sections/images/images_large_ct5c01176_0004}
 \caption{Nonadiabatic dynamics simulations on trivial crossing models.}
 \label{fig:curvature_trivial_crossing}
 \end{figure}
@@ -36,7 +36,7 @@ Moving on to the trivial crossing models (Fig.~\ref{fig:curvature_trivial_crossi
 Applying the algorithms to the 8-dimensional vibronic coupling model of the uracil cation, the catastrophic failures of the $\kappa$\acrshort{fssh} method seen in 1D models are somewhat dampened, as seen in Fig.~\ref{fig:curvature_uracil}. \acrshort{fssh}, \acrshort{lzsh}, and $\kappa$\acrshort{fssh} all qualitatively capture the ultrafast relaxation. This suggests that the complex topology of multidimensional crossing seams can be more forgiving than strict 1D models. However, quantitative discrepancies remain visible: while the reference \acrshort{fssh} correctly predicts negligible population transfer to the $D_3$ state, the curvature-driven approaches inaccurately leak population into $D_3$, once again indicating a structural limitation in capturing the correct coupling mechanisms in densely packed state manifolds.
 \begin{figure}[!ht]
 \centering
-\includegraphics[width=\linewidth]{\filedirpath/images/images_large_ct5c01176_0005}
+\includegraphics[width=\linewidth]{parts/02-Original_Research_and_Contributions/chapters/02-Primary_Scientific_Contributions/sections/images/images_large_ct5c01176_0005}
 \caption{Nonadiabatic dynamics simulations on vibronic coupling model of uracil cation.}
 \label{fig:curvature_uracil}
 \end{figure}
@@ -48,7 +48,7 @@ Because the $\kappa$\acrshort{fssh} method depends directly on the second time-d
 To salvage trajectory stability in such environments, this study introduced a novel discontinuity-blocking algorithm for the \acrshort{lzsh} method. When the \acrshort{lzsh} algorithm detects a minimum in the energy gap, it computes a ratio ($\alpha$) of the numerical second derivatives at the current and previous time steps. True avoided crossings exhibit smooth variations in curvature ($\alpha<0.3$), whereas discontinuities trigger abrupt changes ($\alpha>1.3$). By dynamically blocking hops when $\alpha>1.3$, the modified \acrshort{lzsh} algorithm successfully navigates rough \textit{ab initio} surfaces where $\kappa$\acrshort{fssh} unconditionally fails, as evidenced by its strong agreement with standard \acrshort{fssh} in Fig.~\ref{fig:curvature_stilbene}.
 \begin{figure}[!ht]
 \centering
-\includegraphics[width=\linewidth]{\filedirpath/images/images_large_ct5c01176_0006}
+\includegraphics[width=\linewidth]{parts/02-Original_Research_and_Contributions/chapters/02-Primary_Scientific_Contributions/sections/images/images_large_ct5c01176_0006}
 \caption{Nonadiabatic dynamics simulations on \textit{cis}-stilbene and \textit{trans}-azobenzene.}
 \label{fig:curvature_stilbene}
 \end{figure}

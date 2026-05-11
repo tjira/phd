@@ -1,4 +1,4 @@
-\section{\filetotitle}\label{sec:time_derivative_coupling}
+\section{Time Derivative Coupling}\label{sec:time_derivative_coupling}
 \acrshort{tdc} is a pivotal quantity in \acrshort{tsh} simulations because it enters the electronic equations of motion given in Eq.~\eqref{eq:tsh_eom}. In \textit{ab initio} molecular dynamics, the \acrshort{tdc} is commonly evaluated using the full \acrshort{nacv} as $\sigma_{IJ}=\symbf{v}\cdot\symbf{d}_{IJ}$, where $\symbf{v}$ is the nuclear velocity. When the dynamics evolves on analytic \acrshort{pes} or the \acrshort{nacv} is for any reason not available, it is often preferable to calculate the \acrshort{tdc} directly. The most straightforward strategy applies a finite-difference formula to the adiabatic wavefunctions
 \begin{equation}\label{eq:tdc_fd1}
 \sigma_{IJ}(t)=\frac{1}{\Delta t}\left(\Braket{\phi_I(t)\vert\phi_J(t+\Delta t)}-\Braket{\phi_I(t)\vert\phi_J(t)}\right)=\frac{1}{\Delta t}\left(\Braket{\phi_I(t)\vert\phi_J(t+\Delta t)}-\delta_{IJ}\right),

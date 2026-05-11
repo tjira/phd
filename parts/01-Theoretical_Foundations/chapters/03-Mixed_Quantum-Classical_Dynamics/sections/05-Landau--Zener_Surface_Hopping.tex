@@ -1,4 +1,4 @@
-\section{\filetotitle}\label{sec:landau_zener}
+\section{Landau--Zener Surface Hopping}\label{sec:landau_zener}
 We now move to a slightly different approach to nonadiabatic dynamics. Instead of propagating the electronic wavefunction along with the nuclear trajectories, we will use a solution of a simplified two-state problem to determine the population transfer. The Landau--Zener model is a simple model for nonadiabatic transitions between two electronic states during a nuclear passage through an avoided crossing. The total population transfer between the two states is then used to determine the probability of a surface hop. This approach is known as \acrfull{lzsh}. This idea seems very approximative, since we do not need the \acrshort{tdc} or the electronic wavefunction at all. However, it has been shown that \acrshort{lzsh} can yield results comparable to \acrshort{fssh} in variety of cases, while being computationally much cheaper. \supercite{10.1021/acs.jctc.0c00512}
 
 The Landau--Zener model, first proposed by Landau, Zener, Stueckelberg, and Majorana in 1932,\supercite{10.1016/B978-0-08-010586-4.50014-6,10.1098/rspa.1932.0165,10.5169/seals-110177,10.1007/BF02960953} is an exact solution to \acrshort{tdse} with the time-dependent Hamiltonian in the diabatic representation given by
@@ -47,10 +47,10 @@ Now, we want our final probability to be between 0 and 1, which means that we ha
 \centering
 \begin{subfigure}{.5\textwidth}
 \centering
-\includegraphics[width=.9\linewidth]{\filedirpath/images/lz_contour_counterclockwise}
+\includegraphics[width=.9\linewidth]{parts/01-Theoretical_Foundations/chapters/03-Mixed_Quantum-Classical_Dynamics/sections/images/lz_contour_counterclockwise}
 \end{subfigure}\begin{subfigure}{.5\textwidth}
 \centering
-\includegraphics[width=.9\linewidth]{\filedirpath/images/lz_contour_clockwise}
+\includegraphics[width=.9\linewidth]{parts/01-Theoretical_Foundations/chapters/03-Mixed_Quantum-Classical_Dynamics/sections/images/lz_contour_clockwise}
 \end{subfigure}
 \caption{Possible integration contours in the complex time plane for evaluating the Landau--Zener transition probability. Both contours yield the same result for the final population transfer.}
 \label{fig:landau_zener_contours}

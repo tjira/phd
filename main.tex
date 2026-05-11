@@ -12,7 +12,6 @@
 \documentclass[headsepline=true,parskip=half,12pt]{scrbook}\raggedbottom
 \title{Computational Strategies for Nonadiabatic Molecular Dynamics}\author{Tomáš \textsc{Jíra}}
 \usepackage{style}
-\input{frontmatter/functions}
 \begin{document}
 \ifnum\directlua{tex.print(os.getenv("ENTRY")=="1" and 1 or 0)}=1
     \includepdf[pages=-]{frontmatter/pdf/entry}
