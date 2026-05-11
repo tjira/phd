@@ -21,13 +21,13 @@
 \input{frontmatter/abstract}
 \tableofcontents
 \input{frontmatter/introduction}
-\include{parts/01-Theoretical_Foundations/main.tex}
-\include{parts/02-Original_Research_and_Contributions/main.tex}
-\makeatletter\def\toclevel@chapter{-1}\makeatother
+\include{parts/01-Theoretical_Foundations/main}
+\include{parts/02-Original_Research_and_Contributions/main}
+\bookmarksetup{startatroot}
 \input{frontmatter/conclusion}
-\appendix
+\backmatter\appendix
 \ifnum\directlua{tex.print(os.getenv("PAPERS")=="1" and 1 or 0)}=1
-    \input{appendices/01-Attached_Papers/main.tex}
+    \input{appendices/01-Attached_Papers/main}
 \fi
 \printglossary[type=\acronymtype]
 \printbibliography[heading=bibintoc,title={References}]
