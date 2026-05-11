@@ -1,1 +1,34 @@
 \section{\filetotitle}\label{sec:ehrenfest_dynamics}
+When the \acrshort{boa} fails, the nuclear and electronic degrees of freedom become coupled, and the dynamics of the system can no longer be described by a single potential energy surface. In this case, one needs to consider the full quantum dynamics of the system, which is usually computationally expensive. The Ehrenfest dynamics is one of the first mixed quantum-classical methods developed to describe the coupled dynamics of electrons and nuclei.
+
+In the Ehrenfest dynamics, we expand the wavefunction of the system in the instantaneous adiabatic basis as
+\begin{equation}
+\ket{\Phi(t)}=\sum_I c_I(t)\ket{\phi_I},
+\end{equation}
+where $\ket{\phi_I}$ are the adiabatic electronic states and $c_I(t)$ are the corresponding time-dependent coefficients. The evolution of the coefficients $c_I(t)$ is governed by Eq.~\eqref{eq:sh_tdse_coefs}, which describes the quantum dynamics of the electronic subsystem.
+
+The defining feature of the Ehrenfest dynamics is that the nuclei are treated classically, and their motion is determined by the expectation value of the force exerted by the electrons, written as
+\begin{equation}\label{eq:ehrenfest_nuclear_eom}
+\symbf{M}\ddot{\symbf{R}}=-\Braket{\Phi(t)\vert\nabla_{\symbf{R}}H_{\symrm{el}}\vert\Phi(t)}.
+\end{equation}
+We can, hovewer, rewrite the nuclear equations of motion in a more explicit form by substituting the expansion of $\ket{\Phi(t)}$ into the expression as
+\begin{equation}
+\symbf{M}\ddot{\symbf{R}}=-\sum_{IJ}c_I^\ast c_J\Braket{\phi_I\vert\nabla_{\symbf{R}}H_{\symrm{el}}\vert\phi_J}.
+\end{equation}
+This expression can be further simplified by noting the spatial gradient of the electronic Hamiltonian
+\begin{equation}
+\nabla_{\symbf{R}}H_{\symrm{el}}\ket{\phi_J}+H_{\symrm{el}}\ket{\nabla_{\symbf{R}}\phi_J}=\nabla_{\symbf{R}}E_J\ket{\phi_J}+E_J\ket{\nabla_{\symbf{R}}\phi_J}
+\end{equation}
+and projecting onto $\bra{\phi_I}$, yielding
+\begin{equation}
+\Braket{\phi_I\vert\nabla_{\symbf{R}}H_{\symrm{el}}\vert\phi_J}+E_I\Braket{\phi_I\vert\nabla_{\symbf{R}}\phi_J}=\nabla_{\symbf{R}}E_J\delta_{IJ}+E_J\Braket{\phi_I\vert\nabla_{\symbf{R}}\phi_J}.
+\end{equation}
+Recognizing the \acrshort{nacv} $\symbf{d}_{IJ}=\Braket{\phi_I\vert\nabla_{\symbf{R}}\phi_J}$ defined in Eq.~\eqref{eq:tdc_nacv} we can rewrite the Eq.~\eqref{eq:ehrenfest_nuclear_eom} as
+\begin{equation}
+\symbf{M}\ddot{\symbf{R}}=-\sum_I\vert c_I\vert^2\nabla_{\symbf{R}}E_I-\sum_{IJ}c_I^\ast c_J(E_J-E_I)\symbf{d}_{IJ},
+\end{equation}
+which are the Ehrenfest equations of motion for the nuclei. The first term on the right-hand side represents the average force from the potential energy surfaces weighted by the electronic populations, while the second term accounts for nonadiabatic coupling between different electronic states.
+
+Because the Ehrenfest dynamics relies solely on the expectation value of the force, it is entirely deterministic and rigorously conserves the total energy of the system without any stochastic elements. However, this mean-field treatment of the nuclear dynamics can not capture the correct wavepacket splitting. In a truly quantum mechanical picture, when the system passes through a region of strong nonadiabatic coupling, the nuclear wavepacket can split into components that evolve on different potential energy surfaces. The Ehrenfest dynamics, by averaging over the electronic states, fails to capture this splitting and instead predicts a single trajectory that is an average of the forces from all occupied electronic states.
+
+This fundamental limitation of the Ehrenfest dynamics serves as a motivation for the development of more sophisticated mixed quantum-classical methods, such as the \acrfull{tsh}, which can capture the correct wavepacket splitting by allowing for stochastic hops between different electronic states.
