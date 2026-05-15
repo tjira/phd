@@ -5,7 +5,7 @@ In \acrshort{tsh}, the nuclei follow Newton's equations of motion on a single ad
 \begin{equation}
 \symbf{M}\ddot{\symbf{R}}(t)=-\nabla_{\symbf{R}}E_I,
 \end{equation}
-where $\symbf{M}$ is the diagonal matrix with masses for each coordinate, $\symbf{R}(t)$ is nuclear geometry at time $t$, and $E_I$ is the electronic energy of the state $I$ at the nuclear configuration $\symbf{R}(t)$. Meanwhile, the electrons evolve according to the \acrshort{tdse}, with the electronic wavefunction $\ket{\Phi(t)}$ expanded in the instantaneous adiabatic eigenvectors of the electronic Hamiltonian $H_{\symrm{el}}$ as
+where $\symbf{M}$ is a diagonal matrix with masses for each coordinate, $\symbf{R}(t)$ is nuclear geometry at time $t$, and $E_I$ is the electronic energy of the state $I$ at the nuclear configuration $\symbf{R}(t)$. Meanwhile, the electrons evolve according to the \acrshort{tdse}, with the electronic wavefunction $\ket{\Phi(t)}$ expanded in the basis of instantaneous adiabatic eigenvectors of the electronic Hamiltonian $H_{\symrm{el}}$ as
 \begin{equation}
 \ket{\Phi(t)}=\sum_I c_I(t)\ket{\phi_I},
 \end{equation}
@@ -35,4 +35,4 @@ For electronic dynamics in Eq.~\eqref{eq:sh_tdse_coefs} to be unitary, the effec
 \begin{equation}\label{eq:tdc_nacv}
 \sigma_{IJ}=\Braket{\phi_I\vert\frac{\partial\phi_J}{\partial t}}=\dot{\symbf{R}}\cdot\Braket{\phi_I\vert\frac{\partial\phi_J}{\partial\symbf{R}}}=\symbf{v}\cdot\symbf{d}_{IJ},
 \end{equation}
-where $\symbf{v}=\dot{\symbf{R}}$ is the nuclear velocity and $\symbf{d}_{IJ}$ is the \acrfull{nacv}. Although many quantum‐chemistry packages provide \acrshort{nacv} and thus allow computation of the \acrshort{tdc} via $\sigma_{IJ}=\symbf{v}\cdot\symbf{d}_{IJ}$, \acrshort{nacv} can become ill-defined or numerically unstable near conical intersections (e.g., in multireference methods). In cases where a reliable \acrshort{nacv} is not available, one may instead employ a direct \acrshort{tdc} approximation using wavefunction overlaps.
+where $\symbf{v}=\dot{\symbf{R}}$ is the nuclear velocity and $\symbf{d}_{IJ}$ is the \acrfull{nacv}. Although many quantum‐chemistry packages provide \acrshort{nacv} and thus allow computation of the \acrshort{tdc} via $\sigma_{IJ}=\symbf{v}\cdot\symbf{d}_{IJ}$, \acrshort{nacv} can become ill-defined or numerically unstable near conical intersections (e.g., in multireference methods). In cases where a reliable \acrshort{nacv} is not available, one may instead employ a direct \acrshort{tdc} approximation using wavefunction overlaps, as discussed in the following sections.

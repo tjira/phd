@@ -7,7 +7,7 @@ For a time-independent Hamiltonian, the solution to the \acrshort{tdse} can be w
 \end{equation}
 The action of the operator $\e^{-\i tH}$ on the initial wavefunction $\ket{\Psi\left(0\right)}$ propagates the state from time $0$ to time $t$, carrying all the information about the time evolution of the system. Since $H$ is self-adjoint, the spectral theorem yields a unitary propagator, ensuring $\lvert\Psi(t)\rvert=\lvert\Psi(0)\rvert$. This exponential operator contains the complete description of how the system evolves with time. In practical applications, however, evaluating $\e^{-\i tH}$ analytically is rarely straightforward for nontrivial Hamiltonians, which is exactly the problem the Split-Operator method, originally utilized by Feit and Fleck, solves.\supercite{10.1063/1.447051}
 
-For an N-state system, the wavefunction in the diabatic basis can be written as
+For an $N$-state system, the wavefunction in the diabatic basis can be written as
 \begin{equation}\label{eq:diabatic_wavefunction}
 \Psi\left(\symbf{R},t\right)=\sum_{I=1}^N c_I\left(\symbf{R},t\right)\ket{\tilde\phi_I}
 \end{equation}
@@ -35,11 +35,13 @@ where $\Delta t$ is a fixed time step. Now, each individual short-time propagato
 \begin{equation}
 U(\Delta t)=\e^{-\i\frac{\Delta t}{2}\tilde{V}}\e^{-\i\Delta t\tilde{T}_{\symrm{n}}}\e^{-\i\frac{\Delta t}{2}\tilde{V}}+\mathcal{O}(\Delta t^3),
 \end{equation}
-which is valid for small $\Delta t$. Now we have everything we need to propagate the wavefunction in time. The formula for propagating the wavefunction from time $t$ to time $t+\Delta t$ is
+which is valid for small $\Delta t$.
+
+Now we have everything we need to propagate the wavefunction in time. The formula for propagating the wavefunction from time $t$ to time $t+\Delta t$ is
 \begin{equation}\label{eq:split_operator_propagation}
-\Psi\left(\symbf{R},t+\Delta t\right)=\e^{-\i\frac{\Delta t}{2}\tilde V}\mathcal{F}^{-1}\left\lbrace\e^{-\i\Delta t\tilde{T}_{\symrm{n}}}\mathcal{F}\left\lbrace\e^{-\i\frac{\Delta t}{2}\tilde V}\Psi\left(\symbf{R},t\right)\right\rbrace\right\rbrace,
+\Psi\left(\symbf{R},t+\Delta t\right)=\e^{-\i\frac{\Delta t}{2}\tilde V}\mathcal{F}^{-1}\left\lbrace\e^{-\i\Delta t\frac{\symbf{k}^2}{2m}}\mathcal{F}\left\lbrace\e^{-\i\frac{\Delta t}{2}\tilde V}\Psi\left(\symbf{R},t\right)\right\rbrace\right\rbrace,
 \end{equation}
-where $\tilde{T}_{\symrm{n}}$ is the kinetic operator in the momentum space, and $\tilde{V}$ is the potential operator in the position space. In a discrete grid representation these become matrices acting on the sampled wavefunction.
+where $\frac{\symbf{k}^2}{2m}$ is the kinetic operator in the momentum space, and $\tilde{V}$ is the potential operator in the position space. In a discrete grid representation these become matrices acting on the sampled wavefunction.
 \subsection{Crank--Nicolson Scheme}\label{sec:crank_nicolson_scheme}
 The Split-Operator method in Sec.~\ref{sec:split_operator_method} exploits the simple action of the kinetic and potential operators in Fourier and position representation, respectively, and approximates the short-time propagator by a symmetric factorization of $\e^{-\i\Delta t H}$. An alternative widely used time-integration scheme is the Crank--Nicolson method, which can be viewed as applying a rational (Padé) approximation to the propagator. This method was originally developed for solving the heat equation by Crank and Nicolson.\supercite{10.1017/S0305004100023197}
 
@@ -47,7 +49,7 @@ We again consider the \acrshort{tdse} for a time-independent, self-adjoint Hamil
 \begin{equation}\label{eq:tdse_cn}
 \i\ddt\ket{\Psi(t)}=H\ket{\Psi(t)},
 \end{equation}
-acting on the separable Hilbert space $\mathcal{H}$ introduced in Sec.~\ref{sec:hilbert_spaces_and_quantum_states}. Let $t_n=n\Delta t$ denote a uniform time grid with step $\Delta t>0$ and define
+acting on the separable Hilbert space $\mathcal{H}$ introduced in Sec.~\ref{sec:hilbert_spaces_and_quantum_states}. Let $t_n=n\Delta t$ denote an $n$-th time step on a uniform time grid with step $\Delta t>0$ and define
 \begin{equation}
 \ket{\Psi^n}:=\ket{\Psi(t_n)}.
 \end{equation}
@@ -64,11 +66,11 @@ where $I$ is the identity operator on $\mathcal{H}$. For each time step one solv
 
 Formally, Eq.~\eqref{eq:cn_linear_system} defines a one-step propagation
 \begin{equation}\label{eq:cn_propagator_operator}
-\ket{\Psi^{n+1}}=U_{\symrm{CN}}(\Delta t)\ket{\Psi^n},\qquad U_{\symrm{CN}}(\Delta t)=\left(I+\frac{i\Delta t}{2}H\right)^{-1}\left(I-\frac{\i\Delta t}{2}H\right).
+\ket{\Psi^{n+1}}=U_{\symrm{CN}}(\Delta t)\ket{\Psi^n},\qquad U_{\symrm{CN}}(\Delta t)=\left(I+\frac{\i\Delta t}{2}H\right)^{-1}\left(I-\frac{\i\Delta t}{2}H\right).
 \end{equation}
 The operator $U_{\symrm{CN}}(\Delta t)$ is equivalent to the $[1,1]$ Padé approximation to the exact propagator $e^{-\i\Delta t H}$:
 \begin{equation}
-U_{\symrm{CN}}(\Delta t)=\e^{-\i\Delta t H}+\mathcal{O}(\Delta t^3).
+\e^{-\i\Delta t H}=U_{\symrm{CN}}(\Delta t)+\mathcal{O}(\Delta t^3).
 \end{equation}
 Because $H$ is self-adjoint, $U_{\symrm{CN}}(\Delta t)$ is unitary so that $\lvert\Psi^{n+1}\rvert=\lvert\Psi^n\rvert$ and the total probability is conserved, as required by the unitary time evolution discussed in Sec.~\ref{sec:spectral_theory_in_hilbert_spaces}.
 \subsection{Imaginary Time Propagation}\label{sec:imaginary_time_propagation}
@@ -96,7 +98,7 @@ with real eigenvalues $E_I$ bounded from below. Expanding the initial state in t
 \begin{equation}\label{eq:wf_expansion_eigenstates}
 \ket{\Psi(0)}=\sum_I c_I(0)\ket{\phi_I},
 \end{equation}
-and substituting into Eq.~\eqref{eq:wf_it} yields
+where $c_I(0)=\braket{\phi_I\vert\Psi(0)}$ are the expansion coefficients at $t=0$, and substituting into Eq.~\eqref{eq:wf_it} yields
 \begin{equation}\label{eq:tdse_it_expansion}
 \ket{\Psi(\tau)}=\sum_I c_I(0)\e^{-\tau E_I}\ket{\phi_I}.
 \end{equation}

@@ -62,7 +62,7 @@ Rearranging Eq.~\eqref{eq:npi_matrix_equation} gives the formal solution for the
 \end{equation}
 This expression reduces to the Eq.~\eqref{eq:npi_tdc_final} in the two-state case. The matrix logarithm of a unitary matrix can be complex, so when implementing Eq.~\eqref{eq:npi_multistate_tdc}, one must ensure that the diagonal elements of $U$ are positive to obtain a real-valued \acrshort{tdc}.
 \subsection{The Baeck--An Scheme}\label{sec:baeck_an}
-The approximations for the \acrshort{tdc} according to Baeck and An use, contrary to the previous methods, physical approximation. The original idea is to approximate the \acrshort{nacv} between two states around the conical intersection by a simple model. Baeck and An came up with the expression\supercite{10.1063/1.4975323}
+The approximations for the \acrshort{tdc} according to Baeck and An use, contrary to the previous methods, physical approximations. The original idea is to approximate the \acrshort{nacv} between two states around the conical intersection by a simple model. Baeck and An came up with the expression\supercite{10.1063/1.4975323}
 \begin{equation}\label{eq:baeck_an_nacv}
 \symbf{d}_{IJ}^{\symrm{BA}}=\frac{1}{2}\sqrt{\frac{\symrm{d}^2Z_{IJ}}{\symrm{d}R^2}\frac{1}{Z_{IJ}}},
 \end{equation}
@@ -70,7 +70,7 @@ where $Z_{IJ}=\lvert E_J-E_I\rvert$ is the energy gap between adiabatic states $
 \begin{equation}\label{eq:lambda_tdc}
 \sigma_{IJ}^{\symrm{\lambda}}=\frac{1}{2}\sqrt{\left(\ddot Z_{IJ}-\frac{\ddot R}{\dot R}\dot Z_{IJ}\right)\frac{1}{Z_{IJ}}},
 \end{equation}
-which is not a widely used expression for the \acrshort{tdc} so we have taken the liberty to denote it by $\lambda$ superscript, calling it the $\lambda$\acrshort{tdc}.\supercite{10.1021/acs.jctc.5c01176} The more popular expression is obtained by neglecting the second term in the parenthesis of Eq.~\eqref{eq:lambda_tdc}, yielding
+which is not a widely used expression for the \acrshort{tdc} so I have taken the liberty to denote it by $\lambda$ superscript, calling it the $\lambda$\acrshort{tdc}.\supercite{10.1021/acs.jctc.5c01176} The more popular expression is obtained by neglecting the second term in the parenthesis of Eq.~\eqref{eq:lambda_tdc}, yielding
 \begin{equation}\label{eq:kappa_tdc}
 \sigma_{IJ}^{\kappa}=\frac{1}{2}\sqrt{\ddot Z_{IJ}\frac{1}{Z_{IJ}}},
 \end{equation}

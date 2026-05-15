@@ -1,11 +1,11 @@
 \section{Equations of Motion for Variational Ans\"atze}\label{sec:variational_principles_eom}
-Having introduced the variational principles in the previous section, we now apply them to derive equations of motion for specific variational ansatz. We will focus on Gaussian-based ansatz, which are widely used in quantum dynamics simulations due to their computational efficiency and ability to capture essential features of wavepacket evolution. We will also discuss the extension of these methods to non-adiabatic dynamics, where multiple electronic states are involved.
+Having introduced the variational principles in the previous section, we now apply them to derive equations of motion for specific variational ansatz. We will focus on Gaussian-based ansatz, which is widely used in quantum dynamics simulations due to their computational efficiency and ability to capture essential features of wavepacket evolution. We will also discuss the extension of these methods to non-adiabatic dynamics, where multiple electronic states are involved.
 \subsection{Single Gaussian Wavepacket Ansatz}
 We start with the simplest case of a single Gaussian wavepacket, which we will denote as $\ket{\Psi(t)}=\ket{G(\symbf{\alpha}(t))}$, where $\symbf{\alpha}(t)$ represents the set of parameters defining the Gaussian (e.g., center position, momentum, width). The Gaussian wavepacket we will use can be expressed as
 \begin{equation}
 \ket{G(\symbf{\alpha}(t))}=N\exp\left[\sum_j^D\left(-\frac{1}{2}\gamma_j(t)\left(R_j-q_j(t)\right)^2+\i p_j(t)\left(R_j-q_j(t)\right)\right)+\i\phi(t)\right],
 \end{equation}
-where $N$ is the normalization factor, $\symbf{\alpha}(t)$ include the center position $\symbf{q}(t)$, momentum $\symbf{p}(t)$, the complex width $\symbf{\gamma}(t)$ and the global phase factor $\phi(t)$. Should we consider the frozen Gaussian approximation, the parameter $\symbf{\gamma}(t)$ is kept constant in time, while in the thawed Gaussian approximation, it is allowed to evolve. By applying the \acrshort{dfvp} to this ansatz, we can derive equations of motion for the parameters $\symbf{\alpha}(t)$, which govern the evolution of the Gaussian wavepacket.
+where $N$ is the normalization factor, $D$ is the number of nuclear degrees of freedom, $R_j$ are the nuclear coordinates, and the parameters in $\symbf{\alpha}(t)$ include the center position $\symbf{q}(t)$, momentum $\symbf{p}(t)$, the complex width $\symbf{\gamma}(t)$ and the global phase factor $\phi(t)$. Should we consider the frozen Gaussian approximation, the parameter $\symbf{\gamma}(t)$ is kept constant in time, while in the thawed Gaussian approximation, it is allowed to evolve. By applying the \acrshort{dfvp} to this ansatz, we can derive equations of motion for the parameters $\symbf{\alpha}(t)$, which govern the evolution of the Gaussian wavepacket.
 \subsubsection{Frozen Gaussian Evolution}
 The first derived equations of motion will be for the frozen Gaussian, which means that the width of the gaussian wavepacket is fixed ($\dot{\symbf{\gamma}}(t)=0$). We will use the \acrshort{dfvp} in Eq.~\eqref{eq:dfvp_orthogonality_condition} to derive the equations of motion for the remaining parameters $\symbf{q}(t)$, $\symbf{p}(t)$ and $\phi(t)$. We will also restrict ourselves to the case of a single nuclear degree of freedom for simplicity, but the generalization to multiple dimensions is straightforward.
 
@@ -48,7 +48,7 @@ To improve the accuracy of the Gaussian wavepacket, we can allow the width param
 \begin{equation}\label{eq:gaussian_derivative_gamma}
 \ket{v_\gamma}:=\frac{\partial}{\partial \gamma}\ket{\Psi}=-\frac{1}{2}(R-q)^2\ket{\Psi}.
 \end{equation}
-We now require that the projection onto $\ket{v_\gamma}$ also vanishes, along with the projections onto $\ket{v_\phi}$, $\ket{v_q}$ and $\ket{v_p}$. Projecting onto $\ket{v_q}$ and $\ket{v_p}$ will yield the same equations of motion for $q(t)$ and $p(t)$ as in the frozen case, since the width parameter introduces only $\Braket{(R-q)^3}$ terms, which are zero. However, the projection onto $\ket{v_\phi}$ will now include an additional term and will yield
+We now require that the projection of the error vector $\ket{\epsilon}$ onto $\ket{v_\gamma}$ also vanishes, along with the projections onto $\ket{v_\phi}$, $\ket{v_q}$ and $\ket{v_p}$. Projecting onto $\ket{v_q}$ and $\ket{v_p}$ will yield the same equations of motion for $q(t)$ and $p(t)$ as in the frozen case, since the width parameter introduces only $\Braket{(R-q)^3}$ terms, which are zero. However, the projection onto $\ket{v_\phi}$ will now include an additional term and will yield
 \begin{align}
 \braket{v_\phi|\dot\Psi+\i H\Psi}&=0\\
 \braket{\Psi|\dot\Psi}&=-\i\braket{H}\\
@@ -80,7 +80,7 @@ which can be easily derived using the Stein's lemma. Putting everything together
 \end{equation}
 which shows that the width of the Gaussian wavepacket evolves according to a balance between the kinetic energy, which tends to spread the wavepacket, and the curvature of the \acrshort{pes}, which can either focus or defocus the wavepacket depending on its sign. The frozen and Thawed gaussian \acrshort{eom} were first derived by Heller in his paper on Gaussian wavepacket dynamics.~\supercite{10.1063/1.430620}
 \subsection{Variational Multiconfigurational Gaussian (vMCG) Approach}
-The \acrshort{vmcg} approach, first introduced by Worth, Robb and Burkhardt in 2004,\cite{10.1039/B314253A} extends the single Gaussian wavepacket ansatz to a linear combination of multiple Gaussian wavepackets, allowing for a more flexible representation of the wavefunction. In this approach, we slightly modify the ansatz of the Gaussian and remove the global phase factor, as it can be absorbed into the coefficients of the linear combination. The \acrshort{vmcg} ansatz can be expressed as
+The \acrshort{vmcg} approach, first introduced by Worth, Robb and Burkhardt in 2004,\supercite{10.1039/B314253A} extends the single Gaussian wavepacket ansatz to a linear combination of multiple Gaussian wavepackets, allowing for a more flexible representation of the wavefunction. In this approach, we slightly modify the ansatz of the Gaussian and remove the global phase factor, as it can be absorbed into the coefficients of the linear combination. The \acrshort{vmcg} ansatz can be expressed as
 \begin{equation}
 \ket{\Psi(t)}:=\sum_{j=1}^N c_j(t)\ket{G_j(\symbf{\alpha}_j(t))},
 \end{equation}
@@ -144,7 +144,7 @@ As for the equations of motion for the parameters $\symbf{\alpha}(t)$, they will
 C_{jl,k\beta}&=\rho_{jk}\Braket{\frac{\partial G_j}{\partial \alpha_{j,l}}|\frac{\vphantom{G_j}\partial G_k}{\partial\alpha_{k,\beta}}},\\
 Y_{jl}&=-\sum_{\vphantom{k}s=1}^{\vphantom{N_g}N_s}\sum_{k=1}^{N_g}c_{s,j}^\ast\left(\dot c_{s,k}\Braket{\frac{\partial G_j}{\partial\alpha_{j,l}}|G_k}+\i\sum_{u=1}^{N_s}c_{u,k}\Braket{\frac{\partial G_j}{\partial\alpha_{j,l}}|H_{su}|G_k}\right),
 \end{align}
-which allows us to express the equations of motion for the parameters $\symbf{\alpha}$ for the \acrshort{ssvmcg} method in a compact form as
+which allows us to express the equations of motion for the parameters $\symbf{\alpha}$ for the \acrshort{ss-vmcg} method in a compact form as
 \begin{equation}\label{eq:ssvmcg_eom_lambda}
 \symbf{C}\dot{\symbf{\alpha}}=\symbf{Y}.
 \end{equation}
