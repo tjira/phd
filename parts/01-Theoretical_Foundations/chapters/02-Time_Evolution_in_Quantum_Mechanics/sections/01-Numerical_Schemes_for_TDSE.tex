@@ -1,7 +1,7 @@
 \section{Numerical Schemes for TDSE}\label{sec:numerical_schemes_for_time_dependent_schrodinger_equation}
-This section focuses on numerical solutions to \acrshort{tdse}. In the described methods, we work in a position representation $\Psi\left(\symbf{R},t\right):=\braket{\symbf{R}\vert\Psi\left(t\right)}$. More importantly, we expand the wavefunction $\ket{\Psi\left(t\right)}$ in a set of diabatic basis functions $\lbrace\tilde\phi_I\rbrace_{I=1}^N$ defined in Sec.~\ref{sec:adiabatic_vs_diabatic_representation}, so that $\Psi\left(\symbf{R},t\right)$ is an $N$-component vector in an electronic diabatic subspace.
+This section focuses on numerical solutions to \gls{tdse}. In the described methods, we work in a position representation $\Psi\left(\symbf{R},t\right):=\braket{\symbf{R}\vert\Psi\left(t\right)}$. More importantly, we expand the wavefunction $\ket{\Psi\left(t\right)}$ in a set of diabatic basis functions $\lbrace\tilde\phi_I\rbrace_{I=1}^N$ defined in Sec.~\ref{sec:adiabatic_vs_diabatic_representation}, so that $\Psi\left(\symbf{R},t\right)$ is an $N$-component vector in an electronic diabatic subspace.
 \subsection{Split-Operator Method}\label{sec:split_operator_method}
-For a time-independent Hamiltonian, the solution to the \acrshort{tdse} can be written as
+For a time-independent Hamiltonian, the solution to the \gls{tdse} can be written as
 \begin{equation}\label{eq:tdse_propagator}
 \ket{\Psi\left(t\right)}=\e^{-\i tH}\ket{\Psi\left(0\right)}.
 \end{equation}
@@ -17,11 +17,11 @@ H=\tilde{T}_{\symrm{n}}+\tilde{V}=-\frac{1}{2m}\nabla_\mathbf{R}^2\otimes I_N+\t
 \end{equation}
 where $I_N$ is the identity operator on the $N$-dimensional diabatic electronic space,
 $\tilde{T}_{\symrm{n}}$ is the nuclear kinetic energy operator, and $\tilde{V}$ is the
-potential energy operator represented by an $N\times N$ matrix in the diabatic electronic basis. We aim to reduce the action of the propagator on the diabatic wavefunction in Eq.~\eqref{eq:diabatic_wavefunction} to a simple matrix multiplication. The main difficulty is the differential form of the kinetic operator in Eq.~\eqref{eq:diabatic_hamiltonian}. To handle this, we use a Fourier-based method for applying the kinetic operator $\tilde{T}_{\symrm{n}}$ on a wavefunction $\Psi\left(\symbf{R},t\right)$. Taking the \acrfull{ft} of $\tilde{T}_{\symrm{n}}\Psi\left(\symbf{R},t\right)$ yields
+potential energy operator represented by an $N\times N$ matrix in the diabatic electronic basis. We aim to reduce the action of the propagator on the diabatic wavefunction in Eq.~\eqref{eq:diabatic_wavefunction} to a simple matrix multiplication. The main difficulty is the differential form of the kinetic operator in Eq.~\eqref{eq:diabatic_hamiltonian}. To handle this, we use a Fourier-based method for applying the kinetic operator $\tilde{T}_{\symrm{n}}$ on a wavefunction $\Psi\left(\symbf{R},t\right)$. Taking the \gls{ft} of $\tilde{T}_{\symrm{n}}\Psi\left(\symbf{R},t\right)$ yields
 \begin{equation}\label{eq:kinetic_fourier_method}
 \mathcal{F}\left\lbrace \tilde{T}_{\symrm{n}}\Psi\left(\symbf{R},t\right)\right\rbrace=\mathcal{F}\left\lbrace-\frac{1}{2m}\frac{\partial^2}{\partial\symbf{R}^2}\Psi\left(\symbf{R},t\right)\right\rbrace=\frac{\symbf{k}^2}{2m}\mathcal{F}\left\lbrace\Psi\left(\symbf{R},t\right)\right\rbrace,
 \end{equation}
-where $\symbf{k}$ are the coordinates in the Fourier space. In other words, to apply the kinetic operator on the wavefunction, we need to \acrshort{ft} the wavefunction, multiply it by $\frac{\symbf{k}^2}{2m}$, and then apply the \acrfull{ift}. In Fourier space, $\tilde{T}_{\symrm{n}}$ becomes a diagonal multiplication operator $\frac{\symbf{k}^2}{2m}$. For notational simplicity we denote both the coordinate-space operator and its Fourier-space representation by the same symbol. This method is computationally efficient, since the \acrshort{ft} can be done using the \acrfull{fft} algorithm, which has a complexity of $\mathcal{O}(N\log N)$, where $N$ is the number of grid points (contrary to the straightforward \acrfull{dft} with $\mathcal{O}(N^2)$ complexity).
+where $\symbf{k}$ are the coordinates in the Fourier space. In other words, to apply the kinetic operator on the wavefunction, we need to \gls{ft} the wavefunction, multiply it by $\frac{\symbf{k}^2}{2m}$, and then apply the \gls{ift}. In Fourier space, $\tilde{T}_{\symrm{n}}$ becomes a diagonal multiplication operator $\frac{\symbf{k}^2}{2m}$. For notational simplicity we denote both the coordinate-space operator and its Fourier-space representation by the same symbol. This method is computationally efficient, since the \gls{ft} can be done using the \gls{fft} algorithm, which has a complexity of $\mathcal{O}(N\log N)$, where $N$ is the number of grid points (contrary to the straightforward \gls{dft} with $\mathcal{O}(N^2)$ complexity).
 
 A remaining challenge is the non-commutativity of the potential and kinetic operators. Because $\tilde{V}$ and $\tilde{T}_{\symrm{n}}$ do not commute we cannot factorize the propagator as
 \begin{equation}
@@ -45,7 +45,7 @@ where $\frac{\symbf{k}^2}{2m}$ is the kinetic operator in the momentum space, an
 \subsection{Crank--Nicolson Scheme}\label{sec:crank_nicolson_scheme}
 The Split-Operator method in Sec.~\ref{sec:split_operator_method} exploits the simple action of the kinetic and potential operators in Fourier and position representation, respectively, and approximates the short-time propagator by a symmetric factorization of $\e^{-\i\Delta t H}$. An alternative widely used time-integration scheme is the Crank--Nicolson method, which can be viewed as applying a rational (Padé) approximation to the propagator. This method was originally developed for solving the heat equation by Crank and Nicolson.\supercite{10.1017/S0305004100023197}
 
-We again consider the \acrshort{tdse} for a time-independent, self-adjoint Hamiltonian $H$,
+We again consider the \gls{tdse} for a time-independent, self-adjoint Hamiltonian $H$,
 \begin{equation}\label{eq:tdse_cn}
 \i\ddt\ket{\Psi(t)}=H\ket{\Psi(t)},
 \end{equation}
@@ -76,7 +76,7 @@ Because $H$ is self-adjoint, $U_{\symrm{CN}}(\Delta t)$ is unitary so that $\lve
 \subsection{Imaginary Time Propagation}\label{sec:imaginary_time_propagation}
 Imaginary time propagation is a numerical technique for obtaining the ground state of a quantum system by evolving it in imaginary time instead of real time. By replacing the real time variable by an imaginary one, contributions from higher-energy eigenstates are suppressed exponentially faster than that of the ground state, so that repeated propagation and renormalization project an initial state onto the ground state. As with real-time propagation, its practical applicability is restricted by the cost of repeatedly applying the Hamiltonian to the wavefunction. First applications of imaginary time propagation in quantum chemistry were made by Kosloff.\supercite{10.1021/j100319a003}
 
-We again consider the \acrshort{tdse} for a time-independent, self-adjoint Hamiltonian
+We again consider the \gls{tdse} for a time-independent, self-adjoint Hamiltonian
 $H$ acting on a vector from Hilbert space $\mathcal{H}$,
 \begin{equation}\label{eq:tdse_it_real}
 \i\ddt\ket{\Psi(t)}=H\ket{\Psi(t)}.

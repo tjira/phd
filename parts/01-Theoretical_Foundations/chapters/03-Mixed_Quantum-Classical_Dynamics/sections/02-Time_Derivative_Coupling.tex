@@ -1,15 +1,15 @@
 \section{Time Derivative Coupling}\label{sec:time_derivative_coupling}
-\acrshort{tdc} is a pivotal quantity in \acrshort{tsh} simulations because it enters the electronic equations of motion given in Eq.~\eqref{eq:tsh_eom}. In \textit{ab initio} molecular dynamics, the \acrshort{tdc} is commonly evaluated using the full \acrshort{nacv} as $\sigma_{IJ}=\symbf{v}\cdot\symbf{d}_{IJ}$, where $\symbf{v}$ is the nuclear velocity. When the dynamics evolves on analytic \acrshort{pes} or the \acrshort{nacv} is for any reason not available, it is often preferable to calculate the \acrshort{tdc} directly. The most straightforward strategy applies a finite-difference formula to the adiabatic wavefunctions
+\gls{tdc} is a pivotal quantity in \gls{tsh} simulations because it enters the electronic equations of motion given in Eq.~\eqref{eq:tsh_eom}. In \textit{ab initio} molecular dynamics, the \gls{tdc} is commonly evaluated using the full \gls{nacv} as $\sigma_{IJ}=\symbf{v}\cdot\symbf{d}_{IJ}$, where $\symbf{v}$ is the nuclear velocity. When the dynamics evolves on analytic \gls{pes} or the \gls{nacv} is for any reason not available, it is often preferable to calculate the \gls{tdc} directly. The most straightforward strategy applies a finite-difference formula to the adiabatic wavefunctions
 \begin{equation}\label{eq:tdc_fd1}
 \sigma_{IJ}(t)=\frac{1}{\Delta t}\left(\Braket{\phi_I(t)\vert\phi_J(t+\Delta t)}-\Braket{\phi_I(t)\vert\phi_J(t)}\right)=\frac{1}{\Delta t}\left(\Braket{\phi_I(t)\vert\phi_J(t+\Delta t)}-\delta_{IJ}\right),
 \end{equation}
-with $\Delta t$ a small time step. When analytic \acrshort{pes} is available, the finite-difference estimate of the \acrshort{tdc} is straightforward to implement. In \textit{ab initio} molecular dynamics, however, it is usually more practical to recover this quantity from the non-adiabatic coupling vector, which most electronic-structure packages provide natively. The naïve first-order finite-difference formula suffers from well-known deficiencies: its truncation error scales linearly with the time step and it is highly sensitive to numerical noise. A simple remedy is to adopt the second-order approximation
+with $\Delta t$ a small time step. When analytic \gls{pes} is available, the finite-difference estimate of the \gls{tdc} is straightforward to implement. In \textit{ab initio} molecular dynamics, however, it is usually more practical to recover this quantity from the \gls{nacv}, which most electronic-structure packages provide natively. The naïve first-order finite-difference formula suffers from well-known deficiencies: its truncation error scales linearly with the time step and it is highly sensitive to numerical noise. A simple remedy is to adopt the second-order approximation
 \begin{equation}\label{eq:tdc_fd2}
 \sigma_{IJ}(t)=\frac{1}{2\Delta t}\left(\Braket{\phi_I(t)\vert\phi_J(t+\Delta t)}-\Braket{\phi_I(t)\vert\phi_J(t-\Delta t)}\right).
 \end{equation}
-Although second-order accurate, the approximation still retains significant shortcomings. In particular, it still violates the fundamental antisymmetry requirement, $\sigma_{IJ}^\ast\neq-\sigma_{JI}$, undermining the Hermiticity of the electronic Hamiltonian. The following sections tackle these deficiencies and introduce more accurate, numerically robust strategies for evaluating the \acrshort{tdc}.
+Although second-order accurate, the approximation still retains significant shortcomings. In particular, it still violates the fundamental antisymmetry requirement, $\sigma_{IJ}^\ast\neq-\sigma_{JI}$, undermining the Hermiticity of the electronic Hamiltonian. The following sections tackle these deficiencies and introduce more accurate, numerically robust strategies for evaluating the \gls{tdc}.
 \subsection{The Hammes-Schiffer Tully Scheme}\label{sec:hammes_schiffer_tully_scheme}
-The \acrfull{hst}\supercite{10.1063/1.467455} scheme remedies the antisymmetry defect of Eq.~\eqref{eq:tdc_fd1} and Eq.~\eqref{eq:tdc_fd2}, making the electronic Hamiltonian Hermitian. To that end we first introduce a midpoint approximation for each adiabatic eigenstate $\ket{\phi_I}$, obtained by linear interpolation between its values at the bracketing time slices
+The \gls{hst}\supercite{10.1063/1.467455} scheme remedies the antisymmetry defect of Eq.~\eqref{eq:tdc_fd1} and Eq.~\eqref{eq:tdc_fd2}, making the electronic Hamiltonian Hermitian. To that end we first introduce a midpoint approximation for each adiabatic eigenstate $\ket{\phi_I}$, obtained by linear interpolation between its values at the bracketing time slices
 \begin{equation}\label{eq:hst_wfn}
 \Ket{\phi_I\left(t+\frac{\Delta t}{2}\right)}=\frac{1}{2}\left(\Ket{\phi_I(t+\Delta t)}+\Ket{\phi_I(t)}\right).
 \end{equation}
@@ -17,13 +17,13 @@ This midpoint state is not strictly normalized, a fully norm-preserving variant 
 \begin{equation}\label{eq:hst_dwfn}
 \Ket{\frac{\partial\phi_I}{\partial t}\left(t+\frac{\Delta t}{2}\right)}=\frac{1}{\Delta t}\left(\Ket{\phi_I(t+\Delta t)}-\Ket{\phi_I(t)}\right).
 \end{equation}
-The \acrshort{tdc} $\sigma_{IJ}=\Braket{\phi_I\vert\frac{\partial \phi_J}{\partial t}}$ at a time $t+\frac{\Delta t}{2}$ is then formed as an overlap between the expressions in Eq.~\eqref{eq:hst_wfn} and Eq.~\eqref{eq:hst_dwfn}:
+The \gls{tdc} $\sigma_{IJ}=\Braket{\phi_I\vert\frac{\partial \phi_J}{\partial t}}$ at a time $t+\frac{\Delta t}{2}$ is then formed as an overlap between the expressions in Eq.~\eqref{eq:hst_wfn} and Eq.~\eqref{eq:hst_dwfn}:
 \begin{equation}\label{eq:hst_tdc}
 \sigma_{IJ}\left(t+\frac{\Delta t}{2}\right)=\frac{1}{2\Delta t}\left(\Braket{\phi_I(t)\vert\phi_J(t+\Delta t)}-\Braket{\phi_I(t+\Delta t)\vert\phi_J(t)}\right).
 \end{equation}
-The \acrshort{hst} scheme in Eq.~\eqref{eq:hst_tdc} is a finite-difference approximation of the \acrshort{tdc}, which is also antisymmetric, i.e., $\sigma_{IJ}^\ast=-\sigma_{JI}$. The scheme is numerically stable, but it does not preserve the norm of the adiabatic wavefunction in between the timesteps. Any rapidly varying wavefunction will suffer from a significant normalization error, which can lead to unphysical results. Such a case occurs for two diabatic surfaces coupled by zero diabatic interaction: in the adiabatic basis the exact \acrshort{tdc} diverges, yet the \acrshort{hst} formula collapses to zero, predicting no population transfer. To address this issue, we can apply a \acrfull{npi} to the adiabatic wavefunction, which is discussed in the next section.
+The \gls{hst} scheme in Eq.~\eqref{eq:hst_tdc} is a finite-difference approximation of the \gls{tdc}, which is also antisymmetric, i.e., $\sigma_{IJ}^\ast=-\sigma_{JI}$. The scheme is numerically stable, but it does not preserve the norm of the adiabatic wavefunction in between the timesteps. Any rapidly varying wavefunction will suffer from a significant normalization error, which can lead to unphysical results. Such a case occurs for two diabatic surfaces coupled by zero diabatic interaction: in the adiabatic basis the exact \gls{tdc} diverges, yet the \gls{hst} formula collapses to zero, predicting no population transfer. To address this issue, we can apply a \gls{npi} to the adiabatic wavefunction, which is discussed in the next section.
 \subsection{The Norm-Preserving Interpolation}\label{sec:norm_preserving_interpolation}
-The \acrshort{npi} method improves upon the \acrshort{hst} scheme by ensuring that the interpolated adiabatic wavefunctions remain normalized at all times.\supercite{10.1021/jz5009449,10.1021/acs.jctc.6b00673} This might seem like a minor technical detail, but it has significant implications for the accuracy and stability of the \acrshort{tdc} evaluation, especially in scenarios involving rapidly varying wavefunctions or near-degenerate states.
+The \gls{npi} method improves upon the \gls{hst} scheme by ensuring that the interpolated adiabatic wavefunctions remain normalized at all times.\supercite{10.1021/jz5009449,10.1021/acs.jctc.6b00673} This might seem like a minor technical detail, but it has significant implications for the accuracy and stability of the \gls{tdc} evaluation, especially in scenarios involving rapidly varying wavefunctions or near-degenerate states.
 
 We start with the two-state case for simplicity. Assume we have two normalized adiabatic states $\ket{\phi_1(t)}$ and $\ket{\phi_2(t)}$ from the Hilbert space $\mathcal{H}$ at time $t$. Our integration time step is $\Delta t$. We can write all the intermediate states between $t$ and $t+\Delta t$ as
 \begin{equation}\label{eq:npi_interpolation}
@@ -38,43 +38,43 @@ where
 U_{IJ}\left(t+\Delta t\right)=\Braket{\phi_I(t)\vert\phi_J(t+\Delta t)}.
 \end{equation}
 We could easily verify that the matrix $U(\tau)$ is unitary for all $\tau\in[t,t+\Delta t]$ and thus preserves the normalization of the states.
-Using the interpolation in Eq.~\eqref{eq:npi_interpolation} and the unitary transformation in Eq.~\eqref{eq:npi_unitary_transform}, we can now compute the \acrshort{tdc} in arbitrary time $\tau\in[t,t+\Delta t]$ as
+Using the interpolation in Eq.~\eqref{eq:npi_interpolation} and the unitary transformation in Eq.~\eqref{eq:npi_unitary_transform}, we can now compute the \gls{tdc} in arbitrary time $\tau\in[t,t+\Delta t]$ as
 \begin{equation}\label{eq:npi_overlap}
 \sigma_{IJ}(\tau)=\Braket{\phi_I(t)\vert U^\dagger(\tau)\frac{\partial}{\partial\tau}U(\tau)\vert\phi_J(t)}.
 \end{equation}
-Averaging over the interval $[t,t+\Delta t]$ gives the final \acrshort{npi} expression for the \acrshort{tdc}
+Averaging over the interval $[t,t+\Delta t]$ gives the final \gls{npi} expression for the \gls{tdc}
 \begin{equation}\label{eq:npi_tdc_final}
 \sigma_{IJ}=\frac{1}{\Delta t}\int_t^{t+\Delta t}\Braket{\phi_I(t)\vert U^\dagger(\tau)\frac{\partial}{\partial\tau}U(\tau)\vert\phi_J(t)}\symrm{d}\tau.
 \end{equation}
-We explicitly do not specify the time argument of $\sigma_{IJ}$ in Eq.~\eqref{eq:npi_tdc_final} because the \acrshort{npi} \acrshort{tdc} is not evaluated at a specific time but rather averaged over the entire time step. The time integral in Eq.~\eqref{eq:npi_tdc_final} can be evaluated analytically, yielding a closed-form expression for the \acrshort{npi} \acrshort{tdc} and can be seen in Supporting Information of Ref.~\cite{10.1021/jz5009449}.
+We explicitly do not specify the time argument of $\sigma_{IJ}$ in Eq.~\eqref{eq:npi_tdc_final} because the \gls{npi} \gls{tdc} is not evaluated at a specific time but rather averaged over the entire time step. The time integral in Eq.~\eqref{eq:npi_tdc_final} can be evaluated analytically, yielding a closed-form expression for the \gls{npi} \gls{tdc} and can be seen in Supporting Information of Ref.~\cite{10.1021/jz5009449}.
 
-We can now start thinking about generalizing the \acrshort{npi} scheme to more than two states. First, let's differentiate overlap matrix $U_{IJ}$ in Eq.~\eqref{eq:npi_unitary_matrix} with respect to $\Delta t$ to obtain
+We can now start thinking about generalizing the \gls{npi} scheme to more than two states. First, let's differentiate overlap matrix $U_{IJ}$ in Eq.~\eqref{eq:npi_unitary_matrix} with respect to $\Delta t$ to obtain
 \begin{equation}\label{eq:npi_overlap_derivative}
 \frac{\symrm{d}U_{IJ}}{\symrm{d}\Delta t}=\Braket{\phi_I(t)\vert\frac{\symrm{d}\phi_J(t+\Delta t)}{\symrm{d}\Delta t}}=\sum_K\Braket{\phi_I(t)\vert\phi_K(t+\Delta t)}\Braket{\phi_K(t+\Delta t)\vert\frac{\symrm{d}\phi_J(t+\Delta t)}{\symrm{d}\Delta t}},
 \end{equation}
-where on the right-hand side we have inserted a complete set of states at time $t+\Delta t$. We can now identify the last term in Eq.~\eqref{eq:npi_overlap_derivative} as the \acrshort{tdc} at time $t+\Delta t$ and rearrange to obtain a matrix equation for the \acrshort{tdc} in terms of the overlap matrix and its derivative
+where on the right-hand side we have inserted a complete set of states at time $t+\Delta t$. We can now identify the last term in Eq.~\eqref{eq:npi_overlap_derivative} as the \gls{tdc} at time $t+\Delta t$ and rearrange to obtain a matrix equation for the \gls{tdc} in terms of the overlap matrix and its derivative
 \begin{equation}\label{eq:npi_matrix_equation}
 \dot U=U\sigma\implies U(t+\Delta t)=e^{\int_t^{t+\Delta t}\sigma\symrm{d}t'}.
 \end{equation}
-Rearranging Eq.~\eqref{eq:npi_matrix_equation} gives the formal solution for the multistate \acrshort{npi} \acrshort{tdc}
+Rearranging Eq.~\eqref{eq:npi_matrix_equation} gives the formal solution for the multistate \gls{npi} \gls{tdc}
 \begin{equation}\label{eq:npi_multistate_tdc}
 \sigma=\frac{1}{\Delta t}\ln\left(U(t+\Delta t)\right).
 \end{equation}
-This expression reduces to the Eq.~\eqref{eq:npi_tdc_final} in the two-state case. The matrix logarithm of a unitary matrix can be complex, so when implementing Eq.~\eqref{eq:npi_multistate_tdc}, one must ensure that the diagonal elements of $U$ are positive to obtain a real-valued \acrshort{tdc}.
+This expression reduces to the Eq.~\eqref{eq:npi_tdc_final} in the two-state case. The matrix logarithm of a unitary matrix can be complex, so when implementing Eq.~\eqref{eq:npi_multistate_tdc}, one must ensure that the diagonal elements of $U$ are positive to obtain a real-valued \gls{tdc}.
 \subsection{The Baeck--An Scheme}\label{sec:baeck_an}
-The approximations for the \acrshort{tdc} according to Baeck and An use, contrary to the previous methods, physical approximations. The original idea is to approximate the \acrshort{nacv} between two states around the conical intersection by a simple model. Baeck and An came up with the expression\supercite{10.1063/1.4975323}
+The approximations for the \gls{tdc} according to Baeck and An use, contrary to the previous methods, physical approximations. The original idea is to approximate the \gls{nacv} between two states around the \gls{ci} by a simple model. Baeck and An came up with the expression\supercite{10.1063/1.4975323}
 \begin{equation}\label{eq:baeck_an_nacv}
 \symbf{d}_{IJ}^{\symrm{BA}}=\frac{1}{2}\sqrt{\frac{\symrm{d}^2Z_{IJ}}{\symrm{d}R^2}\frac{1}{Z_{IJ}}},
 \end{equation}
-where $Z_{IJ}=\lvert E_J-E_I\rvert$ is the energy gap between adiabatic states $I$ and $J$. From this expression for the \acrshort{nacv}, we can directly obtain the \acrshort{tdc} using chain rule as
+where $Z_{IJ}=\lvert E_J-E_I\rvert$ is the energy gap between adiabatic states $I$ and $J$. From this expression for the \gls{nacv}, we can directly obtain the \gls{tdc} using chain rule as
 \begin{equation}\label{eq:lambda_tdc}
 \sigma_{IJ}^{\symrm{\lambda}}=\frac{1}{2}\sqrt{\left(\ddot Z_{IJ}-\frac{\ddot R}{\dot R}\dot Z_{IJ}\right)\frac{1}{Z_{IJ}}},
 \end{equation}
-which is not a widely used expression for the \acrshort{tdc} so I have taken the liberty to denote it by $\lambda$ superscript, calling it the $\lambda$\acrshort{tdc}.\supercite{10.1021/acs.jctc.5c01176} The more popular expression is obtained by neglecting the second term in the parenthesis of Eq.~\eqref{eq:lambda_tdc}, yielding
+which is not a widely used expression for the \gls{tdc} so I have taken the liberty to denote it by $\lambda$ superscript, calling it the $\lambda$\gls{tdc}.\supercite{10.1021/acs.jctc.5c01176} The more popular expression is obtained by neglecting the second term in the parenthesis of Eq.~\eqref{eq:lambda_tdc}, yielding
 \begin{equation}\label{eq:kappa_tdc}
 \sigma_{IJ}^{\kappa}=\frac{1}{2}\sqrt{\ddot Z_{IJ}\frac{1}{Z_{IJ}}},
 \end{equation}
-which is called the $\kappa$\acrshort{tdc}.\supercite{10.1021/acs.jctc.1c01080,10.1021/acs.jctc.3c00813,10.12688/openreseurope.13624.2} Both expressions in Eq.~\eqref{eq:lambda_tdc} and Eq.~\eqref{eq:kappa_tdc} have been shown to perform similarly in practice,\supercite{10.1021/acs.jctc.5c01176} with the $\kappa$\acrshort{tdc} being slightly more popular due to its simplicity. Both expressions diverge as $Z_{IJ}\to 0$, which is physically correct behavior for the \acrshort{tdc} near conical intersections. However, we must be careful when implementing these expressions to ensure numerical stability, especially the $\lambda$\acrshort{tdc} in Eq.~\eqref{eq:lambda_tdc}, since it involves division by the nuclear velocity $\dot R$.
+which is called the $\kappa$\gls{tdc}.\supercite{10.1021/acs.jctc.1c01080,10.1021/acs.jctc.3c00813,10.12688/openreseurope.13624.2} Both expressions in Eq.~\eqref{eq:lambda_tdc} and Eq.~\eqref{eq:kappa_tdc} have been shown to perform similarly in practice,\supercite{10.1021/acs.jctc.5c01176} with the $\kappa$\gls{tdc} being slightly more popular due to its simplicity. Both expressions diverge as $Z_{IJ}\to 0$, which is physically correct behavior for the \gls{tdc} near \glspl{ci}. However, we must be careful when implementing these expressions to ensure numerical stability, especially the $\lambda$\gls{tdc} in Eq.~\eqref{eq:lambda_tdc}, since it involves division by the nuclear velocity $\dot R$.
 
 % These approximations have gained popularity in recent years due to their simplicity, but it has been shown that they can lead to significant errors in certain scenarios, especially when the assumptions underlying their derivation are not met. Therefore, while they can be useful tools in the computational chemist's toolkit, they should be applied with caution and validated against more accurate methods whenever possible.\supercite{10.1021/acs.jctc.5c01176}
-These approximations have gained popularity since they only require the adiabatic energy gap and its second derivative, which are often more readily available than the full \acrshort{nacv}. However, it has been shown that they can lead to significant errors in certain scenarios, especially when the assumptions underlying their derivation are not met. Therefore, while they can be useful, they should be applied with caution and validated against more accurate methods whenever possible.\supercite{10.1021/acs.jctc.5c01176}
+These approximations have gained popularity since they only require the adiabatic energy gap and its second derivative, which are often more readily available than the full \gls{nacv}. However, it has been shown that they can lead to significant errors in certain scenarios, especially when the assumptions underlying their derivation are not met. Therefore, while they can be useful, they should be applied with caution and validated against more accurate methods whenever possible.\supercite{10.1021/acs.jctc.5c01176}
