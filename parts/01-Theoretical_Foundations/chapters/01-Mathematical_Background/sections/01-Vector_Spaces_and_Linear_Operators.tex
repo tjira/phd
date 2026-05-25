@@ -53,7 +53,7 @@ Every vector in a vector space can be written uniquely as a linear combination o
 \subsection{Normed, Inner Product and Complete Vector Space}\label{sec:normed_inner_product_complete_vector_space}
 To introduce geometric concepts into vector spaces, we first define the normed vector space.
 \begin{definition}[Normed Vector Space]
-A normed vector space $(V,\lvert\cdot\rvert)$ is a vector space $V$ over a field $F$ (here, $F$ is $\mathbb{R}$ or $\mathbb{C}$) equipped with a norm, which is a function $\lvert\cdot\rvert:V\to\left[0,\infty\right)\subset\mathbb{R}$ that satisfies the following properties for all $\symbf{u},\symbf{v}\in V$ and all scalars $a\in F$:
+A normed vector space $(V,\lvert\cdot\rvert)$ is a vector space $V$ over a field $F$ (here, $F$ is $\mathbb{R}$ or $\mathbb{C}$) equipped with a norm, which is a function $\lvert\cdot\rvert:V\to\left[0,\infty\right)$ that satisfies the following properties for all $\symbf{u},\symbf{v}\in V$ and all scalars $a\in F$:
 \begin{enumerate}[label=\arabic*.]
 \item Non-negativity: $\lvert\symbf{u}\rvert\geq 0$, with equality iff $\symbf{u}=\symbf{0}$
 \item Absolute scalability: $\lvert a\symbf{u}\rvert=\lvert a\rvert\lvert\symbf{u}\rvert$
@@ -118,7 +118,7 @@ It is customary to choose a normalized representative $\ket{\psi}$ with
 \begin{equation}
 \braket{\psi\vert\psi}=1,
 \end{equation}
-in which case $\ket{\psi}$ is called a (normalized) state vector. The overall phase $e^{i\theta}\ket{\psi}$ has no observable physical effect. For a more complete bridge Hilbert space and quantum states, see Ref.~\cite{1021172445}.
+in which case $\ket{\psi}$ is called a (normalized) state vector. The overall phase $e^{i\theta}\ket{\psi}$ has no observable physical effect. For a more complete bridge  of Hilbert spaces and quantum states, see Ref.~\cite{1021172445}.
 
 In most physical applications one assumes that $\mathcal{H}$ is separable, i.e. it possesses a countable orthonormal basis $\lbrace\ket{n}\rbrace_{n\in\mathbb{N}_0}$. Any vector $\ket{\psi}\in\mathcal{H}$ can then be then expanded as
 \begin{equation}
@@ -150,9 +150,9 @@ a_{ij}=\langle\symbf{e}_i,A\symbf{e}_j\rangle.
 \end{equation}
 This equation is consistent with Def.~\ref{def:inner_product}, where we adopt the physics convention for the inner product. Note that the matrix representation of an operator depends on the choice of basis. If $U$ is a change of basis matrix from a new basis $\lbrace\symbf{f}_i\rbrace_{i=1}^n$ to the old basis $\lbrace\symbf{e}_i\rbrace_{i=1}^n$ (i.e., $\symbf{e}_i=\sum_{j=1}^n U_{ji}\symbf{f}_j$), the matrix representation of $A$ in the new basis is given by
 \begin{equation}\label{eq:change_of_basis}
-[A]_{\symbf{e}}=U^{-1}[A]_{\symbf{f}}U.
+[A]_{\symbf{e}}=U^{-1}[A]_{\symbf{f}}U,
 \end{equation}
-We now get to the concept of eigenvalues and eigenvectors, which lie at the heart of quantum mechanics, as they correspond to measurable quantities and their associated states. Every observable in quantum mechanics is represented by a linear operator, and the possible measurement outcomes are given by its eigenvalues.
+where $[A]_{\symbf{e}}$ and $[A]_{\symbf{f}}$ are the matrix representations of $A$ in the old and new bases, respectively. We now get to the concept of eigenvalues and eigenvectors, which lie at the heart of quantum mechanics, as they correspond to measurable quantities and their associated states. Every observable in quantum mechanics is represented by a linear operator, and the possible measurement outcomes are given by its eigenvalues.
 \begin{definition}[Eigenvalues and Eigenvectors]
 A scalar $\lambda\in F$ is called an eigenvalue of a linear operator $A:V\to V$ if there exists a non-zero vector $\symbf{v}\in V$ such that $A\symbf{v}=\lambda\symbf{v}$. The vector $\symbf{v}$ is called an eigenvector associated with the eigenvalue $\lambda$. For a finite-dimensional vector space, the set of all eigenvalues of $A$ is called the spectrum of $A$. The subspace $E_\lambda=\symrm{ker}(A-\lambda I)$ is called the eigenspace associated with the eigenvalue $\lambda$, where $I$ is the identity operator on $V$.
 \end{definition}
