@@ -1,11 +1,11 @@
 \section{Equations of Motion for Variational Ans\"atze}\label{sec:variational_principles_eom}
-Having introduced the variational principles in the previous section, we now apply them to derive equations of motion for specific variational ansatz. We will focus on Gaussian-based ansatz, which is widely used in quantum dynamics simulations due to their computational efficiency and ability to capture essential features of wavepacket evolution. We will also discuss the extension of these methods to non-adiabatic dynamics, where multiple electronic states are involved.
+Having introduced the variational principles in the previous section, we now apply them to derive equations of motion for specific variational ans\"atze. We will focus on Gaussian-based ans\"atze, which is widely used in quantum dynamics simulations due to their computational efficiency and ability to capture essential features of wavepacket evolution. We will also discuss the extension of these methods to non-adiabatic dynamics, where multiple electronic states are involved.
 \subsection{Single Gaussian Wavepacket Ansatz}
 We start with the simplest case of a single Gaussian wavepacket, which we will denote as $\ket{\Psi(t)}=\ket{G(\symbf{\alpha}(t))}$, where $\symbf{\alpha}(t)$ represents the set of parameters defining the Gaussian (e.g., center position, momentum, width). The Gaussian wavepacket we will use can be expressed as
 \begin{equation}
 \ket{G(\symbf{\alpha}(t))}=N\exp\left[\sum_j^D\left(-\frac{1}{2}\gamma_j(t)\left(R_j-q_j(t)\right)^2+\i p_j(t)\left(R_j-q_j(t)\right)\right)+\i\phi(t)\right],
 \end{equation}
-where $N$ is the normalization factor, $D$ is the number of nuclear degrees of freedom, $R_j$ are the nuclear coordinates, and the parameters in $\symbf{\alpha}(t)$ include the center position $\symbf{q}(t)$, momentum $\symbf{p}(t)$, the complex width $\symbf{\gamma}(t)$ and the global phase factor $\phi(t)$. Should we consider the frozen Gaussian approximation, the parameter $\symbf{\gamma}(t)$ is kept constant in time, while in the thawed Gaussian approximation, it is allowed to evolve. By applying the \gls{dfvp} to this ansatz, we can derive equations of motion for the parameters $\symbf{\alpha}(t)$, which govern the evolution of the Gaussian wavepacket.
+where $N$ is a time-independent normalization constant (typically evaluated at $t=0$), $D$ is the number of nuclear degrees of freedom, $R_j$ are the nuclear coordinates, and the parameters in $\symbf{\alpha}(t)$ include the center position $\symbf{q}(t)$, momentum $\symbf{p}(t)$, the complex width $\symbf{\gamma}(t)$ and the global phase factor $\phi(t)$. Should we consider the frozen Gaussian approximation, the parameter $\symbf{\gamma}(t)$ is kept constant in time, while in the thawed Gaussian approximation, it is allowed to evolve. By applying the \gls{dfvp} to this ansatz, we can derive equations of motion for the parameters $\symbf{\alpha}(t)$, which govern the evolution of the Gaussian wavepacket.
 \subsubsection{Frozen Gaussian Evolution}
 The first derived equations of motion will be for the frozen Gaussian, which means that the width of the gaussian wavepacket is fixed ($\dot{\symbf{\gamma}}(t)=0$). We will use the \gls{dfvp} in Eq.~\eqref{eq:dfvp_orthogonality_condition} to derive the equations of motion for the remaining parameters $\symbf{q}(t)$, $\symbf{p}(t)$ and $\phi(t)$. We will also restrict ourselves to the case of a single nuclear degree of freedom for simplicity, but the generalization to multiple dimensions is straightforward.
 
@@ -37,7 +37,7 @@ Plugging this back into Eq.~\eqref{eq:gaussian_eom_p}, we get
 \begin{equation}
 \dot p-\i\gamma\dot q=-\frac{\i\gamma p}{m}-\frac{\braket{(R-q)V}}{\braket{(R-q)^2}}=-\frac{\i\gamma p}{m}-\Braket{\frac{\partial V}{\partial R}}.
 \end{equation}
-where we have used the Stein's lemma to evaluate $\braket{(R-q)V}$. Now, we would like to separate the equation into one equation for $\dot p$ and one for $\dot q$. Since $q$ and $p$ are real-valued parameters, we can take the real and imaginary parts of the above equation to get
+where we have used Stein's lemma to evaluate $\braket{(R-q)V}$. Now, we would like to separate the equation into one equation for $\dot p$ and one for $\dot q$. Since $q$ and $p$ are real-valued parameters, we can take the real and imaginary parts of the above equation to get
 \begin{align}
 \dot q&=\frac{p}{m},\\
 \dot p&=-\Braket{\frac{\partial V}{\partial R}}.
@@ -57,7 +57,7 @@ We now require that the projection of the error vector $\ket{\epsilon}$ onto $\k
 \i\dot\phi&=\i p\dot q+\frac{1}{2}\dot\gamma\braket{(R-q)^2}-\i\braket{H}\\
 \dot\phi&=p\dot q-\frac{\i}{4\Re\gamma}\dot\gamma-\braket{H}.
 \end{align}
-As we can see, the equation of motion for the global phase $\phi(t)$ now includes an additional term that depends on the time derivative of the width parameter $\gamma(t)$. This term accounts for the change in the shape of the wavepacket as it evolves. Finally, let's derive the equation of motion for $\gamma(t)$ by projecting onto $\ket{v_\gamma}$ as
+As we can see, the equation of motion for the global phase $\phi(t)$ now includes an additional term that depends on the time derivative of the width parameter $\gamma(t)$. It is crucial to note that because $\dot\gamma$ is complex (specifically, its real part $\dot\gamma_R\neq 0$ as the wavepacket spreads or compresses), $\dot\phi$ necessarily acquires an imaginary component. This requires $\phi(t)$ to be treated formally as a complex parameter. This is an elegant feature of the parameterization: the real part of $\phi(t)$ governs the quantum phase, while the imaginary part exactly compensates for the changing spatial extent of the wavepacket, strictly enforcing the conservation of the wavefunction's norm without requiring a separate time-dependent normalization factor $N(t)$ in the ansatz. Finally, let's derive the equation of motion for $\gamma(t)$ by projecting onto $\ket{v_\gamma}$ as
 \begin{align}
 \braket{v_\gamma|\dot\Psi+\i H\Psi}&=0\\
 \Braket{(R-q)^2\Psi|\dot\Psi}&=-\i\Braket{(R-q)^2H}\\
@@ -74,13 +74,13 @@ As for the potential energy part, we can express it as
 \begin{align}
 \Braket{(R-q)^2V}-\Braket{(R-q)^2}\Braket{V}&=\Braket{(R-q)^2}^2\Braket{\frac{\partial^2 V}{\partial R^2}},
 \end{align}
-which can be easily derived using the Stein's lemma. Putting everything together, we finally get the equation of motion for the width parameter $\gamma(t)$ as
+which can be easily derived using Stein's lemma. Putting everything together, we finally get the equation of motion for the width parameter $\gamma(t)$ as
 \begin{equation}
 \dot\gamma=-\frac{\i\gamma^2}{m}+\i\Braket{\frac{\partial^2 V}{\partial R^2}}
 \end{equation}
 which shows that the width of the Gaussian wavepacket evolves according to a balance between the kinetic energy, which tends to spread the wavepacket, and the curvature of the \gls{pes}, which can either focus or defocus the wavepacket depending on its sign. The frozen and Thawed gaussian \gls{eom} were first derived by Heller in his paper on Gaussian wavepacket dynamics.~\supercite{10.1063/1.430620}
 \subsection{Variational Multiconfigurational Gaussian Approach}
-The \gls{vmcg} approach, first introduced by Worth, Robb and Burkhardt in 2004,\supercite{10.1039/B314253A} extends the single Gaussian wavepacket ansatz to a linear combination of multiple Gaussian wavepackets, allowing for a more flexible representation of the wavefunction. In this approach, we slightly modify the ansatz of the Gaussian and remove the global phase factor, as it can be absorbed into the coefficients of the linear combination. The \gls{vmcg} ansatz can be expressed as
+The \gls{vmcg} approach, first introduced by Worth, Robb and Burghardt in 2004,\supercite{10.1039/B314253A} extends the single Gaussian wavepacket ansatz to a linear combination of multiple Gaussian wavepackets, allowing for a more flexible representation of the wavefunction. In this approach, we slightly modify the single-particle ansatz. We remove the global phase factor $\phi(t)$ and treat the prefactor $N_j$ as a strict time-independent constant (such as the initial normalization at $t=0$). Any time-dependent changes to the phase or the required normalization (which occur if the wavepacket is thawed) are instead entirely absorbed by the complex coefficients $c_j(t)$ of the linear combination. The \gls{vmcg} ansatz can be expressed as
 \begin{equation}
 \ket{\Psi(t)}:=\sum_{j=1}^N c_j(t)\ket{G_j(\symbf{\alpha}_j(t))},
 \end{equation}

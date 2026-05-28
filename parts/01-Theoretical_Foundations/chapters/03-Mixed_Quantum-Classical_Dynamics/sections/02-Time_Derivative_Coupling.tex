@@ -30,9 +30,10 @@ We start with the two-state case for simplicity. Assume we have two normalized a
 \ket{\phi_I\left(\tau\right)}=U(\tau)\ket{\phi_I(t)},
 \end{equation}
 where $\tau\in[t,t+\Delta t]$ and $U(\tau)$ is a unitary operator that smoothly transforms the states from time $t$ to time $\tau$. We want to construct $U(\tau)$ such that it preserves the normalization of the states at all times, i.e., $\Braket{\phi_I(\tau)\vert\phi_I(\tau)}=1$ for all $\tau$. A simple choice for $U(\tau)$ is a rotation in the two-dimensional subspace spanned by $\ket{\phi_1(t)}$ and $\ket{\phi_2(t)}$ defined from the well-known 2D rotation matrix as
-\begin{equation}\label{eq:npi_unitary_transform}
-U_{II}(\tau)=\cos\left(\frac{\arccos\left(U_{II}\left(t+\Delta t\right)\right)}{\Delta t}\left(\tau-t\right)\right),\quad U_{IJ}(\tau)=\sin\left(\frac{\arcsin\left(U_{IJ}\left(t+\Delta t\right)\right)}{\Delta t}\left(\tau-t\right)\right),
-\end{equation}
+\begin{align}\label{eq:npi_unitary_transform}
+U_{II}(\tau)&=\cos\left(\frac{\arccos\left(U_{II}\left(t+\Delta t\right)\right)}{\Delta t}\left(\tau-t\right)\right),\\
+U_{IJ}(\tau)&=\sin\left(\frac{\arcsin\left(U_{IJ}\left(t+\Delta t\right)\right)}{\Delta t}\left(\tau-t\right)\right),
+\end{align}
 where
 \begin{equation}\label{eq:npi_unitary_matrix}
 U_{IJ}\left(t+\Delta t\right)=\Braket{\phi_I(t)\vert\phi_J(t+\Delta t)}.

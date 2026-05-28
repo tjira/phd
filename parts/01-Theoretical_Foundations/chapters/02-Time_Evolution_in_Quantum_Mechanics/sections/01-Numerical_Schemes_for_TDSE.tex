@@ -13,27 +13,25 @@ For an $N$-state system, the wavefunction in the diabatic basis can be written a
 \end{equation}
 where $c_I\left(\symbf{R},t\right)$ are the expansion coefficients of the wavefunction in the diabatic basis. The Hamiltonian operator $H$ in the diabatic basis takes the form
 \begin{equation}\label{eq:diabatic_hamiltonian}
-H=\tilde{T}_{\symrm{n}}+\tilde{V}=-\frac{1}{2m}\nabla_\mathbf{R}^2\otimes I_N+\tilde{V}
+H=T_{\symrm{n}}+\tilde{V}=-\frac{1}{2m}\nabla_\mathbf{R}^2\otimes I_N+\tilde{V}
 \end{equation}
-where $I_N$ is the identity operator on the $N$-dimensional diabatic electronic space,
-$\tilde{T}_{\symrm{n}}$ is the nuclear kinetic energy operator, and $\tilde{V}$ is the
-potential energy operator represented by an $N\times N$ matrix in the diabatic electronic basis. We aim to reduce the action of the propagator on the diabatic wavefunction in Eq.~\eqref{eq:diabatic_wavefunction} to a simple matrix multiplication. The main difficulty is the differential form of the kinetic operator in Eq.~\eqref{eq:diabatic_hamiltonian}. To handle this, we use a Fourier-based method for applying the kinetic operator $\tilde{T}_{\symrm{n}}$ on a wavefunction $\Psi\left(\symbf{R},t\right)$. Taking the \gls{ft} of $\tilde{T}_{\symrm{n}}\Psi\left(\symbf{R},t\right)$ yields
+where $I_N$ is the identity operator on the $N$-dimensional diabatic electronic space, $T_{\symrm{n}}$ is the nuclear kinetic energy operator, and $\tilde{V}$ is the potential energy operator represented by an $N\times N$ matrix in the diabatic electronic basis. It is crucial to note that by writing the kinetic energy with a single scalar mass $m$, we implicitly assume that $\symbf{R}$ represents mass-weighted Cartesian coordinates (or a single effective mode). We aim to reduce the action of the propagator on the diabatic wavefunction in Eq.~\eqref{eq:diabatic_wavefunction} to a simple matrix multiplication. The main difficulty is the differential form of the kinetic operator in Eq.~\eqref{eq:diabatic_hamiltonian}. To handle this, we use a Fourier-based method for applying the kinetic operator $T_{\symrm{n}}$ on a wavefunction $\Psi\left(\symbf{R},t\right)$. Taking the \gls{ft} of $T_{\symrm{n}}\Psi\left(\symbf{R},t\right)$ yields
 \begin{equation}\label{eq:kinetic_fourier_method}
-\mathcal{F}\left\lbrace \tilde{T}_{\symrm{n}}\Psi\left(\symbf{R},t\right)\right\rbrace=\mathcal{F}\left\lbrace-\frac{1}{2m}\frac{\partial^2}{\partial\symbf{R}^2}\Psi\left(\symbf{R},t\right)\right\rbrace=\frac{\symbf{k}^2}{2m}\mathcal{F}\left\lbrace\Psi\left(\symbf{R},t\right)\right\rbrace,
+\mathcal{F}\left\lbrace T_{\symrm{n}}\Psi\left(\symbf{R},t\right)\right\rbrace=\mathcal{F}\left\lbrace-\frac{1}{2m}\frac{\partial^2}{\partial\symbf{R}^2}\Psi\left(\symbf{R},t\right)\right\rbrace=\frac{\symbf{k}^2}{2m}\mathcal{F}\left\lbrace\Psi\left(\symbf{R},t\right)\right\rbrace,
 \end{equation}
-where $\symbf{k}$ are the coordinates in the Fourier space. In other words, to apply the kinetic operator on the wavefunction, we need to \gls{ft} the wavefunction, multiply it by $\frac{\symbf{k}^2}{2m}$, and then apply the \gls{ift}. In Fourier space, $\tilde{T}_{\symrm{n}}$ becomes a diagonal multiplication operator $\frac{\symbf{k}^2}{2m}$. For notational simplicity we denote both the coordinate-space operator and its Fourier-space representation by the same symbol. This method is computationally efficient, since the \gls{ft} can be done using the \gls{fft} algorithm, which has a complexity of $\mathcal{O}(N\log N)$, where $N$ is the number of grid points (contrary to the straightforward \gls{dft} with $\mathcal{O}(N^2)$ complexity).
+where $\symbf{k}$ are the coordinates in the Fourier space. In other words, to apply the kinetic operator on the wavefunction, we need to \gls{ft} the wavefunction, multiply it by $\frac{\symbf{k}^2}{2m}$, and then apply the \gls{ift}. In Fourier space, $T_{\symrm{n}}$ becomes a diagonal multiplication operator $\frac{\symbf{k}^2}{2m}$. For notational simplicity we denote both the coordinate-space operator and its Fourier-space representation by the same symbol. This method is computationally efficient, since the \gls{ft} can be done using the \gls{fft} algorithm, which has a complexity of $\mathcal{O}(N\log N)$, where $N$ is the number of grid points (contrary to the straightforward \gls{dft} with $\mathcal{O}(N^2)$ complexity).
 
-A remaining challenge is the non-commutativity of the potential and kinetic operators. Because $\tilde{V}$ and $\tilde{T}_{\symrm{n}}$ do not commute we cannot factorize the propagator as
+A remaining challenge is the non-commutativity of the potential and kinetic operators. Because $\tilde{V}$ and $T_{\symrm{n}}$ do not commute we cannot factorize the propagator as
 \begin{equation}
-\e^{-\i tH}\neq\e^{-\i t\tilde{V}}\e^{-\i t\tilde{T}_{\symrm{n}}}.
+\e^{-\i tH}\neq\e^{-\i t\tilde{V}}\e^{-\i tT_{\symrm{n}}}.
 \end{equation}
-If such a factorization were possible, we could apply the exponential of $\tilde{V}$ in the position space and the exponential of $\tilde{T}_{\symrm{n}}$ momentum space separately. To address this, we split the total propagation time $t$ into $n$ short steps $\Delta t$, so the full propagator becomes a product of short-time propagators as
+If such a factorization were possible, we could apply the exponential of $\tilde{V}$ in the position space and the exponential of $T_{\symrm{n}}$ momentum space separately. To address this, we split the total propagation time $t$ into $n$ short steps $\Delta t$, so the full propagator becomes a product of short-time propagators as
 \begin{equation}
 U(t)=\e^{-\i tH}=\left(\e^{-\i\Delta tH}\right)^n,\qquad t=n\Delta t
 \end{equation}
 where $\Delta t$ is a fixed time step. Now, each individual short-time propagator acts on the wave function and causes a small evolution. We can then use the symmetric splitting approximation
 \begin{equation}
-U(\Delta t)=\e^{-\i\frac{\Delta t}{2}\tilde{V}}\e^{-\i\Delta t\tilde{T}_{\symrm{n}}}\e^{-\i\frac{\Delta t}{2}\tilde{V}}+\mathcal{O}(\Delta t^3),
+U(\Delta t)=\e^{-\i\frac{\Delta t}{2}\tilde{V}}\e^{-\i\Delta tT_{\symrm{n}}}\e^{-\i\frac{\Delta t}{2}\tilde{V}}+\mathcal{O}(\Delta t^3),
 \end{equation}
 which is valid for small $\Delta t$.
 

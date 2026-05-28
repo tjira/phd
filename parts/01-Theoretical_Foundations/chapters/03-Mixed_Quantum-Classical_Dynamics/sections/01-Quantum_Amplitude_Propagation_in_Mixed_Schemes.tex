@@ -27,7 +27,7 @@ where $\sigma_{IJ}=\Braket{\phi_I\vert\frac{\partial\phi_J}{\partial t}}$ is the
 \begin{equation}\label{eq:sh_tdse_coefs}
 \i\dot c_I=E_I c_I-i\sum_J\sigma_{IJ}c_J.
 \end{equation}
-With $\symbf{c}(t)=\left(c_1(t),c_2(t),\dots,c_N(t)\right)^{\symrm{T}}$ the Eq.~\eqref{eq:sh_tdse_coefs} is a \gls{tdse} in a finite-dimensional Hilbert space $\mathbb{C}^N$ and can be rewritten as
+With $\symbf{c}(t)=\left(c_1(t),c_2(t),\dots,c_N(t)\right)^{\symrm{T}}$ Eq.~\eqref{eq:sh_tdse_coefs} is a \gls{tdse} in a finite-dimensional Hilbert space $\mathbb{C}^N$ and can be rewritten as
 \begin{equation}
 \i\symbf{\dot{c}}(t)=H_{\symrm{eff}}\symbf{c}(t),\qquad H_{IJ}^{\symrm{eff}}=E_I\delta_{IJ}-\i\sigma_{IJ}
 \end{equation}
@@ -35,4 +35,4 @@ For electronic dynamics in Eq.~\eqref{eq:sh_tdse_coefs} to be unitary, the effec
 \begin{equation}\label{eq:tdc_nacv}
 \sigma_{IJ}=\Braket{\phi_I\vert\frac{\partial\phi_J}{\partial t}}=\dot{\symbf{R}}\cdot\Braket{\phi_I\vert\frac{\partial\phi_J}{\partial\symbf{R}}}=\symbf{v}\cdot\symbf{d}_{IJ},
 \end{equation}
-where $\symbf{v}=\dot{\symbf{R}}$ is the nuclear velocity and $\symbf{d}_{IJ}$ is the \gls{nacv}. Although many quantum‐chemistry packages provide \gls{nacv} and thus allow computation of the \gls{tdc} via $\sigma_{IJ}=\symbf{v}\cdot\symbf{d}_{IJ}$, \gls{nacv} can become ill-defined or numerically unstable near \glspl{ci} (e.g., in multireference methods). In cases where a reliable \gls{nacv} is not available, one may instead employ a direct \gls{tdc} approximation using wavefunction overlaps, as discussed in the following sections.
+where $\symbf{v}=\dot{\symbf{R}}$ is the nuclear velocity and $\symbf{d}_{IJ}$ is the \gls{nacv}. Although many quantum‐chemistry packages provide \gls{nacv} and thus allow computation of the \gls{tdc} via $\sigma_{IJ}=\symbf{v}\cdot\symbf{d}_{IJ}$, \gls{nacv} can become ill-defined near \glspl{ci} (e.g., in multireference methods). In cases where a reliable \gls{nacv} is not available, one may instead employ a direct \gls{tdc} approximation using wavefunction overlaps, as discussed in the following sections.

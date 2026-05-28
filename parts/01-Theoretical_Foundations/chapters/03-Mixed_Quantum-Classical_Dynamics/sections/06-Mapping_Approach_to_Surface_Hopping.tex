@@ -11,9 +11,9 @@ To define the dynamics, we split the adiabatic potential energies $E_1(\symbf{R}
 \end{equation}
 Assuming state 2 is the upper adiabatic state and state 1 is the lower adiabatic state, the total energy function in \gls{mash} is defined as
 \begin{equation}\label{eq:mash_energy}
-E(\symbf{R},\symbf{p},\symbf{S})=\sum_{j}\frac{p_j^2}{2M_j}+\overline{E}(\symbf{R})+\Delta E(\symbf{R})\symrm{sgn}(S_z),
+E(\symbf{R},\symbf{p},\symbf{S})=\sum_{j}\frac{p_j^2}{2m}+\overline{E}(\symbf{R})+\Delta E(\symbf{R})\symrm{sgn}(S_z),
 \end{equation}
-where $M_j$ is the mass of the $j$-th nucleus, and $\symrm{sgn}(S_z)$ is the signum function that determines which adiabatic surface the system evolves on based on the value of $S_z$. When $S_z>0$ (the northern hemisphere), the system evolves on the upper surface $E_2(\symbf{R})$. When $S_z<0$ (the southern hemisphere), the system evolves on the lower surface $E_1(\symbf{R})$.
+where $m$ is mass (note that, again, the coordinetes $\symbf{R}$ are mass-weighted), and $\symrm{sgn}(S_z)$ is the signum function that determines which adiabatic surface the system evolves on based on the value of $S_z$. When $S_z>0$ (the northern hemisphere), the system evolves on the upper surface $E_2(\symbf{R})$. When $S_z<0$ (the southern hemisphere), the system evolves on the lower surface $E_1(\symbf{R})$.
 
 The electronic variables evolve analogously to a classical spin in an effective magnetic field governed by the energy splitting and the nonadiabatic coupling. For a given nuclear trajectory $\symbf{R}(t)$, the equations of motion for the electronic variables in atomic units ($\hbar=1$) are given by
 \begin{equation}
@@ -23,31 +23,31 @@ where $\sigma_{21}$ is the \gls{tdc} between the two adiabatic states defined in
 
 The equations of motion for the nuclei are obtained by enforcing the strict conservation of the total \gls{mash} energy $\left(\frac{\symrm{d}E(\symbf{R})}{\dt}=0\right)$. Taking the total time derivative of Eq.~\eqref{eq:mash_energy} and utilizing the relation $\ddt\symrm{sgn}(x) = 2\delta(x)\dot{x}$, the \gls{mash} nuclear force is given as
 \begin{equation}\label{eq:mash_force}
-F^{\symrm{MASH}}(\symbf{R},\symbf{S})=-\nabla_{\symbf{R}}\overline{E}(\symbf{R})-\nabla_{\symbf{R}}\Delta E(\symbf{R})\symrm{sgn}(S_z)+4\Delta E(\symbf{R})\symbf{d}_{12}(\symbf{R})S_x\delta(S_z),
+F^{\symrm{MASH}}(\symbf{R},\symbf{S})=-\nabla_{\symbf{R}}\overline{E}(\symbf{R})-\nabla_{\symbf{R}}\Delta E(\symbf{R})\symrm{sgn}(S_z)+4\Delta E(\symbf{R})\symbf{d}_{21}(\symbf{R})S_x\delta(S_z),
 \end{equation}
-where $\symbf{d}_{12}(\symbf{R})$ is the \gls{nacv} between the two adiabatic states. The first two terms represent the standard adiabatic gradient of the active surface determined by $\symrm{sgn}(S_z)$. The third term is an impulsive force containing the Dirac delta function $\delta(S_z)$, which dictates how the nuclei respond when the electronic variables transition between states.
+where $\symbf{d}_{21}(\symbf{R})$ is the \gls{nacv} between the two adiabatic states. The first two terms represent the standard adiabatic gradient of the active surface determined by $\symrm{sgn}(S_z)$. The third term is an impulsive force containing the Dirac delta function $\delta(S_z)$, which dictates how the nuclei respond when the electronic variables transition between states.
 \subsection{Deterministic Surface Hopping and Momentum Rescaling}\label{sec:mash_hopping}
 Unlike \gls{fssh}, where surface hops are determined by evaluating stochastic probabilities along the trajectory, \gls{mash} transitions are entirely deterministic. A hop occurs precisely when the electronic trajectory crosses the equator of the spin-sphere ($S_z=0$). 
 
-At the exact moment of an equator crossing, the $\delta(S_z)$ term in Eq.~\eqref{eq:mash_force} applies an instantaneous momentum impulse to the nuclei. This impulse acts strictly along the direction of the \gls{nacv} $\symbf{d}_{12}(\symbf{R})$, rigorously preserving energy without the need for ad-hoc directional prescriptions. During a successful hop, the momentum is instantaneously updated to strictly conserve the total energy as
+At the exact moment of an equator crossing, the $\delta(S_z)$ term in Eq.~\eqref{eq:mash_force} applies an instantaneous momentum impulse to the nuclei. This impulse acts strictly along the direction of the \gls{nacv} $\symbf{d}_{21}(\symbf{R})$, rigorously preserving energy without the need for ad-hoc directional prescriptions. During a successful hop, the momentum is instantaneously updated to strictly conserve the total energy as
 \begin{equation}
-\frac{\tilde{p}_{\symrm{fin}}^2}{2M}=\frac{\tilde{p}_{\symrm{init}}^2}{2M}+2\Delta E(\symbf{R})\symrm{sgn}(\tilde{p}_{\symrm{init}}S_x),
+\frac{\tilde{p}_{\symrm{fin}}^2}{2m}=\frac{\tilde{p}_{\symrm{init}}^2}{2m}+2\Delta E(\symbf{R})\symrm{sgn}(\tilde{p}_{\symrm{init}}S_x),
 \end{equation}
-where $\tilde{p}$ be the component of the nuclear momentum parallel to $\symbf{d}_{12}(\symbf{R})$. A limitation arises if the system attempts to hop to the upper adiabatic surface but lacks sufficient kinetic energy along the coupling vector (i.e., $\frac{\tilde{p}_{\symrm{init}}^2}{2M}<2\Delta E(\symbf{R})$). In \gls{fssh}, such \textit{frustrated hops} are conventionally handled by an \textit{ad-hoc} reversal of the nuclear velocity. In \gls{mash}, this velocity reversal naturally emerges from the underlying deterministic mechanics. When a hop is energetically forbidden, the equations of motion prescribe an elastic reflection of the trajectory at the $S_z=0$ boundary, resulting in
+where $\tilde{p}$ is the component of the nuclear momentum parallel to $\symbf{d}_{21}(\symbf{R})$. A limitation arises if the system attempts to hop to the upper adiabatic surface but lacks sufficient kinetic energy along the coupling vector (i.e., $\frac{\tilde{p}_{\symrm{init}}^2}{2m}<2\Delta E(\symbf{R})$). In \gls{fssh}, such \textit{frustrated hops} are conventionally handled by an \textit{ad-hoc} reversal of the nuclear velocity. In \gls{mash}, this velocity reversal naturally emerges from the underlying deterministic mechanics. When a hop is energetically forbidden, the equations of motion prescribe an elastic reflection of the trajectory at the $S_z=0$ boundary, resulting in
 \begin{equation}
 \dot{S}_{z,\symrm{fin}}=-\dot{S}_{z,\symrm{init}}\quad\text{and}\quad\tilde{p}_{\symrm{fin}}=-\tilde{p}_{\symrm{init}}.
 \end{equation}
 This rigorous justification for momentum reversal during classically forbidden transitions is one of the distinct theoretical advantages of the \gls{mash} framework.
 \subsection{Initial Sampling and Observables}
-To compute dynamical observables, an ensemble of \gls{mash} trajectories must be properly initialized. The initial nuclear coordinates and momenta $(\symbf{R}_0,\symbf{p}_0)$ are typically sampled from the Wigner transform of the initial nuclear density matrix, similar to standard mixed quantum-classical methods.  The initial electronic mapping variables are sampled uniformly from the surface of the unit sphere. The coordinates are generated using standard spherical coordinates
+To compute dynamical observables, an ensemble of \gls{mash} trajectories must be properly initialized. The initial nuclear coordinates and momenta $(\symbf{R}_0,\symbf{p}_0)$ are typically sampled from the Wigner transform of the initial nuclear density matrix, similar to standard mixed quantum-classical methods. To ensure the correct initial electronic populations, the initial mapping variables are sampled uniformly from the surface of the corresponding hemisphere. If the system is prepared in the upper adiabatic state (state 2), the coordinates are generated using standard spherical coordinates
 \begin{equation}
 S_x=\sin\theta\cos\phi,\quad S_y=\sin\theta\sin\phi,\quad S_z=\cos\theta,
 \end{equation}
-where $\cos\theta\in[-1, 1]$ and $\phi\in[0,2\pi]$ are sampled from uniform distributions. 
+where $\cos\theta\in[0, 1]$ and $\phi\in[0,2\pi]$ are sampled from uniform distributions. Conversely, for an initial state 1, $\cos\theta\in[-1, 0]$.
 
 To bridge the continuous variables back to discrete quantum state populations, the projection operators for the adiabatic states $\hat{P}_{1/2}$ are mapped using the Heaviside step function $h(x)$
 \begin{equation}
-    \hat{P}_2 \mapsto h(S_z) \quad \text{and} \quad \hat{P}_1 \mapsto h(-S_z)
+\hat{P}_2\mapsto h(S_z)\quad\text{and}\quad\hat{P}_1\mapsto h(-S_z).
 \end{equation}
 To ensure that the ensemble exactly reproduces the short-time quantum dynamics as dictated by the \gls{qcle}, the calculation of correlation functions requires a specific phase-space weighting factor $\mathcal{W}(\symbf{S})$. For population-population correlation functions, this factor is given by
 \begin{equation}
@@ -55,6 +55,6 @@ To ensure that the ensemble exactly reproduces the short-time quantum dynamics a
 \end{equation}
 The time-dependent population of a state $I$ is then calculated as an ensemble average over $N_{\symrm{traj}}$ independent trajectories as
 \begin{equation}
-P_I(t)=\frac{1}{N_{\symrm{traj}}}\sum_{k=1}^{N_{\symrm{traj}}} \mathcal{W}(\symbf{S}_0^{(k)}) h(\pm S_z^{(k)}(t))
+P_I(t)=\frac{1}{N_{\symrm{traj}}}\sum_{k=1}^{N_{\symrm{traj}}}\mathcal{W}(\symbf{S}_0^{(k)}) h(\pm S_z^{(k)}(t)),
 \end{equation}
 where the sign in the Heaviside function is positive for state 2 and negative for state 1.

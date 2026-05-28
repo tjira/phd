@@ -5,7 +5,7 @@ The starting point is the separation of the Hamiltonian into nuclear and electro
 \begin{equation}\label{eq:boa_hamiltonian}
 H=T_{\symrm{n}}+H_{\symrm{el}},
 \end{equation}
-where $T_{\symrm{n}}$ is the nuclear kinetic energy operator and $H_{\symrm{el}}$ contains the electronic kinetic energy and all Coulomb interactions, with the nuclei treated as fixed at positions $\symbf{R}$.
+where $T_{\symrm{n}}$ is the nuclear kinetic energy operator and $H_{\symrm{el}}$ is the electronic Hamiltonian, which we define here to implicitly include the nuclear-nuclear repulsion $V_{\symrm{NN}}(\symbf{R})$ in addition to the electronic kinetic energy and all Coulomb interactions. The nuclei are treated as fixed at positions $\symbf{R}$.
 
 For each nuclear configuration $\symbf{R}$ we can solve the electronic \gls{tise}
 \begin{equation}
@@ -51,9 +51,9 @@ for all $\alpha,\beta$ (or at least for those states of interest). In such a bas
 
 However, removing the derivative couplings in this way introduces off-diagonal elements into the potential energy matrix. The nuclear \gls{tdse} in the diabatic representation then has the form
 \begin{equation}
-\i\frac{\partial}{\partial{t}}\ket{\tilde\chi_\alpha(\symbf{R},t)}=\tilde{T}_{\symrm{n}}\ket{\tilde\chi_\alpha(\symbf{R},t)}+\sum_\beta\tilde{V}_{\alpha\beta}(\symbf{R})\ket{\tilde\chi_\beta(\symbf{R},t)},
+\i\frac{\partial}{\partial{t}}\ket{\tilde\chi_\alpha(\symbf{R},t)}=T_{\symrm{n}}\ket{\tilde\chi_\alpha(\symbf{R},t)}+\sum_\beta\tilde{V}_{\alpha\beta}(\symbf{R})\ket{\tilde\chi_\beta(\symbf{R},t)},
 \end{equation}
-The $\tilde{V}$ term is equivalent to the electronic Hamiltonian in Eq.~\eqref{eq:boa_hamiltonian} in the diabatic basis; we call it here the potential, mainly for historical reasons.
+where $T_{\symrm{n}}$ operator is the standard nuclear kinetic energy, which in this representation acts purely on the nuclear coefficients since the derivative couplings vanish. The $\tilde{V}$ term is equivalent to the electronic Hamiltonian in Eq.~\eqref{eq:boa_hamiltonian} evaluated in the diabatic basis. We refer to it here as the potential matrix.
 
 Physically, the diabatic representation has the following features. First, the nuclear kinetic energy is diagonal and free of derivative couplings (or they are at least minimized). Second, the electronic couplings appear as smooth off-diagonal potentials in $\tilde{V}(\symbf{R})$.
 

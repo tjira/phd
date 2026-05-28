@@ -11,19 +11,19 @@ where the diagonal elements $\rho_{II}=\lvert c_I\rvert^2$ represent the populat
 \end{equation}
 where
 \begin{equation}\label{eq:fssh_b_matrix}
-b_{KI}=2\Im\left(H_{IK}^{\symrm{el}}\rho_{IK}^\ast\right)+2\Re\left(\sigma_{IK}\rho_{IK}^\ast\right).
+b_{KI}=2\Im\left(H_{IK}^{\symrm{el}}\rho_{IK}^\ast\right)-2\Re\left(\sigma_{IK}\rho_{IK}^\ast\right).
 \end{equation}
 If we consider an adiabatic basis where the electronic Hamiltonian is diagonal, the first term in Eq.~\eqref{eq:fssh_b_matrix} vanishes, and the population transfer between states is mediated entirely by the \gls{tdc} term. We should also note that $b_{II}=0$ due to the properties of \gls{tdc} being anti-Hermitian and the density matrix being Hermitian.
 
 Our goal is to derive a hopping algorithm that minimizes the number of switches between states while ensuring that the ensemble-averaged populations match the quantum mechanical populations. Let's consider a two-state system for simplicity. In this case, let the total number of trajectories at a time $t$ on state 1 be expressed as $N_1(t)=N\rho_{11}(t)$, where $N$ is the total number of trajectories in the ensemble. Without the loss of generality, we can assume that the population of state 1 is increasing, i.e., $\rho_{11}(t+\Delta t)>\rho_{11}(t)$. This means that the amount of trajectories that need to hop from state 2 to state 1 during the time interval $\Delta t$ must be larger than the number of trajectories hopping from state 1 to state 2. Since we want to minimize the number of hops, we can assume that no trajectories hop from state 1 to state 2 during this time interval. Therefore, the number of trajectories hopping from state 2 to state 1 must be equal to $N\left(\rho_{11}(t+\Delta t)-\rho_{11}(t)\right)$. The probability of a trajectory on state 2 hopping to state 1 during the time interval $\Delta t$ can then be expressed as the ratio of the number of trajectories hopping to the total number of trajectories on state 2 as
 \begin{equation}\label{eq:fssh_hopping_probability_two_state}
-P_{2\to 1}=\frac{N\left(\rho_{11}(t+\Delta t)-\rho_{11}(t)\right)}{N\rho_{22}}=\frac{\dot\rho_{11}\Delta t}{\rho_{22}}=\frac{b_{12}\Delta t}{\rho_{22}},
+P_{2\to 1}=\frac{N\left(\rho_{11}(t+\Delta t)-\rho_{11}(t)\right)}{N\rho_{22}}=\frac{\dot\rho_{11}\Delta t}{\rho_{22}}=\frac{b_{21}\Delta t}{\rho_{22}},
 \end{equation}
 where we used $\dot\rho_{11}=b_{12}$ from Eq.~\eqref{eq:fssh_population_eom}. The hopping probability from state 1 to state 2 can be derived similarly assuming that the population of state 1 is decreasing during the time interval $\Delta t$.
 
 Should we want to generalize the hopping probabilities to more than two states, we can follow a similar reasoning. Let's assume that the population of state $I$ is increasing during the time interval $\Delta t$. The number of trajectories hopping from all other states to state $I$ must then be equal to $N\left(\rho_{II}(t+\Delta t)-\rho_{II}(t)\right)$. To minimize the number of hops, we can assume that no trajectories hop from state $I$ to any other state during this time interval. Therefore, the probability of a trajectory on state $J$ hopping to state $I$ during the time interval $\Delta t$ can be expressed as
 \begin{equation}\label{eq:fssh_hopping_probability_multistate}
-P_{J\to I}=\frac{b_{IJ}\Delta t}{\rho_{JJ}},
+P_{J\to I}=\frac{b_{JI}\Delta t}{\rho_{JJ}},
 \end{equation}
 where in the numerator we have the population flux only from state $J$ to state $I$, ignoring contributions from other states.
 \subsection{Decoherence Correction}
@@ -45,7 +45,7 @@ where $\tau_{IJ}$ is the decoherence time scale between states $I$ and $J$ and c
 \end{equation}
 where $E_I$ and $E_J$ are the energies of states $I$ and $J$, $E_{\symrm{kin}}$ is the kinetic energy of the particle, and $C$ is an empirical parameter. To ensure that the total population remains normalized after the transformation, we have to renormalize the current state coefficient as
 \begin{equation}\label{eq:granucci_persico_decoherence_renormalization}
-c^\prime_I(t+\Delta t)=C_I\sqrt{\frac{1-\sum_{J\neq I}\lvert c^\prime_J(t+\Delta t)\rvert^2}{\lvert c_I\rvert^2}}.
+c^\prime_I(t+\Delta t)=c_I\sqrt{\frac{1-\sum_{J\neq I}\lvert c^\prime_J(t+\Delta t)\rvert^2}{\lvert c_I\rvert^2}}.
 \end{equation}
 Using this decoherence correction, the coherence between states is reduced after each integration step, which helps to maintain the internal consistency of the \gls{fssh} method and improve the agreement with quantum mechanical results. However, it is important to note that the choice of the empirical parameter $C$ can significantly affect the results, but we often choose $C=0.1$~Hartree as it has been shown to provide good agreement with quantum mechanical results in many cases.\supercite{10.1063/1.1793991}
 \subsection{Momentum Rescaling and Frustrated Hops}
