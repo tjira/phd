@@ -73,7 +73,7 @@ An inner product on a vector space $V$ over a field $F$ is a function $\langle\c
 \item Positive-definiteness: $\langle\symbf{u},\symbf{u}\rangle\geq 0$, with equality if and only if $\symbf{u}=\symbf{0}$
 \end{enumerate}
 \end{definition}
-The linearity in second argument and conjugate symmetry together imply conjugate-linearity in the first argument. We note here that we use the definition that is commonly used un quantum mechanics.\supercite{1164152357,633612145} Mathematicians often require linearity in the first argument and conjugate-linearity in the second argument. For real vector spaces, the conjugate symmetry reduces to ordinary symmetry. The inner product induces a norm (or length) of a vector $\symbf{u}$ defined by
+The linearity in second argument and conjugate symmetry together imply conjugate-linearity in the first argument. We note here that we use the definition that is commonly used in quantum mechanics.\supercite{1164152357,633612145} Mathematicians often require linearity in the first argument and conjugate-linearity in the second argument. For real vector spaces, the conjugate symmetry reduces to ordinary symmetry. The inner product induces a norm (or length) of a vector $\symbf{u}$ defined by
 \begin{equation}
 \lvert\symbf{u}\rvert=\sqrt{\langle\symbf{u},\symbf{u}\rangle}.
 \end{equation}
@@ -148,7 +148,7 @@ If the vector space $V$ is equipped with an inner product and the basis $\lbrace
 \begin{equation}
 a_{ij}=\langle\symbf{e}_i,A\symbf{e}_j\rangle.
 \end{equation}
-This equation is consistent with Def.~\ref{def:inner_product}, where we adopt the physics convention for the inner product. Note that the matrix representation of an operator depends on the choice of basis. If $U$ is a change of basis matrix from a new basis $\lbrace\symbf{f}_i\rbrace_{i=1}^n$ to the old basis $\lbrace\symbf{e}_i\rbrace_{i=1}^n$ (i.e., $\symbf{e}_i=\sum_{j=1}^n U_{ji}\symbf{f}_j$), the matrix representation of $A$ in the new basis is given by
+This equation is consistent with Def.~\ref{def:inner_product}, where we adopt the physics convention for the inner product. Note that the matrix representation of an operator depends on the choice of basis. If $U$ is a change of basis matrix from the old basis $\lbrace\symbf{e}_i\rbrace_{i=1}^n$ to a new basis $\lbrace\symbf{f}_i\rbrace_{i=1}^n$ (i.e., $\symbf{e}_i=\sum_{j=1}^n U_{ji}\symbf{f}_j$), the matrix representation of $A$ in the new basis is given by
 \begin{equation}\label{eq:change_of_basis}
 [A]_{\symbf{e}}=U^{-1}[A]_{\symbf{f}}U,
 \end{equation}
@@ -158,4 +158,4 @@ A scalar $\lambda\in F$ is called an eigenvalue of a linear operator $A:V\to V$ 
 \end{definition}
 If $V$ is finite-dimensional, the eigenvalues of $A$ can be found by solving the characteristic polynomial equation $\symrm{det}(A-\lambda I)=0$. The set of all eigenvalues is called the spectrum. The eigenvectors corresponding to distinct eigenvalues are linearly independent. If the operator $A$ has $n$ distinct eigenvalues in an $n$-dimensional space, its eigenvectors form a basis of $V$.
 
-The eigenproblems lie at the heart of quantum mechanics and provide the mathematical framework required for to the collapse postulate. When we measure an observable represented by a self-adjoint operator $A$, the system collapses into one of the eigenvectors $\symbf{v}$ of $A$ and the value we read on our measurement device is the corresponding eigenvalue $\lambda$. The probability of collapsing into a particular eigenvector $\symbf{v}$ is given by the Born rule, which will be described in more detail in Sec.~\ref{sec:spectral_theory_in_hilbert_spaces}. This is why finding the spectrum of the Hamiltonian operator is the central task in quantum mechanics.
+The eigenproblems lie at the heart of quantum mechanics and provide the mathematical framework required for the collapse postulate. When we measure an observable represented by a self-adjoint operator $A$, the system collapses into one of the eigenvectors $\symbf{v}$ of $A$ and the value we read on our measurement device is the corresponding eigenvalue $\lambda$. The probability of collapsing into a particular eigenvector $\symbf{v}$ is given by the Born rule, which will be described in more detail in Sec.~\ref{sec:spectral_theory_in_hilbert_spaces}. This is why finding the spectrum of the Hamiltonian operator is the central task in quantum mechanics.
