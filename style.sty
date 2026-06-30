@@ -1,7 +1,7 @@
 \RequirePackage{pdfmanagement}\SetKeys[document/metadata]{pdfversion=1.7,pdfstandard=a-3b}
 
 \RequirePackage[onehalfspacing]{setspace} % setting the line spacing
-\RequirePackage[top=25mm,bottom=30mm,inner=20mm,outer=15mm,bindingoffset=10mm]{geometry} % page composition
+\RequirePackage[top=25mm,bottom=25mm,inner=25mm,outer=25mm,bindingoffset=10mm]{geometry} % page composition
 \RequirePackage[hidelinks,linktoc=all]{hyperref} % hyperlinks and metadata
 \RequirePackage[backend=biber,style=chem-acs]{biblatex} % bibliography package
 \RequirePackage{braket} % braket notation
@@ -124,7 +124,7 @@
 
 \makeatletter
 \renewcommand*{\chapterlinesformat}[3]{
-  \vspace*{-1cm}
+  \vspace*{-2cm}
   \begin{tikzpicture}[baseline=(current bounding box.north)]
     \draw[chapdark,line width=3.5pt] (0,0) -- (0.99\textwidth,0);
     \Ifstr{#2}{}{}{

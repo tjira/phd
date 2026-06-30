@@ -25,17 +25,11 @@
 \definecolor{coverbg}{HTML}{1A1F2C}
 \definecolor{chapgold}{HTML}{D1A86F}
 
-\newlength{\spinewidth}\setlength{\spinewidth}{15mm}
+\newlength{\spinewidth}\setlength{\spinewidth}{10mm}
 
-\geometry{paperwidth=\dimexpr 420mm+\spinewidth\relax,paperheight=305mm,margin=0mm}
+\geometry{paperwidth=\dimexpr 382mm+\spinewidth\relax,paperheight=280mm,margin=0mm}
 
-\ifnum\directlua{tex.print(os.getenv("ONLINE")=="1" and 1 or 0)}=1
-    \geometry{paperwidth=210mm,paperheight=305mm,margin=0mm}
-\fi
-
-\ifnum\directlua{tex.print(os.getenv("ONLINE")=="1" and 1 or 0)}=1\def\isOnline{1}\else\def\isOnline{0}\fi
-
-\ifnum\isOnline=1\def\frontshift{15mm}\else\def\frontshift{\dimexpr 225mm+\spinewidth\relax}\fi
+\def\frontshift{\dimexpr 206mm+\spinewidth\relax}
 
 \begin{document}
 \pagecolor{coverbg}
@@ -45,51 +39,30 @@
         (current page.north west) rectangle ([yshift=140mm] current page.south east);
     \fill[coverbg,path fading=south]
         ([yshift=140mm] current page.south west) rectangle ([yshift=90mm] current page.south east);
-    \ifnum\isOnline=0
-        \shade[left color=coverbg,right color=coverbg!85!black]
-            ([xshift=210mm] current page.north west) rectangle ([xshift=\dimexpr 210mm+0.5\spinewidth\relax] current page.south west);
-        \shade[left color=coverbg!85!black,right color=coverbg]
-            ([xshift=\dimexpr 210mm+0.5\spinewidth\relax] current page.north west) rectangle ([xshift=\dimexpr 210mm+\spinewidth\relax] current page.south west);
-        \node[rotate=-90,font=\Large\sffamily] at ([yshift=3mm] current page.center) {
-            \makebox[195mm]{Prague 2026\hfill\textbf{DISSERTATION}\hfill Ing. Tomáš Jíra}
-        };
-        \node[inner sep=0pt,anchor=center,yshift=-100mm] (wave) at (current page.center) {
-            \includegraphics[width=670mm,height=260mm,trim={3.75cm 0 3.25cm 0},clip]{frontmatter/pdf/wave.pdf}
-        };
-        \begin{scope}[shift={(current page.north west)}]
-            \node[anchor=north west,text width=160mm,align=justify,font=\sffamily] at (25mm,-50mm) {
-                {\fontsize{24pt}{28pt}\selectfont\textbf{\color{chapgold}Abstract}\\[10mm]}
-                \fontsize{12pt}{15pt}\selectfont\color{white!85}
-                \lipsum[1][1-8]\\[5mm]
-                \lipsum[1][1-3]\\[10mm]
-                {\color{chapgold}Key summaries of contributions:}
-                \begin{itemize}[leftmargin=*,labelsep=2mm,nosep,itemsep=3mm,topsep=3mm]
-                    \item\lipsum[1][1-3]
-                    \item\lipsum[1][1-3]
-                    \item\lipsum[1][1-3]
-                \end{itemize}\vspace{5mm}
-                \lipsum[1][1-6]
-            };
-        \end{scope}
-    \else
-        \node[inner sep=0pt,anchor=center,yshift=-100mm] (wave) at ([xshift=-0.5*\spinewidth] current page.west) {
-            \includegraphics[width=670mm,height=260mm,trim={3.75cm 0 3.25cm 0},clip]{frontmatter/pdf/wave.pdf}
-        };
-    \fi
-    \node[anchor=north west,inner sep=0pt] at ([xshift=\frontshift,yshift=-35mm] current page.north west) {
-        \begin{minipage}[t]{170mm}
+    \shade[left color=coverbg,right color=coverbg!85!black]
+        ([xshift=191mm] current page.north west) rectangle ([xshift=\dimexpr 191mm+0.5\spinewidth\relax] current page.south west);
+    \shade[left color=coverbg!85!black,right color=coverbg]
+        ([xshift=\dimexpr 191mm+0.5\spinewidth\relax] current page.north west) rectangle ([xshift=\dimexpr 191mm+\spinewidth\relax] current page.south west);
+    \node[rotate=-90,font=\large\sffamily] at ([yshift=0mm] current page.center) {
+        \makebox[195mm]{Prague 2026\hfill\textbf{DISSERTATION}\hfill Ing. Tomáš Jíra}
+    };
+    \node[inner sep=0pt,anchor=center,yshift=-100mm] (wave) at (current page.center) {
+        \includegraphics[width=600mm,height=260mm,trim={3.95cm 0 3.05cm 0},clip]{frontmatter/pdf/wave.pdf}
+    };
+    \node[anchor=north west,inner sep=0pt] at ([xshift=\frontshift,yshift=-50mm] current page.north west) {
+        \begin{minipage}[t]{146mm}
             \raggedright
-            {\sffamily\Large\color{chapgold}\textls[80]{\uppercase{University of Chemistry\\and Technology Prague}}\\[3mm]}
-            {\sffamily\large\uppercase{Faculty of Chemical Engineering}\\[25mm]}
+            {\sffamily\normalsize\color{chapgold}\textls[80]{\uppercase{University of Chemistry\\and Technology Prague}}\\[3mm]}
+            {\sffamily\normalsize\uppercase{Faculty of Chemical Engineering}\\[25mm]}
             \begin{tikzpicture}
-                \shade[left color=chapgold!80!black,right color=chapgold!80!black,middle color=white!80!chapgold] (0,0) rectangle (170mm,7pt);
-            \end{tikzpicture}\\[8mm]
-            {\fontsize{42pt}{48pt}\selectfont\textbf{Computational Strategies\\[2mm]for Nonadiabatic\\[2mm]Molecular Dynamics}\\[10mm]}
+                \shade[left color=chapgold!80!black,right color=chapgold!80!black,middle color=white!80!chapgold] (0,0) rectangle (146mm,7pt);
+            \end{tikzpicture}\\[4mm]
+            {\fontsize{32pt}{36pt}\selectfont\textbf{Computational Strategies\\[2mm]for Nonadiabatic\\[2mm]Molecular Dynamics}\\[6mm]}
             \begin{tikzpicture}
-                \shade[left color=chapgold!80!black,right color=chapgold!80!black,middle color=white!80!chapgold] (0,0) rectangle (170mm,7pt);
-            \end{tikzpicture}\\[25mm]
-            {\sffamily\Large\color{chapgold}\textls[150]{\uppercase{Dissertation}}\\[8mm]}
-            {\fontsize{32pt}{36pt}\selectfont\textbf{Ing. Tomáš Jíra}\\[3mm]\large Prague 2026}
+                \shade[left color=chapgold!80!black,right color=chapgold!80!black,middle color=white!80!chapgold] (0,0) rectangle (146mm,7pt);
+            \end{tikzpicture}\\[20mm]
+            {\sffamily\large\color{chapgold}\textls[150]{\uppercase{Dissertation}}\\[5mm]}
+            {\fontsize{24pt}{28pt}\selectfont\textbf{Ing. Tomáš Jíra}\\[3mm]\normalsize Prague 2026}
         \end{minipage}
     };
 \end{tikzpicture}
